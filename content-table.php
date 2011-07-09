@@ -5,7 +5,7 @@ Description: <p>Create a table of content in you posts. </p><p>You only have to 
 Version: 1.0.1
 Author: SedLex
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://www.sedlex.fr/cote_geek/
+Plugin URI: http://wordpress.org/extend/plugins/content-table/
 License: GPL3
 */
 
