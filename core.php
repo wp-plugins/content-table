@@ -871,12 +871,23 @@ if (!class_exists('pluginSedLex')) {
 		
 		/** ====================================================================================================================================================
 		* Get information on the plugin
+		* For instance <code> $info = get_plugins_data(WP_PLUGIN_DIR.'my-plugin/my-plugin.php')</code> will return an array with 
+		* 	- the folder of the plugin : <code>$info['Dir_Plugin']</code>
+		* 	- the name of the plugin : <code>$info['Plugin_Name']</code>
+		* 	- the url of the plugin : <code>$info['Plugin_URI']</code>
+		* 	- the description of the plugin : <code>$info['Description']</code>
+		* 	- the name of the author : <code>$info['Author']</code>
+		* 	- the url of the author : <code>$info['Author_URI']</code>
+		* 	- the version number : <code>$info['Version']</code>
 		* 
-		* @param string $plugin_file path of the plugin main file
+		* @param string $plugin_file path of the plugin main file. If no paramater is provided, the file is the current plugin main file.
 		* @return array information on Name, Author, Description ...
 		*/
 
-		function get_plugins_data($plugin_file) {
+		public function get_plugins_data($plugin_file='') {
+			if ($plugin_file == "")
+				$plugin_file = $this->path ; 
+		
 			$plugin_data = implode('', file($plugin_file));
 			preg_match("|Plugin Name:(.*)|i", $plugin_data, $plugin_name);
 			preg_match("|Plugin URI:(.*)|i", $plugin_data, $plugin_uri);
