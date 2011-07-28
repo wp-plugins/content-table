@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
 Version: 1.0.1
@@ -10,6 +10,7 @@ License: GPL3
 */
 
 require_once('core.php') ; 
+
 
 
 class tableofcontent extends pluginSedLex {
@@ -99,45 +100,33 @@ class tableofcontent extends pluginSedLex {
 			//==========================================================================================
 			//
 			// Mise en place du systeme d'onglet
-			//		(bien mettre a jour les liens contenu dans les <li> qui suivent)
 			//
 			//==========================================================================================
 		?>		
-			<script>jQuery(function($){ $('#tabs').tabs(); }) ; </script>		
-			<div id="tabs">
-				<ul class="hide-if-no-js">
-					<li><a href="#tab-parameters"><? echo __('Parameters',$this->pluginID) ?></a></li>					
-				</ul>
-				<?php
-				//==========================================================================================
-				//
-				// Premier Onglet 
-				//		(bien verifier que id du 1er div correspond a celui indique dans la mise en 
-				//			place des onglets)
-				//
-				//==========================================================================================
-				?>
-				<div id="tab-parameters" class="blc-section">
+
+					
+			<?php
+			$tabs = new adminTabs() ; 
+			
+			ob_start() ; 
+				$params = new parametersSedLex($this, "tab-parameters") ; 
+				$params->add_title(__('What is the title of the TOC?',$this->pluginID)) ; 
+				$params->add_param('title', __('Main title:',$this->pluginID)) ; 
+				$params->add_title(__('Add Chapter, Section, ...',$this->pluginID)) ; 
+				$params->add_comment(__('If you leave the field blank, nothing will be added !<br/>Note that if you want to display the number of level 2, just write <i>#2</i> ...',$this->pluginID)) ; 
+				$params->add_param('h2', __('For level 2 title:',$this->pluginID)) ; 
+				$params->add_param('h3', __('For level 3 title:',$this->pluginID)) ; 
+				$params->add_param('h4', __('For level 4 title:',$this->pluginID)) ; 
+				$params->add_param('h5', __('For level 5 title:',$this->pluginID)) ; 
+				$params->add_param('h6', __('For level 6 title:',$this->pluginID)) ; 
 				
-					<h3 class="hide-if-js"><? echo __('Parameters',$this->pluginID) ?></h3>
-					<p><?php echo __('Here is the parameters of the plugin. Please modify them at your convenience.',$this->pluginID) ; ?> </p>			
+				$params->flush() ; 
 					
-					<?php
-					$params = new parametersSedLex($this, "tab-parameters") ; 
-					$params->add_title(__('What is the title of the TOC?',$this->pluginID)) ; 
-					$params->add_param('title', __('Main title:',$this->pluginID)) ; 
-					$params->add_title(__('Do you want to modify the content of your titles by adding numbers or text before them? If you leave the field blank, nothing will be added !<br/>Note that if you want to display the number of level 2, just write <i>#2</i> ...',$this->pluginID)) ; 
-					$params->add_param('h2', __('For level 2 title:',$this->pluginID)) ; 
-					$params->add_param('h3', __('For level 3 title:',$this->pluginID)) ; 
-					$params->add_param('h4', __('For level 4 title:',$this->pluginID)) ; 
-					$params->add_param('h5', __('For level 5 title:',$this->pluginID)) ; 
-					$params->add_param('h6', __('For level 6 title:',$this->pluginID)) ; 
-					
-					$params->flush() ; 
-					
+			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
+			
+			echo $tabs->flush() ; 
 					?>
-				</div>
-			</div>
+
 			<!--fin de personnalisation-->
 			<?php echo $this->signature ; ?>
 		</div>

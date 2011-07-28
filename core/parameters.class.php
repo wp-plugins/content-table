@@ -25,7 +25,7 @@ if (!class_exists("parametersSedLex")) {
 		* @return void
 		*/
 		function parametersSedLex($obj, $tab) {
-			$this->output = "<div class=wrap><form method='post' action='".$_SERVER["REQUEST_URI"]."#".$tab."'>" ; 
+			$this->output = "<div class='wrap parameters'><form method='post' action='".$_SERVER["REQUEST_URI"]."#".$tab."'>\n" ; 
 			$this->maj = false ; 
 			$this->modified = false ;
 			$this->error = false ; 
@@ -43,7 +43,7 @@ if (!class_exists("parametersSedLex")) {
 				$this->output .= "</table>" ; 
 				$this->hastobeclosed = false ; 
 			}
-			$this->output .= "<hr/><p>".$title."</p>" ; 
+			$this->output .= "<hr/>\n<h4>".$title."</h4>\n" ; 
 		}
 		
 		/** ====================================================================================================================================================
@@ -104,7 +104,7 @@ if (!class_exists("parametersSedLex")) {
 			?>
 				<tr valign="top">
 					<th scope="row"></th>
-					<td><p style="color:#666666"><?php echo $param ; ?><p></td>
+					<td><p class='comments'><?php echo $param ; ?><p></td>
 				</tr>
 			<?php	
 			$this->output .= ob_get_contents();
@@ -160,7 +160,7 @@ if (!class_exists("parametersSedLex")) {
 						$this->obj->set_param($param, (int)$_POST[$param]) ; 
 						$this->modified = true ; 
 					} else {
-						$problem_e .= "<p>Error: the submitted value is not an integer and thus, the parameter has not been updated!</p>" ; 
+						$problem_e .= "<p>Error: the submitted value is not an integer and thus, the parameter has not been updated!</p>\n" ; 
 						$this->error = true ; 
 					}
 				} 
@@ -173,12 +173,12 @@ if (!class_exists("parametersSedLex")) {
 					} 
 
 					if ($tmp!=$_POST[$param]) {
-						$problem_w .= "<p>Warning: some characters have been removed because they are not allowed here (".$forbid.")!</p>" ; 
+						$problem_w .= "<p>Warning: some characters have been removed because they are not allowed here (".$forbid.")!</p>\n" ; 
 						$this->warning = true ; 
 					}
 					
 					if (($allow!="")&&(!preg_match($allow, $_POST[$param]))) {
-						$problem_e .= "<p>Error: the submitted string does not match the constrains (".$allow.")!</p>" ; 
+						$problem_e .= "<p>Error: the submitted string does not match the constrains (".$allow.")!</p>\n" ; 
 						$this->error = true ; 
 					} else {
 						$this->obj->set_param($param, stripslashes($tmp)) ; 
