@@ -556,10 +556,8 @@ if (!class_exists('pluginSedLex')) {
 					<?php
 					$plugins = get_plugins() ; 
 					$sl_count = 0 ; 
-					foreach ($plugins as $k=>$v) {
-						if (preg_match('/.*SedLex.*/', $v['Author'])>0) {
-							$sl_count ++ ; 
-						}
+					foreach ($submenu['sedlex.php'] as $ov) {
+						$sl_count ++ ; 
 					}
 ?>
 					<p>For now, you have installed <?php echo count($plugins) ?> plugins including <b><?php echo $sl_count ; ?> plugins developped with the "SL framework developpment"</b> for plugins:<p/>
@@ -574,27 +572,27 @@ if (!class_exists('pluginSedLex')) {
 						$table = new adminTable() ; 
 						$table->title(array(__("Plugin name", $this->pluginID), __("Description", $this->pluginID), __("Status", $this->pluginID))) ; 
 						
-						foreach ($plugins as $k=>$v) {
-							if (preg_match('/.*SedLex.*/', $v['Author'])>0) {
-								$ligne++ ; 
+						foreach ($submenu['sedlex.php'] as $i => $ov) {
 
-								$url = "" ; 
-								foreach ($submenu['sedlex.php'] as $ov) {
-									if ($ov[0] == $v['Name']) {
-										$url = $ov[2] ; 
-									}
-								}
+							$ligne++ ; 
+
+							$url = $ov[2] ; 
+							
+							
+							
+							if ($i != 0) {
+								$info = $this->get_plugins_data(WP_PLUGIN_DIR."/".$url);
 								ob_start() ; 
 								?>
-											<p><b><?php echo $v['Name'] ; ?></b></p>
+											<p><b><?php echo $info['Plugin_Name'] ; ?></b></p>
 											<p><a href='admin.php?page=<?php echo $url  ; ?>'><?php echo __('Settings') ; ?></a> | <?php echo Utils::byteSize(Utils::dirSize(dirname(WP_PLUGIN_DIR.'/'.$url ))) ;?></p>
 
 								<?php
 								$cel1 = new adminCell(ob_get_clean()) ; 
 								ob_start() ; 
 								?>
-											<p><?php echo $v['Description'] ; ?></p>
-											<p>Version : <?php echo $v['Version'] ; ?> by <?php echo $v['Author'] ; ?> (<a href='<?php echo $v['AuthorURI'] ; ?>'><?php echo $v['AuthorURI'] ; ?></a>)</p>
+											<p><?php echo $info['Description'] ; ?></p>
+											<p>Version : <?php echo $info['Version'] ; ?> by <?php echo $info['Author'] ; ?> (<a href='<?php echo $info['Author_URI'] ; ?>'><?php echo $info['Author_URI'] ; ?></a>)</p>
 
 								<?php
 								$cel2 = new adminCell(ob_get_clean()) ; 
@@ -868,6 +866,42 @@ if (!class_exists('pluginSedLex')) {
 			}
 		}
 		
+		
+		
+		
+		/** ====================================================================================================================================================
+		* Get information on the plugin
+		* 
+		* @param string $plugin_file path of the plugin main file
+		* @return array information on Name, Author, Description ...
+		*/
+
+		function get_plugins_data($plugin_file) {
+			$plugin_data = implode('', file($plugin_file));
+			preg_match("|Plugin Name:(.*)|i", $plugin_data, $plugin_name);
+			preg_match("|Plugin URI:(.*)|i", $plugin_data, $plugin_uri);
+			preg_match("|Description:(.*)|i", $plugin_data, $description);
+			preg_match("|Author:(.*)|i", $plugin_data, $author_name);
+			preg_match("|Author URI:(.*)|i", $plugin_data, $author_uri);
+			if (preg_match("|Version:(.*)|i", $plugin_data, $version)) {
+				$version = trim($version[1]);
+			} else {
+				$version = '';
+			}
+			
+			$plugins_allowedtags = array('a' => array('href' => array()),'code' => array(), 'p' => array() ,'ul' => array() ,'li' => array() ,'strong' => array());
+			
+			$plugin_name = wp_kses(trim($plugin_name[1]), $plugins_allowedtags);
+			$plugin_uri = wp_kses(trim($plugin_uri[1]), $plugins_allowedtags);
+			$description = wp_kses(wptexturize(trim($description[1])), $plugins_allowedtags);
+			$author = wp_kses(trim($author_name[1]), $plugins_allowedtags);
+			$author_uri = wp_kses(trim($author_uri[1]), $plugins_allowedtags);;
+			$version = wp_kses($version, $plugins_allowedtags);
+			
+			return array('Dir_Plugin'=>basename(dirname($plugin_file)) , 'Plugin_Name' => $plugin_name, 'Plugin_URI' => $plugin_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Version' => $version);
+		}
+		
+		
 		/** ====================================================================================================================================================
 		* Check core version of the plugin
 		* 
@@ -922,6 +956,7 @@ if (!class_exists('pluginSedLex')) {
 						$ok = false ; 
 						foreach ($lines as $lineNumber => $lineContent) {
 							if (preg_match('/Version/',  $lineContent)) {
+								$tmp = explode(':',$lineContent) ; 
 								$version = trim($tmp[1]) ; 
 								$ok = true ; 
 								break ; 
