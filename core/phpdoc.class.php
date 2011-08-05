@@ -1,12 +1,12 @@
 <?php
 /*
 Core SedLex Plugin
-VersionInclude : 2.1
+VersionInclude : 3.0
 */ 
-/** ====================================================================================================================================================
-* Configuration panel - Parameters Class
-* 
-* @return void
+
+/** =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+* This PHP class enables the generation of the documentation of the PHP files used for the framework
+* Please note that the methods of this class is not supposed to be called from your plugin. Thus, its methods are not displayed here.
 */
 if (!class_exists("phpDoc")) {
 	class phpDoc {
@@ -17,6 +17,8 @@ if (!class_exists("phpDoc")) {
 		/** ====================================================================================================================================================
 		* Constructor
 		* 
+		* @access private
+		* @param string $file the file to scan
 		* @return void
 		*/
 		function phpDoc($file) {
@@ -31,6 +33,7 @@ if (!class_exists("phpDoc")) {
 		/** ====================================================================================================================================================
 		* Get the classes name in the file
 		* 
+		* @access private
 		* @return array
 		*/
 		public function parse() {
@@ -85,7 +88,9 @@ if (!class_exists("phpDoc")) {
 		/** ====================================================================================================================================================
 		* Parse comments 
 		* 
-		* @return void
+ 		* @access private
+		* @param string $comment the comment of each method 
+		* @return array a array of string or of array which contains the formated comment and arguments
 		*/
 		private function parseComments($comment) {
 			$comment = str_replace("\r","" ,$comment) ; 
@@ -142,7 +147,7 @@ if (!class_exists("phpDoc")) {
 						}
 					}
 					if (!$found) {
-						$result['comment'] .= htmlentities($l)."\n" ; 
+						$result['comment'] .= $l."\n" ; 
 					}
 				}
 			}
@@ -150,8 +155,11 @@ if (!class_exists("phpDoc")) {
 		} 
 		
 		/** ====================================================================================================================================================
-		* add Missing Parameters to the parsed Comment
+		* Add Missing Parameters to the parsed Comment
 		* 
+		* @access private
+		* @param array parsedComment the array returned by the parseComments function
+		* @param array $params an array of object containing parameters of the function
 		* @return void
 		*/
 		private function parseParameters($parsedComment, $params) {

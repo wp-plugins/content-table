@@ -1,7 +1,7 @@
 <?php
 /*
 Core SedLex Plugin
-VersionInclude : 2.1
+VersionInclude : 3.0
 */ 
 
 

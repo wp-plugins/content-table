@@ -36,6 +36,9 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.0.2 =
+* Update the framework with a new version
+
 = 1.0.1 =
 * First release in the wild web (have fun)
 

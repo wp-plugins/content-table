@@ -178,7 +178,7 @@ class my_plugin extends pluginSedLex {
 			ob_start() ; 
 			echo "Cell 2-3" ; 
 			$cel3 = new adminCell(ob_get_clean()) ; 		
-			$table->add_line(array($cel1, $cel2, $cel3), '1') ; 
+			$table->add_line(array($cel1, $cel2, $cel3), '2') ; 
 
 			echo $table->flush() ; 
 

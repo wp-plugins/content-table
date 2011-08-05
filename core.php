@@ -1,16 +1,16 @@
 <?php
 /**
 * Core SedLex Plugin
-* VersionInclude : 2.2
+* VersionInclude : 3.0
 */ 
 
-require_once('core/zip.class.php') ; 
-require_once('core/parameters.class.php') ; 
 require_once('core/admin_table.class.php') ; 
 require_once('core/tabs.class.php') ; 
-require_once('core/utils.class.php') ; 
 require_once('core/box.class.php') ; 
+require_once('core/parameters.class.php') ; 
 require_once('core/phpdoc.class.php') ; 
+require_once('core/utils.class.php') ; 
+require_once('core/zip.class.php') ; 
 
 if (!class_exists('pluginSedLex')) {
 
@@ -58,7 +58,7 @@ if (!class_exists('pluginSedLex')) {
 			remove_action('wp_head', 'start_post_rel_link'); // start link
 			remove_action('wp_head', 'adjacent_posts_rel_link_wp_head'); // Displays relational links for the posts adjacent to the current post.
 			remove_action('wp_head', 'wp_generator'); // Displays the XHTML generator that is generated on the wp_head hook, WP version
-			remove_action( 'wp_head', 'wp_shortlink_wp_head');
+			//remove_action( 'wp_head', 'wp_shortlink_wp_head');
 			
 			$this->signature = '<p style="text-align:right;font-size:75%;">&copy; SedLex - <a href="http://www.sedlex.fr/">http://www.sedlex.fr/</a></p>' ; 
 		}
@@ -115,7 +115,7 @@ if (!class_exists('pluginSedLex')) {
 		* For instance: <code> echo $this->get_param('opt1') </code> will return the value of the option 'opt1' stored for this plugin. Please note that two different plugins may have options with the same name without any conflict.
 		*
 		* @see  pluginSedLex::set_param
-		* @see  subclass::get_default_option
+		* @see parametersSedLex::parametersSedLex
 		* @param string $option the name of the option
 		* @return mixed  the value of the option requested
 		*/
@@ -135,6 +135,7 @@ if (!class_exists('pluginSedLex')) {
 		* For instance, <code>$this->set_param('opt1', 'val1')</code> will store the string 'val1' for the option 'opt1'. Any object may be stored in the options
 		* 
 		* @see  pluginSedLex::get_param
+		* @see parametersSedLex::parametersSedLex
 		* @param string $option the name of the option
 		* @param mixed $value the value of the option to be saved
 		* @return void
@@ -459,7 +460,7 @@ if (!class_exists('pluginSedLex')) {
 			
 			if (!empty($sedlex_list_styles)) {
 				$list = implode(',',$sedlex_list_styles) ; 
-				$url = WP_PLUGIN_URL.'/'.str_replace(basename(  __FILE__),"",plugin_basename( __FILE__)).'core/load-styles.php?c=0&load='.$list ; 
+				$url = WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename( __FILE__)).'core/load-styles.php?c=0&load='.$list ; 
 				wp_enqueue_style('sedlex_styles', $url, array() ,date('Ymd'));
 				$sedlex_list_styles = array(); 
 			}
@@ -690,10 +691,20 @@ if (!class_exists('pluginSedLex')) {
 					ob_start() ; 
 						$rc = new phpDoc(WP_PLUGIN_DIR.'/'.str_replace(basename( $this->path),"",plugin_basename($this->path)) ."core.php");
 						$classes = $rc->parse() ; 
-						$this->printDoc($classes) ; 
 						
-						$rc = new phpDoc(WP_PLUGIN_DIR.'/'.str_replace(basename( $this->path),"",plugin_basename($this->path)) ."core/utils.class.php");
-						$classes = $rc->parse() ; 
+						// On liste les fichiers includer par le fichier courant
+						$fichier_master = dirname(__FILE__)."/core.php" ; 
+						
+						$lines = file($fichier_master) ;
+					
+						foreach ($lines as $lineNumber => $lineContent) {
+							if (preg_match('/^require.*\([\'"]core\/(.*)[\'"]\)/',  trim($lineContent),$match)) {
+								$chem = dirname(__FILE__)."/core/".$match[1] ; 
+								$rc = new phpDoc($chem);
+								$classes = array_merge($classes, $rc->parse()) ; 
+							}
+						}
+						
 						$this->printDoc($classes) ; 
 
 					$tabs->add_tab(__('Framework documentation',  $this->pluginID), ob_get_clean() ) ; 
@@ -782,27 +793,57 @@ if (!class_exists('pluginSedLex')) {
 		*/
 		
 		private function printDoc($rc)  {
+			$allowedtags = array('a' => array('href' => array()),'code' => array(), 'p' => array() ,'br' => array() ,'ul' => array() ,'li' => array() ,'strong' => array());
+		
+			// Print the summary of the method
+			echo "<p class='descclass_phpDoc'>Please find hearafter all the possible classes and methods for the development with this framework</p>" ; 
+			echo "<ul>" ; 
 			foreach ($rc as $name => $cl) {
-				echo "<p class='class_phpDoc'>$name <span class='desc_phpDoc'>[CLASS]</span></p>" ; 
-				echo "<p class='descclass_phpDoc'>".$cl['description']['comment']."</p>" ; 
+				echo "<li><b><a href='#class_".$name."'>".$name."</a></b></li>" ; 
+				echo "<ul>" ; 
+					foreach ($cl['methods'] as $name_m => $method) {
+						if (($method['access']!='private')&&($method['return']!="")) {
+							echo "<li><a href='#".$name."_".$name_m."'>".$name_m."</a></li>" ; 
+						}
+					}				
+				echo "</ul>" ; 
+			}		
+			echo "</ul>" ; 
+
+			foreach ($rc as $name => $cl) {
+				echo "<p class='class_phpDoc'><a name='class_".$name."'></a>$name <span class='desc_phpDoc'>[CLASS]</span></p>" ; 
+				
+				$cl['description']['comment'] = wp_kses($cl['description']['comment'], $allowedtags);
+				$cl['description']['comment'] = explode("\n", $cl['description']['comment'] ) ; 
+				foreach($cl['description']['comment'] as $c) {
+					if (trim($c)!="") 
+						echo "<p class='descclass_phpDoc'>".trim($c)."</p>" ; 
+				}
+				echo "<p class='descclass_phpDoc'>Here is the method of the class : </p>" ; 
+				
+				// Print the summary of the method
+				echo "<ul>" ; 
+				foreach ($cl['methods'] as $name_m => $method) {
+					if (($method['access']!='private')&&($method['return']!="")) {
+						echo "<li><a href='#".$name."_".$name_m."'>".$name."::".$name_m."</a></li>" ; 
+					}
+				}				
+				echo "</ul>" ; 
 				
 				foreach ($cl['methods'] as $name_m => $method) {
 					
-					if ($method['access']!='private') {
+					if (($method['access']!='private')&&($method['return']!="")) {
 						echo "<p class='method_phpDoc'><a name='".$name."_".$name_m."'></a>$name_m <span class='desc_phpDoc'>[METHOD]</span></p>" ; 
 						
 						echo "<p class='comment_phpDoc'>";
 						echo __('Description:',$this->pluginID) ; 
 						echo "</p>" ; 
 
-						$comment = $method['comment'] ; 
-						$comment =str_replace('&lt;code&gt;', '<code>', $comment) ; 
-						$comment =str_replace('&lt;/code&gt;', '</code>', $comment) ; 
-						$comment = explode("\n", $comment) ; 
-						
+						$method['comment'] = wp_kses($method['comment'], $allowedtags);
+						$method['comment'] = explode("\n", $method['comment']) ; 
 						$typical = " $name_m (" ; 
 						
-						foreach($comment as $c) {
+						foreach($method['comment'] as $c) {
 							if (trim($c)!="") 
 								echo "<p class='comment_each_phpDoc'>".trim($c)."</p>" ; 
 						}
