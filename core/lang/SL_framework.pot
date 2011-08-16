@@ -1,137 +1,137 @@
 Content-Transfer-Encoding: 8bit
 
-#: core.php:184
-#: core.php:184
+#: core.php:187
+#: core.php:187
 #@ SL_framework
 msgid "About..."
 msgstr ""
 
-#: core.php:227
-#: core.php:598
+#: core.php:230
+#: core.php:601
 #@ SL_framework
 msgid "Settings"
 msgstr ""
 
-#: core.php:562
+#: core.php:565
 #@ SL_framework
 msgid "Summary page for the plugins developped with the SL framework"
 msgstr ""
 
-#: core.php:573
+#: core.php:576
 #@ SL_framework
 msgid "For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':"
 msgstr ""
 
-#: core.php:583
+#: core.php:586
 #@ SL_framework
 msgid "Plugin name"
 msgstr ""
 
-#: core.php:583
+#: core.php:586
 #@ SL_framework
 msgid "Description"
 msgstr ""
 
-#: core.php:583
+#: core.php:586
 #@ SL_framework
 msgid "Status"
 msgstr ""
 
-#: core.php:616
+#: core.php:619
 #@ SL_framework
 msgid "List of SL plugins"
 msgstr ""
 
-#: core.php:627
+#: core.php:630
 #@ SL_framework
 msgid "The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)"
 msgstr ""
 
-#: core.php:694
+#: core.php:697
 #@ SL_framework
 msgid "How to create a new Plugin with the SL framework"
 msgstr ""
 
-#: core.php:719
+#: core.php:722
 #@ SL_framework
 msgid "Framework documentation"
 msgstr ""
 
-#: core.php:726
+#: core.php:729
 #@ SL_framework
 msgid "The core file used for the SedLex plugins is:"
 msgstr ""
 
-#: core.php:808
+#: core.php:811
 #@ SL_framework
 msgid "Please find hearafter all the possible classes and methods for the development with this framework"
 msgstr ""
 
-#: core.php:831
+#: core.php:834
 #@ SL_framework
 msgid "Here is the method of the class:"
 msgstr ""
 
-#: core.php:845
+#: core.php:848
 #@ SL_framework
 msgid "[METHOD]"
 msgstr ""
 
-#: core.php:848
+#: core.php:851
 #@ SL_framework
 msgid "Description:"
 msgstr ""
 
-#: core.php:863
-#: core.php:887
+#: core.php:866
+#: core.php:890
 #@ SL_framework
 msgid "Parameters:"
 msgstr ""
 
-#: core.php:871
+#: core.php:874
 #@ SL_framework
 msgid "[optional]"
 msgstr ""
 
-#: core.php:871
+#: core.php:874
 #@ SL_framework
 msgid "(by default, its value is:"
 msgstr ""
 
-#: core.php:887
+#: core.php:890
 #@ SL_framework
 msgid "No param"
 msgstr ""
 
-#: core.php:894
+#: core.php:897
 #@ SL_framework
 msgid "Return value:"
 msgstr ""
 
-#: core.php:900
+#: core.php:903
 #@ SL_framework
 msgid "Typical call:"
 msgstr ""
 
-#: core.php:905
+#: core.php:908
 #@ SL_framework
 msgid "See also:"
 msgstr ""
 
-#: core.php:994
-#: core.php:1000
-#: core.php:1039
+#: core.php:997
+#: core.php:1003
+#: core.php:1042
 #@ SL_framework
 msgid "Version of"
 msgstr ""
 
-#: core.php:1002
-#: core.php:1034
+#: core.php:1005
+#: core.php:1037
 #@ SL_framework
 msgid "bytes"
 msgstr ""
 
-#: core.php:1017
+#: core.php:1020
 #@ SL_framework
 msgid "file not found"
 msgstr ""
@@ -184,6 +184,50 @@ msgstr ""
 #: core/parameters.class.php:345
 #@ SL_framework
 msgid "Parameters have been updated successfully !"
+msgstr ""
+
+#: core/feedback.class.php:37
+#: core/translation.class.php:400
+#: core/translation.class.php:480
+#@ SL_framework
+msgid "Your name:"
+msgstr ""
+
+#: core/feedback.class.php:38
+#@ SL_framework
+msgid "Your email (for response):"
+msgstr ""
+
+#: core/feedback.class.php:39
+#@ SL_framework
+msgid "Your comments:"
+msgstr ""
+
+#: core/feedback.class.php:41
+#@ SL_framework
+msgid "Send feedback"
+msgstr ""
+
+#: core/feedback.class.php:47
+#@ SL_framework
+msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
+msgstr ""
+
+#: core/feedback.class.php:90
+#@ SL_framework
+msgid "The feedback has been sent"
+msgstr ""
+
+#: core/feedback.class.php:94
+#: core/translation.class.php:604
+#@ SL_framework
+msgid "An error occured sending the email."
+msgstr ""
+
+#: core/feedback.class.php:94
+#: core/translation.class.php:604
+#@ SL_framework
+msgid "Make sure that your wordpress is able to send email."
 msgstr ""
 
 #: core/translation.class.php:246
@@ -269,12 +313,6 @@ msgid "Translation"
 msgstr ""
 
 #: core/translation.class.php:400
-#: core/translation.class.php:480
-#@ SL_framework
-msgid "Your name:"
-msgstr ""
-
-#: core/translation.class.php:400
 #@ SL_framework
 msgid "(if your name/pseudo is already in the list, there is no need to fill this input)"
 msgstr ""
@@ -308,16 +346,6 @@ msgstr ""
 #: core/translation.class.php:600
 #@ SL_framework
 msgid "The translation %s have been sent"
-msgstr ""
-
-#: core/translation.class.php:604
-#@ SL_framework
-msgid "An error occured sending the email."
-msgstr ""
-
-#: core/translation.class.php:604
-#@ SL_framework
-msgid "Make sure that your wordpress is able to send email."
 msgstr ""
 
 #: core/translation.class.php:750

@@ -128,6 +128,13 @@ class tableofcontent extends pluginSedLex {
 				$trans = new translationSL($this->pluginID, $plugin) ; 
 				$trans->enable_translation() ; 
 			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
+
+			ob_start() ; 
+				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
+				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
+				$trans = new feedbackSL($plugin) ; 
+				$trans->enable_feedback() ; 
+			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
 			
 			echo $tabs->flush() ; 
 			

@@ -70,3 +70,13 @@ msgstr ""
 msgid "Manage translations"
 msgstr ""
 
+#: content-table.php:133
+#@ tableofcontent
+msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
+msgstr ""
+
+#: content-table.php:137
+#@ tableofcontent
+msgid "Give feedback"
+msgstr ""
+

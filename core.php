@@ -7,6 +7,7 @@
 require_once('core/admin_table.class.php') ; 
 require_once('core/tabs.class.php') ; 
 require_once('core/box.class.php') ; 
+require_once('core/feedback.class.php') ; 
 require_once('core/parameters.class.php') ; 
 require_once('core/phpdoc.class.php') ; 
 require_once('core/translation.class.php') ; 
@@ -55,7 +56,9 @@ if (!class_exists('pluginSedLex')) {
 			add_action('wp_ajax_translate_create', array('translationSL','translate_create')) ; 
 			add_action('wp_ajax_send_translation', array('translationSL','send_translation')) ; 
 			add_action('wp_ajax_update_summary', array('translationSL','update_summary')) ; 
-
+			
+			// We add an ajax call for the feedback classe
+			add_action('wp_ajax_send_feedback', array('feedbackSL','send_feedback')) ; 
 			
 			remove_action('wp_head', 'feed_links_extra', 3); // Displays the links to the extra feeds such as category feeds
 			remove_action('wp_head', 'feed_links', 2); // Displays the links to the general feeds: Post and Comment Feed
