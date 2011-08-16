@@ -244,8 +244,8 @@ if (!class_exists('pluginSedLex')) {
 		* @return void
 		*/
 		public function init_textdomain() {
-			load_plugin_textdomain($this->pluginID, false, dirname( plugin_basename( __FILE__ ) ). '/lang/') ;
-			load_plugin_textdomain('SL_framework', false, dirname( plugin_basename( __FILE__ ) ). '/core/lang/') ;
+			load_plugin_textdomain($this->pluginID, false, dirname( plugin_basename( $this->path ) ). '/lang/') ;
+			load_plugin_textdomain('SL_framework', false, dirname( plugin_basename( $this->path ) ). '/core/lang/') ;
 		}
 		
 		/** ====================================================================================================================================================

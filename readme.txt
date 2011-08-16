@@ -36,6 +36,9 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.0.4 =
+* Correction of the bug when a plurality of plugin use the same framework
+
 = 1.0.3 =
 * Correction of a bug in the load-style.php which change dynamically the url of the image contained in the CSS file
 * Enable the translation of the plugin (modification in the framework, thus all your plugin developped with this framework can enable this feature easily)

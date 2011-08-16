@@ -187,8 +187,8 @@ msgid "Parameters have been updated successfully !"
 msgstr ""
 
 #: core/feedback.class.php:37
-#: core/translation.class.php:400
-#: core/translation.class.php:480
+#: core/translation.class.php:405
+#: core/translation.class.php:487
 #@ SL_framework
 msgid "Your name:"
 msgstr ""
@@ -219,155 +219,155 @@ msgid "The feedback has been sent"
 msgstr ""
 
 #: core/feedback.class.php:94
-#: core/translation.class.php:604
+#: core/translation.class.php:613
 #@ SL_framework
 msgid "An error occured sending the email."
 msgstr ""
 
 #: core/feedback.class.php:94
-#: core/translation.class.php:604
+#: core/translation.class.php:613
 #@ SL_framework
 msgid "Make sure that your wordpress is able to send email."
 msgstr ""
 
-#: core/translation.class.php:246
+#: core/translation.class.php:249
 #@ SL_framework
 msgid "The available translation for the SL framework (contained in the '%s' folder)"
 msgstr ""
 
-#: core/translation.class.php:247
+#: core/translation.class.php:250
 #@ SL_framework
 msgid "There is %d languages supported for the 'SL framework' (to see the plugin translations %s click here %s) ."
 msgstr ""
 
-#: core/translation.class.php:249
+#: core/translation.class.php:252
 #@ SL_framework
 msgid "The available translation for this plugin"
 msgstr ""
 
-#: core/translation.class.php:250
+#: core/translation.class.php:253
 #@ SL_framework
 msgid "There is %d languages supported for this plugin (to see the plugin translations %s click here %s) ."
 msgstr ""
 
-#: core/translation.class.php:256
+#: core/translation.class.php:259
 #@ SL_framework
 msgid "Language"
 msgstr ""
 
-#: core/translation.class.php:256
+#: core/translation.class.php:259
 #@ SL_framework
 msgid "Ratio %"
 msgstr ""
 
-#: core/translation.class.php:256
+#: core/translation.class.php:259
 #@ SL_framework
 msgid "Translators"
 msgstr ""
 
-#: core/translation.class.php:315
+#: core/translation.class.php:318
 #@ SL_framework
 msgid "Modify"
 msgstr ""
 
-#: core/translation.class.php:318
+#: core/translation.class.php:321
 #@ SL_framework
 msgid "Send to the author of the framework"
 msgstr ""
 
-#: core/translation.class.php:320
+#: core/translation.class.php:323
 #@ SL_framework
 msgid "Send to the author of the plugin"
 msgstr ""
 
-#: core/translation.class.php:332
+#: core/translation.class.php:335
 #@ SL_framework
 msgid "Add a new translation"
 msgstr ""
 
-#: core/translation.class.php:333
+#: core/translation.class.php:336
 #@ SL_framework
 msgid "You may add a new translation hereafter (Please note that it is recommended to send your translation to the author so that he would be able to add your translation to the future release of the plugin !)"
 msgstr ""
 
-#: core/translation.class.php:348
+#: core/translation.class.php:351
 #@ SL_framework
 msgid "Add"
 msgstr ""
 
-#: core/translation.class.php:377
+#: core/translation.class.php:382
 #@ SL_framework
 msgid "Adding a new translation for this language:"
 msgstr ""
 
-#: core/translation.class.php:381
-#: core/translation.class.php:437
+#: core/translation.class.php:386
+#: core/translation.class.php:444
 #@ SL_framework
 msgid "Sentence to translate"
 msgstr ""
 
-#: core/translation.class.php:381
-#: core/translation.class.php:437
+#: core/translation.class.php:386
+#: core/translation.class.php:444
 #@ SL_framework
 msgid "Translation"
 msgstr ""
 
-#: core/translation.class.php:400
+#: core/translation.class.php:405
 #@ SL_framework
 msgid "(if your name/pseudo is already in the list, there is no need to fill this input)"
 msgstr ""
 
-#: core/translation.class.php:401
-#: core/translation.class.php:481
+#: core/translation.class.php:406
+#: core/translation.class.php:488
 #@ SL_framework
 msgid "Your email or your website:"
 msgstr ""
 
-#: core/translation.class.php:403
+#: core/translation.class.php:408
 #@ SL_framework
 msgid "Create the translation files"
 msgstr ""
 
-#: core/translation.class.php:433
+#: core/translation.class.php:440
 #@ SL_framework
 msgid "Modifying the translation for this language:"
 msgstr ""
 
-#: core/translation.class.php:483
+#: core/translation.class.php:490
 #@ SL_framework
 msgid "Modify the translation files"
 msgstr ""
 
-#: core/translation.class.php:542
+#: core/translation.class.php:549
 #@ SL_framework
 msgid "%s sentences have been translated (i.e. %s)."
 msgstr ""
 
-#: core/translation.class.php:600
+#: core/translation.class.php:609
 #@ SL_framework
 msgid "The translation %s have been sent"
 msgstr ""
 
-#: core/translation.class.php:750
-#: core/translation.class.php:753
+#: core/translation.class.php:761
+#: core/translation.class.php:764
 #@ SL_framework
 msgid "%s file has been updated for %s"
 msgstr ""
 
-#: core/translation.class.php:751
-#: core/translation.class.php:754
+#: core/translation.class.php:762
+#: core/translation.class.php:765
 #@ SL_framework
 msgid "%s file has been updated from this file"
 msgstr ""
 
-#: core/translation.class.php:758
-#: core/translation.class.php:761
+#: core/translation.class.php:769
+#: core/translation.class.php:772
 #@ SL_framework
 msgid "%s file has been created with a new translation for %s"
 msgstr ""
 
-#: core/translation.class.php:759
-#: core/translation.class.php:762
+#: core/translation.class.php:770
+#: core/translation.class.php:773
 #@ SL_framework
 msgid "%s file has been created from this file"
 msgstr ""
