@@ -318,7 +318,7 @@ if (!class_exists("parametersSedLex")) {
 			?>
 					<hr/>
 					<div class="submit">
-						<input type="submit" name="submitOptions" class='button-primary validButton' value="<?php echo __('Update', $this->pluginID) ?>" />
+						<input type="submit" name="submitOptions" class='button-primary validButton' value="<?php echo __('Update', 'SL_framework') ?>" />
 					</div>
 				</form>
 			</div>
@@ -330,19 +330,19 @@ if (!class_exists("parametersSedLex")) {
 			if (($this->error) && ($this->maj)) {
 			?>
 			<div class="error fade">
-				<p><?php echo __('Some parameters have not been updated due to errors (see below) !', $this->pluginID) ?></p>
+				<p><?php echo __('Some parameters have not been updated due to errors (see below) !', 'SL_framework') ?></p>
 			</div>
 			<?php
 			} else if (($this->warning) && ($this->maj)) {
 			?>
 			<div class="updated  fade">
-				<p><?php echo __('Parameters have been updated (but with some warnings) !', $this->pluginID) ?></p>
+				<p><?php echo __('Parameters have been updated (but with some warnings) !', 'SL_framework') ?></p>
 			</div>
 			<?php
 			} else if (($this->modified) && ($this->maj)) {
 			?>
 			<div class="updated  fade">
-				<p><?php echo __('Parameters have been updated successfully !', $this->pluginID) ?></p>
+				<p><?php echo __('Parameters have been updated successfully !', 'SL_framework') ?></p>
 			</div>
 			<?php
 			} 

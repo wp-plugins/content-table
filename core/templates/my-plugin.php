@@ -6,6 +6,7 @@ Version: 1.0.0
 Framework: SL_Framework
 Author: The name of the author
 Author URI: http://www.yourdomain.com/
+Author Email : youremail@yourdomain.com
 Plugin URI: http://wordpress.org/extend/plugins/my-plugin/
 License: GPL3
 */

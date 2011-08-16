@@ -9,6 +9,7 @@ require_once('core/tabs.class.php') ;
 require_once('core/box.class.php') ; 
 require_once('core/parameters.class.php') ; 
 require_once('core/phpdoc.class.php') ; 
+require_once('core/translation.class.php') ; 
 require_once('core/utils.class.php') ; 
 require_once('core/zip.class.php') ; 
 
@@ -47,6 +48,12 @@ if (!class_exists('pluginSedLex')) {
 			add_action('wp_print_styles', array( $this, 'css_front'), 5);
 			add_action('wp_print_scripts', array( $this, 'flush_js'), 10000000);
 			add_action('wp_print_styles', array( $this, 'flush_css'), 10000000);
+			
+			// We add an ajax call for the translation classe
+			add_action('wp_ajax_translate_add', array('translationSL','translate_add')) ; 
+			add_action('wp_ajax_translate_modify', array('translationSL','translate_modify')) ; 
+			add_action('wp_ajax_translate_create', array('translationSL','translate_create')) ; 
+			add_action('wp_ajax_send_translation', array('translationSL','send_translation')) ; 
 
 			
 			remove_action('wp_head', 'feed_links_extra', 3); // Displays the links to the extra feeds such as category feeds
@@ -173,7 +180,7 @@ if (!class_exists('pluginSedLex')) {
 				} else {
 				//add main menu
 				add_object_page('SL Plugins', 'SL Plugins', 10, $topLevel, array($this,'sedlex_information'));
-				$page = add_submenu_page($topLevel, __('About...', $this->pluginID), __('About...', $this->pluginID), 10, $topLevel, array($this,'sedlex_information'));
+				$page = add_submenu_page($topLevel, __('About...', 'SL_framework'), __('About...', 'SL_framework'), 10, $topLevel, array($this,'sedlex_information'));
 
 				add_action('admin_print_scripts-'.$page, array($this,'javascript_admin_always'),5);
 				add_action('admin_print_styles-'.$page, array($this,'css_admin_always'),5);
@@ -183,7 +190,7 @@ if (!class_exists('pluginSedLex')) {
 			}
 		
 			//add sub menus
-			$page = add_submenu_page($topLevel, __($this->pluginName, $this->pluginID), __($this->pluginName, $this->pluginID), 10, $plugin, array($this,'configuration_page'));
+			$page = add_submenu_page($topLevel, $this->pluginName, $this->pluginName, 10, $plugin, array($this,'configuration_page'));
 			
 			// Different actions
 
@@ -233,7 +240,8 @@ if (!class_exists('pluginSedLex')) {
 		* @return void
 		*/
 		public function init_textdomain() {
-			load_plugin_textdomain($this->pluginID, WP_PLUGIN_URL.'/'.str_replace(basename( $this->path),"",plugin_basename($this->path)) . 'lang');
+			load_plugin_textdomain($this->pluginID, false, dirname( plugin_basename( __FILE__ ) ). '/lang/') ;
+			load_plugin_textdomain('SL_framework', false, dirname( plugin_basename( __FILE__ ) ). '/core/lang/') ;
 		}
 		
 		/** ====================================================================================================================================================
@@ -550,7 +558,7 @@ if (!class_exists('pluginSedLex')) {
 			?>
 				<div class="wrap">
 					<div id="icon-themes" class="icon32"><br></div>
-					<h2><?php echo __('Summary page for the plugins developped with the SL framework', $this->pluginID)?></h2>
+					<h2><?php echo __('Summary page for the plugins developped with the SL framework', 'SL_framework')?></h2>
 					<?php echo $this->signature; ?>
 					<p>&nbsp;</p>
 					<!--debut de personnalisation-->
@@ -571,7 +579,7 @@ if (!class_exists('pluginSedLex')) {
 					ob_start() ; 
 					
 						$table = new adminTable() ; 
-						$table->title(array(__("Plugin name", $this->pluginID), __("Description", $this->pluginID), __("Status", $this->pluginID))) ; 
+						$table->title(array(__("Plugin name", 'SL_framework'), __("Description", 'SL_framework'), __("Status", 'SL_framework'))) ; 
 						
 						foreach ($submenu['sedlex.php'] as $i => $ov) {
 
@@ -604,7 +612,7 @@ if (!class_exists('pluginSedLex')) {
 						}
 						echo $table->flush() ; 
 					
-					$tabs->add_tab(__('List of SL plugins',  $this->pluginID), ob_get_clean() ) ; 
+					$tabs->add_tab(__('List of SL plugins',  'SL_framework'), ob_get_clean() ) ; 
 					
 					//======================================================================================
 					//= Tab with a zip file for downloading an empty plugin with a quick tuto
@@ -682,7 +690,7 @@ if (!class_exists('pluginSedLex')) {
 					</div>
 					
 					<?php
-					$tabs->add_tab(__('How to create a new Plugin with the SL framework',  $this->pluginID), ob_get_clean() ) ; 
+					$tabs->add_tab(__('How to create a new Plugin with the SL framework',  'SL_framework'), ob_get_clean() ) ; 
 					
 					//======================================================================================
 					//= Tab presenting the core documentation
@@ -707,7 +715,7 @@ if (!class_exists('pluginSedLex')) {
 						
 						$this->printDoc($classes) ; 
 
-					$tabs->add_tab(__('Framework documentation',  $this->pluginID), ob_get_clean() ) ; 
+					$tabs->add_tab(__('Framework documentation',  'SL_framework'), ob_get_clean() ) ; 
 					
 
 			
@@ -836,7 +844,7 @@ if (!class_exists('pluginSedLex')) {
 						echo "<p class='method_phpDoc'><a name='".$name."_".$name_m."'></a>$name_m <span class='desc_phpDoc'>[METHOD]</span></p>" ; 
 						
 						echo "<p class='comment_phpDoc'>";
-						echo __('Description:',$this->pluginID) ; 
+						echo __('Description:','SL_framework') ; 
 						echo "</p>" ; 
 
 						$method['comment'] = wp_kses($method['comment'], $allowedtags);
@@ -851,7 +859,7 @@ if (!class_exists('pluginSedLex')) {
 						ob_start() ;
 						if (count($method['param'])>0) {
 							echo "<p class='parameter_phpDoc'>" ; 
-							echo __('Parameters:',$this->pluginID) ; 
+							echo __('Parameters:','SL_framework') ; 
 							echo "</p>" ; 
 							
 							
@@ -875,25 +883,25 @@ if (!class_exists('pluginSedLex')) {
 							}
 						} else {
 							echo "<p class='parameter_phpDoc'>" ; 
-							echo __('Parameters: No param',$this->pluginID) ; 
+							echo __('Parameters: No param','SL_framework') ; 
 							echo "</p>" ; 
 						}
 						
 						$typical = $typical.") ; " ; 
 						
 						$return = explode(" ",$method['return']." ",2) ; 
-						echo "<p class='return_phpDoc'>".__('Return value:',$this->pluginID)."</p>" ; 
+						echo "<p class='return_phpDoc'>".__('Return value:','SL_framework')."</p>" ; 
 						echo "<p class='return_each_phpDoc'><b>".$return[0]."</b> ".trim($return[1])."</p>" ; 
 						$typical = $return[0].$typical ; 
 						
 						$echo = ob_get_clean() ; 
 						
-						echo "<p class='typical_phpDoc'>".__('Typical call:',$this->pluginID)."</p>" ; 
+						echo "<p class='typical_phpDoc'>".__('Typical call:','SL_framework')."</p>" ; 
 						echo "<p class='typical_each_phpDoc'><code>".$typical."</code></p>" ; 
 						echo $echo ; 
 						
 						if ($method['see'] !="") {
-							echo "<p class='see_phpDoc'>".__('See also:',$this->pluginID)."</p>" ; 
+							echo "<p class='see_phpDoc'>".__('See also:','SL_framework')."</p>" ; 
 							if (is_array($method['see'] )) {
 								foreach ($method['see'] as $s) {
 									echo "<p class='see_each_phpDoc'><a href='#".str_replace('::','_',$s)."'>".$s."</a></p>" ; 
@@ -920,6 +928,7 @@ if (!class_exists('pluginSedLex')) {
 		* 	- the name of the author : <code>$info['Author']</code>
 		* 	- the url of the author : <code>$info['Author_URI']</code>
 		* 	- the version number : <code>$info['Version']</code>
+		* 	- the email of the Author : <code>$info['Email']</code>
 		* 
 		* @param string $plugin_file path of the plugin main file. If no paramater is provided, the file is the current plugin main file.
 		* @return array information on Name, Author, Description ...
@@ -935,6 +944,7 @@ if (!class_exists('pluginSedLex')) {
 			preg_match("|Description:(.*)|i", $plugin_data, $description);
 			preg_match("|Author:(.*)|i", $plugin_data, $author_name);
 			preg_match("|Author URI:(.*)|i", $plugin_data, $author_uri);
+			preg_match("|Author Email:(.*)|i", $plugin_data, $author_email);
 			if (preg_match("|Version:(.*)|i", $plugin_data, $version)) {
 				$version = trim($version[1]);
 			} else {
@@ -948,9 +958,10 @@ if (!class_exists('pluginSedLex')) {
 			$description = wp_kses(wptexturize(trim($description[1])), $plugins_allowedtags);
 			$author = wp_kses(trim($author_name[1]), $plugins_allowedtags);
 			$author_uri = wp_kses(trim($author_uri[1]), $plugins_allowedtags);;
+			$author_email = wp_kses(trim($author_email[1]), $plugins_allowedtags);;
 			$version = wp_kses($version, $plugins_allowedtags);
 			
-			return array('Dir_Plugin'=>basename(dirname($plugin_file)) , 'Plugin_Name' => $plugin_name, 'Plugin_URI' => $plugin_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Version' => $version);
+			return array('Dir_Plugin'=>basename(dirname($plugin_file)) , 'Plugin_Name' => $plugin_name, 'Plugin_URI' => $plugin_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Email' => $author_email, 'Version' => $version);
 		}
 		
 		

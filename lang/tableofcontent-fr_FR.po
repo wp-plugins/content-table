@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2011-08-16T11:36:09+00:00\n"
+"Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: France\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "If you want that the table of content appears in your post, just type:"
+msgstr "Si vous voulez que la table des matière apparaisse dans vos articles, tapez simplement : "
+
+msgid "that is all !"
+msgstr "c&#039;est tout !"
+
+msgid "What is the title to be displayed in the table of content?"
+msgstr "Quel est le titre qui sera affiché pour la table des matières ?"
+
+msgid "Title of the table of content:"
+msgstr "Titre de la table des matières :"
+
+msgid "Add prefix in your title:"
+msgstr "Ajoutez un préfixe à vos titres"
+
+msgid "If you leave the field blank, nothing will be added !"
+msgstr "Si vous laissez les champs vides, rien ne sera ajouté !"
+
+msgid "Note that if you want to display the number of level 2, just write <i>#2</i> ..."
+msgstr "Notez que si vous souhaitez afficher le numéro de niveau 2, écrivez &lt;i&gt;#2&lt;/i&gt; ..."
+
+msgid "Prefix of the level 2:"
+msgstr "Préfixe du niveau 2 :"
+
+msgid "Prefix of the level 3:"
+msgstr "Préfixe du niveau 3 :"
+
+msgid "Prefix of the level 4:"
+msgstr "Préfixe du niveau 4 :"
+
+msgid "Prefix of the level 5:"
+msgstr "Préfixe du niveau 5 :"
+
+msgid "Prefix of the level 6:"
+msgstr "Préfixe du niveau 6 :"
+
+msgid "Parameters"
+msgstr "Paramètres"
+
+msgid "Manage translations"
+msgstr "Gérer les traductions"
+

@@ -68,7 +68,7 @@ if (!class_exists("adminTable")) {
 		/** ====================================================================================================================================================
 		* Add a line in your table
 		* For instance
-		* <code>$table = new adminTable() ; <br/> $table->title(array("Col1", "Col2", "Col3") ) ; <br/> $cel1 = new adminCell("Cel1-1") ; <br/> $cel1 = new adminCell("Cel1-2") ; <br/> $cel1 = new adminCell("Cel1-3") ; <br/> $table->add_line(array($cel1, $cel2, $cel3), '1') ; <br/> echo $table->flush() ; </code>
+		* <code>$table = new adminTable() ; <br/> $table->title(array("Col1", "Col2", "Col3") ) ; <br/> $cel1 = new adminCell("Cel1-1") ; <br/> $cel2 = new adminCell("Cel1-2") ; <br/> $cel3 = new adminCell("Cel1-3") ; <br/> $table->add_line(array($cel1, $cel2, $cel3), '1') ; <br/> echo $table->flush() ; </code>
 		* This code will display a table with a unique line
 		* 
 		* @param array $array it is an array of adminCell object. The length of this array is the same size of the number of your columns
@@ -218,6 +218,8 @@ if (!class_exists("adminCell")) {
 		*with the following javascript code in the js/js_admin.js file to call a PHP function (deletePHP) in AJAX
 		*<code>function deleteFunction (element) { <br/>&nbsp; &nbsp; &nbsp;// Get the id of the line <br/>&nbsp; &nbsp; &nbsp;var idLine = element.getAttribute("id"); <br/>&nbsp; &nbsp; &nbsp;// Prepare the argument for the AJAX call <br/>&nbsp; &nbsp; &nbsp;var arguments = { <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;action: 'deletePHP',  <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;id : idLine <br/>&nbsp; &nbsp; &nbsp;}  <br/>&nbsp; &nbsp; &nbsp;//POST the data  <br/>&nbsp; &nbsp; &nbsp;jQuery.post(ajaxurl, arguments, function(response) { <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// The call is finished <br/>&nbsp; &nbsp; &nbsp;});  <br/>}</code>
 		* and do not forget to add a <code>add_action('wp_ajax_deletePHP', array($this,'deletePHP'));</code> in the <code>_init</code> function of your plugin
+		* If the function is only a string with no parantehsis (i.e. <code>the_function</code>), thus the id of the line will be passed in argument
+		* If the function is a function name with arguments (i.e. <code>the_function(arg1, arg2)</code>), thus this function will be called directly
 		*
 		* @param string $name the text of the link to be displayed
 		* @param string $javascript_function the name of the function to be called when the link is clicked
@@ -246,8 +248,14 @@ if (!class_exists("adminCell")) {
 				$num = 0 ; 
 				foreach ($this->action as $l) {
 					$num ++ ;
-?>										<span><a href="#" onclick="javascript: <?php echo $l[1] ;?>(<?php echo $this->idLigne ; ?>) ; return false ; " id="<?php echo $l[1] ;?>_<?php echo $this->idLigne ;?>"><?php echo $l[0] ;?></a><?php if ($num!=count($this->action)) { echo "|" ; }?></span>
-<?php		
+					if (strpos($l[1],"(")>0) {
+						$l[1] = str_replace('"', '\'', $l[1]) ; 
+?>										<span><a href="#" onclick="javascript: <?php echo $l[1] ;?> ; return false ; " id="<?php echo Utils::create_identifier($l[1]) ;?>_<?php echo $this->idLigne ;?>"><?php echo $l[0] ;?></a><?php if ($num!=count($this->action)) { echo " |" ; }?></span>
+<?php					
+					} else {
+					
+?>										<span><a href="#" onclick="javascript: <?php echo $l[1] ;?>(<?php echo $this->idLigne ; ?>) ; return false ; " id="<?php echo $l[1] ;?>_<?php echo $this->idLigne ;?>"><?php echo $l[0] ;?></a><?php if ($num!=count($this->action)) { echo " |" ; }?></span>
+<?php				}
 				}
 ?>									</div>
 <?php
