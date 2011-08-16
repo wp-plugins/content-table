@@ -119,7 +119,7 @@ function translate_save_after_modification (plug_param,dom_param,lang_param, nom
 *
 */
 
-function send_trans (plug_param,dom_param,lang_param) {
+function send_trans(plug_param,dom_param,lang_param) {
 
 	var num = jQuery("#new_translation option:selected").val() ;
 	jQuery("#wait_translation_modify").show();
@@ -135,5 +135,29 @@ function send_trans (plug_param,dom_param,lang_param) {
 		jQuery("#wait_translation_modify").fadeOut();
 		jQuery("#zone_edit").html(response);
 		window.location = String(window.location).replace(/\#.*$/, "") + "#edit_translation";
+	});    
+}
+
+/* =====================================================================================
+*
+*  Update the summary
+*
+*/
+
+function update_summary(plug_param,dom_param) {
+
+	jQuery("#wait_translation_modify").show();
+		
+	var arguments = {
+		action: 'update_summary', 
+		plugin : plug_param, 
+		domain : dom_param
+	} 
+	//POST the data and append the results to the results div
+	jQuery.post(ajaxurl, arguments, function(response) {
+		jQuery("#wait_translation_modify").fadeOut();
+		jQuery("#zone_edit").html("");
+		jQuery("#summary_of_translations").html(response);
+		window.location = String(window.location).replace(/\#.*$/, "") + "#top_translation";
 	});    
 }

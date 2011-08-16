@@ -6,7 +6,8 @@ Version: 1.0.0
 Framework: SL_Framework
 Author: The name of the author
 Author URI: http://www.yourdomain.com/
-Author Email : youremail@yourdomain.com
+Author Email: youremail@yourdomain.com
+Framework Email: sedlex@sedlex.fr
 Plugin URI: http://wordpress.org/extend/plugins/my-plugin/
 License: GPL3
 */
@@ -199,6 +200,13 @@ class my_plugin extends pluginSedLex {
 			$params->add_param('opt4', 'Modify opt4:') ; 
 			
 			$params->flush() ; 
+			
+			
+			// Examples for managing the translation of the plugin
+			//----------------------------------	
+			$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
+			$trans = new translationSL($this->pluginID, $plugin) ; 
+			$trans->enable_translation() ; 
 			
 			// Before this comment, you may modify whatever you want
 			//===============================================================================================

@@ -5,6 +5,7 @@ Description: <p>Create a table of content in you posts. </p><p>You only have to 
 Version: 1.0.2
 Author: SedLex
 Author Email: sedlex@sedlex.fr
+Framework Email: sedlex@sedlex.fr
 Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/content-table/
 License: GPL3
@@ -110,7 +111,7 @@ class tableofcontent extends pluginSedLex {
 				$params->add_title(__('What is the title to be displayed in the table of content?',$this->pluginID)) ; 
 				$params->add_param('title', __('Title of the table of content:',$this->pluginID)) ; 
 				$params->add_title(__('Add prefix in your title:',$this->pluginID)) ; 
-				$params->add_comment(__('If you leave the field blank, nothing will be added !',$this->pluginID).'<br/>'.__('Note that if you want to display the number of level 2, just write <i>#2</i> ...',$this->pluginID)) ; 
+				$params->add_comment(__('If you leave the field blank, nothing will be added !',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
 				$params->add_param('h2', __('Prefix of the level 2:',$this->pluginID)) ; 
 				$params->add_param('h3', __('Prefix of the level 3:',$this->pluginID)) ; 
 				$params->add_param('h4', __('Prefix of the level 4:',$this->pluginID)) ; 

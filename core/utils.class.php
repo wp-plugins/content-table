@@ -120,14 +120,14 @@ if (!class_exists("Utils")) {
 			$size = $bytes / 1024;
 			if($size < 1024) {
 				$size = number_format($size, 2);
-				$size .= ' KB';
+				$size .= ' '.__('KB', 'SL_framework');
 			} else {
 				if($size / 1024 < 1024)  {
 					$size = number_format($size / 1024, 2);
-					$size .= ' MB';
+					$size .= ' '.__('MB', 'SL_framework');
 				} else if ($size / 1024 / 1024 < 1024)  {
 					$size = number_format($size / 1024 / 1024, 2);
-					$size .= ' GB';
+					$size .= ' '.__('GB', 'SL_framework');
 				} 
 			}
 			return $size;
