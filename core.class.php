@@ -635,7 +635,7 @@ if (!class_exists('pluginSedLex')) {
 									// $action: query_plugins, plugin_information or hot_tags
 									// $req is an object
 									$action = "plugin_information" ; 
-									$req->slug = $plugin_name;
+									$req->slug = $plugin_name; 
 									
 									$request = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/', array( 'body' => array('action' => $action, 'request' => serialize($req))) );
 									if ( is_wp_error($request) ) {
