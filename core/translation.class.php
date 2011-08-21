@@ -28,110 +28,113 @@ if (!class_exists("translationSL")) {
 			
 			$path = $this->path ; 			
 			
-			// We create the lang dir
-			if (!is_dir($path."/lang/")) {
-				mkdir($path."/lang/", true) ; 
-			}
-			
-			// We check if the .pot file exist
-			if (is_file($path."/lang/".$domain .".pot")) {
-				// We delete the file
-				@unlink($path."/lang/".$domain .".pot");
-			} 
-			// We generate a new POT file
-			$content = "Content-Transfer-Encoding: 8bit\n\n" ; 
-			$php = $this->get_php_files($path) ; 
-			
-			foreach ($php as $f) {
-				$lines = file($path."/".$f) ; 
+			if ($domain != "SL_framework") {
+				// We create the lang dir
+				if (!is_dir($path."/lang/")) {
+					mkdir($path."/lang/", 0777, true) ; 
+				}
 				
-				$i = 0 ; 
-				foreach($lines as $l) {
-					$i++ ; 
-					$match_array = array("@__[ ]*\([ ]*\\\"([^\\\"]*)\\\"([^)]*)this->pluginID\)@", 
-										 "@__[ ]*\([ ]*'([^']*)'([^)]*)this->pluginID\)@")  ; 
-					foreach ($match_array as $reg) {
-						if (preg_match_all($reg,$l, $match,PREG_SET_ORDER)) {
-							foreach($match as $m) {
-								$val[0] = trim($m[1]) ; 
-								$pos = strpos($content,'msgid "'.$val[0].'"') ; 
-								if ($pos===false) {
-									// We translate only the text of the domain of the plugin
-									$content .= "#: ".$f.":".$i."\n" ; 
-									$content .= "#@ ".$domain."\n" ; // domain
-									$value = $val[0] ; 
-									// If the string is between simple quote, we escape the double quote
-									if ($reg==$match_array[1]) 
-										$value = str_replace("\"", "\\\"",$val[0]) ; 
-									$content .= 'msgid "'.$value.'"'."\n" ; 
-									$content .= 'msgstr ""'."\n\n" ;  
-								} else {
-									// If the text is already in the POT file, we only add the line number and the file
-									$temp = explode("#@ ".$domain."\n".'msgid "'.$val[0].'"'."\n", $content) ; 
-									$content = $temp[0]."#: ".$f.":".$i."\n"."#@ ".$domain."\n".'msgid "'.$val[0].'"'."\n".$temp[1] ; 
+				// We check if the .pot file exist
+				if (is_file($path."/lang/".$domain .".pot")) {
+					// We delete the file
+					@unlink($path."/lang/".$domain .".pot");
+				} 
+				// We generate a new POT file
+				$content = "Content-Transfer-Encoding: 8bit\n\n" ; 
+				$php = $this->get_php_files($path) ; 
+				
+				foreach ($php as $f) {
+					$lines = file($path."/".$f) ; 
+					
+					$i = 0 ; 
+					foreach($lines as $l) {
+						$i++ ; 
+						$match_array = array("@__[ ]*\([ ]*\\\"([^\\\"]*)\\\"([^)]*)this->pluginID\)@", 
+											 "@__[ ]*\([ ]*'([^']*)'([^)]*)this->pluginID\)@")  ; 
+						foreach ($match_array as $reg) {
+							if (preg_match_all($reg,$l, $match,PREG_SET_ORDER)) {
+								foreach($match as $m) {
+									$val[0] = trim($m[1]) ; 
+									$pos = strpos($content,'msgid "'.$val[0].'"') ; 
+									if ($pos===false) {
+										// We translate only the text of the domain of the plugin
+										$content .= "#: ".$f.":".$i."\n" ; 
+										$content .= "#@ ".$domain."\n" ; // domain
+										$value = $val[0] ; 
+										// If the string is between simple quote, we escape the double quote
+										if ($reg==$match_array[1]) 
+											$value = str_replace("\"", "\\\"",$val[0]) ; 
+										$content .= 'msgid "'.$value.'"'."\n" ; 
+										$content .= 'msgstr ""'."\n\n" ;  
+									} else {
+										// If the text is already in the POT file, we only add the line number and the file
+										$temp = explode("#@ ".$domain."\n".'msgid "'.$val[0].'"'."\n", $content) ; 
+										$content = $temp[0]."#: ".$f.":".$i."\n"."#@ ".$domain."\n".'msgid "'.$val[0].'"'."\n".$temp[1] ; 
+									}
 								}
-							}
-						} 
+							} 
+						}
 					}
 				}
-			}
-			
-			file_put_contents($path."/lang/".$domain .".pot", $content) ; 		
-			
-			
-			// We create the lang dir for the core translation
-			$plugin = explode("/",str_replace(basename( __FILE__),"",plugin_basename(__FILE__))); 
-			$plugin = $plugin[0] ; 
-			$path = WP_PLUGIN_DIR."/".$plugin ; 
-			
-			if (!is_dir($path."/core/lang/")) {
-				mkdir($path."/core/lang/", true) ; 
-			}
-			
-			// We check if the .pot file exist
-			if (is_file($path."/core/lang/SL_framework.pot")) {
-				// We delete the file
-				@unlink($path."/core/lang/SL_framework.pot");
-			} 
-			// We generate a new POT file
-			$content = "Content-Transfer-Encoding: 8bit\n\n" ; 
-			$php = $this->get_php_files($path) ; 
-			
-			foreach ($php as $f) {
-				$lines = file($path."/".$f) ; 
 				
-				$i = 0 ; 
-				foreach($lines as $l) {
-					$i++ ; 
-					$match_array = array("@__[ ]*\([ ]*\\\"([^\\\"]*)\\\"([^)]*)SL_framework([^)]*)\)@", 
-										 "@__[ ]*\([ ]*'([^']*)'([^)]*)SL_framework([^)]*)\)@")  ; 
-					foreach ($match_array as $reg) {
-						if (preg_match_all($reg,$l, $match,PREG_SET_ORDER)) {
-							foreach($match as $m) {
-								$val[0] = trim($m[1]) ; 
-								$pos = strpos($content,'msgid "'.$val[0].'"') ; 
-								if ($pos===false) {
-									// We translate only the text of the domain of the plugin
-									$content .= "#: ".$f.":".$i."\n" ; 
-									$content .= "#@ SL_framework\n" ; // domain
-									$value = $val[0] ; 
-									// If the string is between simple quote, we escape the double quote
-									if ($reg==$match_array[1]) 
-										$value = str_replace("\"", "\\\"",$val[0]) ; 
-									$content .= 'msgid "'.$value.'"'."\n" ; 
-									$content .= 'msgstr ""'."\n\n" ;  
-								} else {
-									// If the text is already in the POT file, we only add the line number and the file
-									$temp = explode("#@ SL_framework\n".'msgid "'.$val[0].'"'."\n", $content) ; 
-									$content = $temp[0]."#: ".$f.":".$i."\n"."#@ SL_framework\n".'msgid "'.$val[0].'"'."\n".$temp[1] ; 
+				file_put_contents($path."/lang/".$domain .".pot", $content) ; 
+				
+			} else {
+			
+				// We create the lang dir for the core translation
+				$plugin = explode("/",str_replace(basename( __FILE__),"",plugin_basename(__FILE__))); 
+				$plugin = $plugin[0] ; 
+				$path = WP_PLUGIN_DIR."/".$plugin ; 
+				
+				if (!is_dir($path."/core/lang/")) {
+					mkdir($path."/core/lang/", 0777, true) ; 
+				}
+				
+				// We check if the .pot file exist
+				if (is_file($path."/core/lang/SL_framework.pot")) {
+					// We delete the file
+					@unlink($path."/core/lang/SL_framework.pot");
+				} 
+				// We generate a new POT file
+				$content = "Content-Transfer-Encoding: 8bit\n\n" ; 
+				$php = $this->get_php_files($path) ; 
+				
+				foreach ($php as $f) {
+					$lines = file($path."/".$f) ; 
+					
+					$i = 0 ; 
+					foreach($lines as $l) {
+						$i++ ; 
+						$match_array = array("@__[ ]*\([ ]*\\\"([^\\\"]*)\\\"([^)]*)SL_framework([^)]*)\)@", 
+											 "@__[ ]*\([ ]*'([^']*)'([^)]*)SL_framework([^)]*)\)@")  ; 
+						foreach ($match_array as $reg) {
+							if (preg_match_all($reg,$l, $match,PREG_SET_ORDER)) {
+								foreach($match as $m) {
+									$val[0] = trim($m[1]) ; 
+									$pos = strpos($content,'msgid "'.$val[0].'"') ; 
+									if ($pos===false) {
+										// We translate only the text of the domain of the plugin
+										$content .= "#: ".$f.":".$i."\n" ; 
+										$content .= "#@ SL_framework\n" ; // domain
+										$value = $val[0] ; 
+										// If the string is between simple quote, we escape the double quote
+										if ($reg==$match_array[1]) 
+											$value = str_replace("\"", "\\\"",$val[0]) ; 
+										$content .= 'msgid "'.$value.'"'."\n" ; 
+										$content .= 'msgstr ""'."\n\n" ;  
+									} else {
+										// If the text is already in the POT file, we only add the line number and the file
+										$temp = explode("#@ SL_framework\n".'msgid "'.$val[0].'"'."\n", $content) ; 
+										$content = $temp[0]."#: ".$f.":".$i."\n"."#@ SL_framework\n".'msgid "'.$val[0].'"'."\n".$temp[1] ; 
+									}
 								}
-							}
-						} 
+							} 
+						}
 					}
 				}
+				
+				file_put_contents($path."/core/lang/SL_framework.pot", $content) ; 	
 			}
-			
-			file_put_contents($path."/core/lang/SL_framework.pot", $content) ; 				
 		}
 		
 		/** ====================================================================================================================================================
@@ -247,10 +250,35 @@ if (!class_exists("translationSL")) {
 			
 			if (strpos($domain,"SL_framework")!==false) {
 				echo "<h3>".sprintf(__("The available translation for the SL framework (contained in the '%s' folder)",'SL_framework'),$plugin)."</h3>" ; 
-				echo "<p>".sprintf(__("There is %d languages supported for the 'SL framework' (to see the plugin translations %s click here %s) .",'SL_framework'),$nb, "<a href='#' onclick='update_summary(\"".$plugin_lien."\", \"".str_replace("SL_framework","",$domain)."\"); return false;'>", "</a>")."</p>" ; 			
+				echo "<p>".sprintf(__("There is %d languages supported for the 'SL framework'.",'SL_framework'),$nb)."</p>" ; 	
+				
+				// We count the number of sentences to be translated
+				$content_pot = file($path."/core/lang/SL_framework.pot") ;
+				$all_count_pot = 0 ; 
+				foreach ($content_pot as $ligne_pot) {
+					if (preg_match("/^msgid \\\"(.*)\\\"$/", trim($ligne_pot))) {
+						$all_count_pot ++ ; 
+					}
+				}
+				echo "<p>".sprintf(__("There is %d sentence to be translated in the framework.",'SL_framework'),$all_count_pot)."</p>" ; 	
+				
+				
 			} else {
 				echo "<h3>".__("The available translation for this plugin",'SL_framework')."</h3>" ; 
-				echo "<p>".sprintf(__("There is %d languages supported for this plugin (to see the plugin translations %s click here %s) .",'SL_framework'),$nb, "<a href='#' onclick='update_summary(\"".$plugin_lien."\", \"SL_framework".$domain."\"); return false;'>", "</a>")."</p>" ; 			
+				echo "<p>".sprintf(__("There is %d languages supported for this plugin.",'SL_framework'),$nb)."</p>" ; 
+
+				// We count the number of sentences to be translated
+				$content_pot = file($path."/lang/".$domain.".pot") ;
+				$all_count_pot = 0 ; 
+				foreach ($content_pot as $ligne_pot) {
+					if (preg_match("/^msgid \\\"(.*)\\\"$/", trim($ligne_pot))) {
+						$all_count_pot ++ ; 
+					}
+				}
+				echo "<p>".sprintf(__("There is %d sentence to be translated in this plugin.",'SL_framework'),$all_count_pot)."</p>" ; 	
+
+				
+				
 			}
 			sort($file) ; 
 			$i = 1 ; 

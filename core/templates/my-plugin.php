@@ -131,7 +131,8 @@ class my_plugin extends pluginSedLex {
 		<div class="wrap">
 			<div id="icon-themes" class="icon32"><br></div>
 			<h2><?php echo $this->pluginName ?></h2>
-			
+		</div>
+		<div style="padding:20px;">			
 			<?php
 			//===============================================================================================
 			// After this comment, you may modify whatever you want
@@ -202,11 +203,23 @@ class my_plugin extends pluginSedLex {
 			$params->flush() ; 
 			
 			
-			// Examples for managing the translation of the plugin
-			//----------------------------------	
-			$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-			$trans = new translationSL($this->pluginID, $plugin) ; 
-			$trans->enable_translation() ; 
+			$tabs = new adminTabs() ; 
+			
+			ob_start() ; 
+				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
+				$trans = new translationSL($this->pluginID, $plugin) ; 
+				$trans->enable_translation() ; 
+			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
+
+			ob_start() ; 
+				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
+				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
+				$trans = new feedbackSL($plugin) ; 
+				$trans->enable_feedback() ; 
+			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
+			
+			echo $tabs->flush() ; 
+			
 			
 			// Before this comment, you may modify whatever you want
 			//===============================================================================================

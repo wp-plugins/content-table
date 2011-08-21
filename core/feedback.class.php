@@ -38,11 +38,11 @@ if (!class_exists("feedbackSL")) {
 				echo "<p>".__('Your email (for response):', 'SL_framework')." <input id='feedback_mail' type='text' name='feedback_mail' value='' /></p>" ; 
 				echo "<p>".__('Your comments:', 'SL_framework')." </p>" ; 
 				echo "<p><textarea id='feedback_comment' style='width:500px;height:400px;'></textarea></p>" ; 
+				echo "<p>".__('Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)', 'SL_framework')." </p>" ; 
 				echo "<p id='feedback_submit'><input type='submit' name='add' class='button-primary validButton' onclick='send_feedback(\"".$this->plugin."\");return false;' value='".__('Send feedback','SL_framework')."' /></p>" ; 
 				
 				$x = WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__)) ; 
 				echo "<img id='wait_feedback' src='".$x."/img/ajax-loader.gif' style='display:none;'>" ; 
-
 			} else {
 				echo "<p>".__('No email have been provided for the author of this plugin. Therefore, the feedback is impossible', 'SL_framework')."</p>" ; 
 			}
@@ -73,11 +73,29 @@ if (!class_exists("feedbackSL")) {
 			
 			$message = "" ; 
 			$message .= "From $name (".$mail.")\n\n\n" ; 
-			$message .= $comment ; 
+			$message .= $comment."\n\n\n" ; 
+			$message .= "* Information * \n" ; 
+			$message .= "Plugin: ".$plugin."\n" ;
+			$message .= "Plugin Version: ".$info_file['Version']."\n" ; 
+			$message .= "Wordpress Version: ".get_bloginfo('version')."\n" ; 
+			$message .= "URL (home): ".get_bloginfo('home')."\n" ; 
+			$message .= "URL (site): ".get_bloginfo('siteurl')."\n" ; 
+			$message .= "URL (wp): ".get_bloginfo('wpurl')."\n" ; 
+			$message .= "Language: ".get_bloginfo('language')."\n" ; 
+			$message .= "Charset: ".get_bloginfo('charset')."\n" ; 
+			$message .= "\n" ; 
+			$message .= "* Activated plugins * \n" ; 
+			$plugins = get_plugins() ; 
+			$active = get_option('active_plugins') ; 
+			foreach($plugins as $file=>$p){
+				if (array_search($file, $active)!==false) {
+					$message .= $p['Name']."(".$p['Version'].") => ".$p['PluginURI']."\n" ; 
+				}
+			}
+			
 			
 			$headers = "" ; 
 			if (preg_match("#^[a-z0-9-_.]+@[a-z0-9-_.]{2,}\.[a-z]{2,4}$#",$mail)) {
-			echo "coucou" ; 
 				$headers = "Reply-To: $mail\n".
 						"Return-Path: $mail" ; 
 			}

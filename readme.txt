@@ -36,6 +36,10 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.0.5 =
+* Enhance the internationalization
+* Improve stability
+
 = 1.0.4 =
 * Correction of the bug when a plurality of plugin use the same framework
 
@@ -59,5 +63,6 @@ It is stressed that the first level taken in account is "Title 2".
 * Where can I read more?
 
 Visit http://www.sedlex.fr/cote_geek/
-
-
+ 
+ 
+InfoVersion:7241cb2c1ebd2b9b649c48cc07e32acb

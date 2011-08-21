@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-08-16T16:28:41+00:00\n"
+"PO-Revision-Date: 2011-08-21T09:27:53+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,17 @@ msgstr "A propos..."
 msgid "Settings"
 msgstr "Réglages"
 
+msgid "%s has been updated with %s !"
+msgstr "%s a été mis à jour avec %s"
+
+msgid "Please click %shere%s to refresh the page and ensure everything is ok!"
+msgstr "Merci de cliquer %sici%s afin de rafraichir la page et de s&#039;assurer que tout fonctionne bien !"
+
 msgid "Summary page for the plugins developped with the SL framework"
 msgstr "Page de synthèse pour les plugins développés avec le framework SL"
+
+msgid "The core file used for the SedLex plugins is:"
+msgstr "Le fichier principal utilisé par les plugins SL est : "
 
 msgid "For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':"
 msgstr "Pour l&#039;instant, vous avez installé %d plugin, dont %d plugins développés avec le framework SL"
@@ -41,6 +50,42 @@ msgstr "Description"
 msgid "Status"
 msgstr "Status"
 
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr "Une erreur HTTP inattendue est survenue durant la requête API."
+
+msgid "This plugin does not seem to be hosted on the wordpress repository."
+msgstr "Ce plugin ne semble pas être hébergé par Wordpress"
+
+msgid "This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)"
+msgstr "Ce plugin est hébergé par Wordpress et n&#039;est pas à jour (i.e. %s) !"
+
+msgid "This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same"
+msgstr "Ce plugin est hébergé par Wordpress avec la même version mais le plugin n&#039;est pas tout à fait identique."
+
+msgid "This plugin is hosted by wordpress repository and is up-to-date !"
+msgstr "Ce plugin est hébergé par Wordpress et est à jour !"
+
+msgid "Last update:"
+msgstr "Dernière mise à jour"
+
+msgid "by %s persons"
+msgstr "par %s personnes"
+
+msgid "Rating:"
+msgstr "Evaluation : "
+
+msgid "Number of download:"
+msgstr "Nombre de téléchargement"
+
+msgid "Version: %s by %s"
+msgstr "Version %s par %s"
+
+msgid "Update with the core of the %s plugin (only if you definitely know what you do)"
+msgstr "Mettre à jour le core du plugin (seulement si vous savez ce que vous faites)"
+
+msgid "This core is currently used by the framework and plugins !"
+msgstr "Ce core est actuellement utilisé par le framework et les plugins !"
+
 msgid "List of SL plugins"
 msgstr "Liste des plugins SL"
 
@@ -53,11 +98,14 @@ msgstr "Comment développer un nouveau plugin avec le framework SL"
 msgid "Framework documentation"
 msgstr "Documentation du framework"
 
-msgid "The core file used for the SedLex plugins is:"
-msgstr "Le fichier principal utilisé par les plugins SL est : "
+msgid "Manage translation of the framework"
+msgstr "Gérer les traductions du framework"
 
 msgid "Please find hearafter all the possible classes and methods for the development with this framework"
 msgstr "Voici ci-après les classes et méthodes pour le développement avec ce framework."
+
+msgid "[CLASS]"
+msgstr "[CLASSE]"
 
 msgid "Here is the method of the class:"
 msgstr "Voici les méthodes de la classe:"
@@ -95,74 +143,29 @@ msgstr "Version de"
 msgid "bytes"
 msgstr "octets"
 
-msgid "file not found"
-msgstr "fichier non trouvé"
+msgid "MD5 fingerprint of the framework:"
+msgstr "Empreinte MD5 du framework:"
 
-msgid "KB"
-msgstr "ko"
-
-msgid "MB"
-msgstr "Mo"
-
-msgid "GB"
-msgstr "Go"
-
-msgid "Error: the submitted value is not an integer and thus, the parameter has not been updated!"
-msgstr "Erreur : la valeur soumises n&#039;est pas un entier, la valeur du paramètre n&#039;est donc pas mise à jour"
-
-msgid "Warning: some characters have been removed because they are not allowed here"
-msgstr "Attention : certains caractères ont été supprimés car ils ne sont pas autorisés ici"
-
-msgid "Error: the submitted string does not match the constrains"
-msgstr "Erreur : la chaine de caractère soumise ne respecte pas les contraines imposées"
-
-msgid "Update"
-msgstr "Mise à jour"
-
-msgid "Some parameters have not been updated due to errors (see below) !"
-msgstr "Des paramètres n&#039;ont pas été mis à jour à cause d&#039;erreurs (voir ci-dessous) !"
-
-msgid "Parameters have been updated (but with some warnings) !"
-msgstr "Les paramètres on été mis à jour (mais avec des avertissements) !"
-
-msgid "Parameters have been updated successfully !"
-msgstr "Les paramètres ont été mis à jour avec succès !"
-
-msgid "Your name:"
-msgstr "Votre nom:"
-
-msgid "Your email (for response):"
-msgstr "Votre email (pour la réponse) : "
-
-msgid "Your comments:"
-msgstr "Vos commentaires : "
-
-msgid "Send feedback"
-msgstr "Envoyer vos commentaires"
-
-msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
-msgstr "Aucun email n&#039;a été communiqué par l&#039;auteur de ce plugin. Aucun feedback n&#039;est donc possible."
-
-msgid "The feedback has been sent"
-msgstr "Le feedback a été envoyé"
-
-msgid "An error occured sending the email."
-msgstr "Une erreur est survenue lors de l&#039;envoi du mail"
-
-msgid "Make sure that your wordpress is able to send email."
-msgstr "Verifier que votre wordpress est en capacité d&#039;envoyer des mails"
+msgid "Last update of the core:"
+msgstr "Dernière mise à jour du framework"
 
 msgid "The available translation for the SL framework (contained in the '%s' folder)"
 msgstr "La traduction disponible pour le framework SL (contenu dans le répertoire &#039;%s&#039;)"
 
-msgid "There is %d languages supported for the 'SL framework' (to see the plugin translations %s click here %s) ."
-msgstr "Il y a %d langues supportées par le framework SL (pour voir les traductions du plugin %s cliquez ici %s)."
+msgid "There is %d languages supported for the 'SL framework'."
+msgstr "Il y a %d langues supportées par le framework SL."
+
+msgid "There is %d sentence to be translated in the framework."
+msgstr "Il y a %d phrases à traduire dans le framework."
 
 msgid "The available translation for this plugin"
 msgstr "La traduction disponible pour le plugin"
 
-msgid "There is %d languages supported for this plugin (to see the plugin translations %s click here %s) ."
-msgstr "Il y a %d langues supportées par ce plugin (pour voir les traductions du framework %s cliquez ici %s)."
+msgid "There is %d languages supported for this plugin."
+msgstr "Il y a %d langues supportées par ce plugin."
+
+msgid "There is %d sentence to be translated in this plugin."
+msgstr "Il y a %d phrases à traduire dans ce plugin."
 
 msgid "Language"
 msgstr "Langues"
@@ -200,6 +203,9 @@ msgstr "Phrase à traduire"
 msgid "Translation"
 msgstr "Traduction"
 
+msgid "Your name:"
+msgstr "Votre nom:"
+
 msgid "(if your name/pseudo is already in the list, there is no need to fill this input)"
 msgstr "(si votre nom/pseudo est déja dans la list, il n&#039;est pas nécessiare de remplir ces champs)"
 
@@ -221,6 +227,12 @@ msgstr "%s phrases ont été traduites (c&#039;est à dire %s)"
 msgid "The translation %s have been sent"
 msgstr "La traduction %s a été envoyée"
 
+msgid "An error occured sending the email."
+msgstr "Une erreur est survenue lors de l&#039;envoi du mail"
+
+msgid "Make sure that your wordpress is able to send email."
+msgstr "Verifier que votre wordpress est en capacité d&#039;envoyer des mails"
+
 msgid "%s file has been updated for %s"
 msgstr "Le fichier %s a été mis à jour pour %s"
 
@@ -232,4 +244,52 @@ msgstr "Le fichier %s a été créé pour %s"
 
 msgid "%s file has been created from this file"
 msgstr "Le fichier %s a été créé à partir de ce fichier"
+
+msgid "KB"
+msgstr "ko"
+
+msgid "MB"
+msgstr "Mo"
+
+msgid "GB"
+msgstr "Go"
+
+msgid "Error: the submitted value is not an integer and thus, the parameter has not been updated!"
+msgstr "Erreur : la valeur soumises n&#039;est pas un entier, la valeur du paramètre n&#039;est donc pas mise à jour"
+
+msgid "Warning: some characters have been removed because they are not allowed here"
+msgstr "Attention : certains caractères ont été supprimés car ils ne sont pas autorisés ici"
+
+msgid "Error: the submitted string does not match the constrains"
+msgstr "Erreur : la chaine de caractère soumise ne respecte pas les contraines imposées"
+
+msgid "Update"
+msgstr "Mise à jour"
+
+msgid "Some parameters have not been updated due to errors (see below) !"
+msgstr "Des paramètres n&#039;ont pas été mis à jour à cause d&#039;erreurs (voir ci-dessous) !"
+
+msgid "Parameters have been updated (but with some warnings) !"
+msgstr "Les paramètres on été mis à jour (mais avec des avertissements) !"
+
+msgid "Parameters have been updated successfully !"
+msgstr "Les paramètres ont été mis à jour avec succès !"
+
+msgid "Your email (for response):"
+msgstr "Votre email (pour la réponse) : "
+
+msgid "Your comments:"
+msgstr "Vos commentaires : "
+
+msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
+msgstr "Merci de noter que des informations complémentaires relatives à votre installation de wordpress seront envoyées à l&#039;auteur afin d&#039;aider la correction des erreurs(comme la version de wordpress, la liste des plugins installés, etc.)"
+
+msgid "Send feedback"
+msgstr "Envoyer vos commentaires"
+
+msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
+msgstr "Aucun email n&#039;a été communiqué par l&#039;auteur de ce plugin. Aucun feedback n&#039;est donc possible."
+
+msgid "The feedback has been sent"
+msgstr "Le feedback a été envoyé"
 
