@@ -68,4 +68,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:7b148994655cc411723d05700b4776c7
+InfoVersion:a9ab7b8ce46e325f8bdca97ec2a27d36
