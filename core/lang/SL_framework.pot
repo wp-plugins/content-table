@@ -67,6 +67,13 @@ msgstr ""
 msgid "This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)"
 msgstr ""
 
+#: core.class.php:650
+#: core.class.php:654
+#: core.class.php:656
+#@ SL_framework
+msgid "(the repository)"
+msgstr ""
+
 #: core.class.php:654
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same"
@@ -210,14 +217,14 @@ msgstr ""
 msgid "bytes"
 msgstr ""
 
-#: core.class.php:1170
+#: core.class.php:1179
 #@ SL_framework
 msgid "MD5 fingerprint of the framework:"
 msgstr ""
 
-#: core.class.php:1171
+#: core.class.php:1180
 #@ SL_framework
-msgid "Last update of the core:"
+msgid "Last update of the core: %s at %s"
 msgstr ""
 
 #: core/translation.class.php:252

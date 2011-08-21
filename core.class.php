@@ -647,13 +647,13 @@ if (!class_exists('pluginSedLex')) {
 										} else {
 											$version_on_wordpress = $res->version ; 
 											if ($version_on_wordpress != $info['Version']) {
-												echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)", 'SL_framework' ),$version_on_wordpress)."</p>" ; 
+												echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
 											} else {
 												// We search in the FAQ section if the same hash is found
 												if (strpos($res->sections['faq'], $hash_plugin)===false) {
-													echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same", 'SL_framework' ),$version_on_wordpress)."</p>" ; 
+													echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
 												} else {
-													echo "<p style='color:#006600'>".sprintf(__("This plugin is hosted by wordpress repository and is up-to-date !", 'SL_framework' ),$version_on_wordpress)."</p>" ; 
+													echo "<p style='color:#006600'>".sprintf(__("This plugin is hosted by wordpress repository and is up-to-date !", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
 												}
 											}
 						
@@ -1167,8 +1167,17 @@ if (!class_exists('pluginSedLex')) {
 				file_put_contents(dirname($path).'/core.nfo', $md5."#".$date) ; 
 			}
 			
+			$year = substr($date, 0, 4) ; 
+			$month = substr($date, 4, 2) ; 
+			$day = substr($date, 6, 2) ; 
+			$hour = substr($date, 8, 2) ; 
+			$min = substr($date, 10, 2) ; 
+			$sec = substr($date, 12, 2) ;
+			$temp_time = $year.'-'.$month.'-'.$day.' '.$hour.':'. $min.':' .$sec ; 
+			$time = strtotime($temp_time) ; 
+			
 			$resultat .= "<p ".$style.">".__('MD5 fingerprint of the framework:','SL_framework')." $md5</p>" ; 
-			$resultat .= "<p ".$style.">".__('Last update of the core:','SL_framework')." $date</p>" ; 
+			$resultat .= "<p ".$style.">".sprintf(__('Last update of the core: %s at %s','SL_framework'), "<b>".date("d M Y",$time)."</b>", "<b>".date("H:i:s",$time))."</b></p>" ; 
 
 			return $resultat ; 
 		} 

@@ -235,7 +235,7 @@ if (!class_exists("Utils")) {
 		*/
 
 		static function md5_rec($path, $exclu=array()) {
-			$md5 = "" ; 
+			$md5 = "" ;  
 			$text = "" ; 
 			if (is_dir($path)) {
 				chmod($path, 0755) ; 
@@ -249,8 +249,8 @@ if (!class_exists("Utils")) {
 									$toexclu = true ; 
 								}
 							}
-							if (!$toexclu) 
-								$text .= $object.Utils::md5_rec($path."/".$object); 
+							if (!$toexclu)  
+								$text .= Utils::md5_rec($path."/".$object); 
 						} else {
 							$toexclu = false ; 
 							foreach($exclu as $e) {

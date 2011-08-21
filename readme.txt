@@ -36,6 +36,9 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.0.6 =
+* Correction of a micro-bug (nothing to worry about)
+
 = 1.0.5 =
 * Enhance the internationalization
 * Improve stability
@@ -65,4 +68,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:7241cb2c1ebd2b9b649c48cc07e32acb
+InfoVersion:963ebc45cc390ca3ec46856642ff5d22
