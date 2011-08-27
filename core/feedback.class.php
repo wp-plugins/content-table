@@ -14,10 +14,12 @@ if (!class_exists("feedbackSL")) {
 		* Constructor of the class
 		* 
 		* @param string $plugin the name of the plugin (probably <code>str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__)))</code>)
+		* @param string $pluginID the pluginID of the plugin (probably <code>$this->pluginID</code>)
 		* @return feedbackSL the feedbackSL object
 		*/
-		function feedbackSL($plugin) {
+		function feedbackSL($plugin, $pluginID) {
 			$this->plugin = $plugin ; 
+			$this->pluginID = $pluginID ; 
 		}
 		
 		/** ====================================================================================================================================================
@@ -39,7 +41,7 @@ if (!class_exists("feedbackSL")) {
 				echo "<p>".__('Your comments:', 'SL_framework')." </p>" ; 
 				echo "<p><textarea id='feedback_comment' style='width:500px;height:400px;'></textarea></p>" ; 
 				echo "<p>".__('Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)', 'SL_framework')." </p>" ; 
-				echo "<p id='feedback_submit'><input type='submit' name='add' class='button-primary validButton' onclick='send_feedback(\"".$this->plugin."\");return false;' value='".__('Send feedback','SL_framework')."' /></p>" ; 
+				echo "<p id='feedback_submit'><input type='submit' name='add' class='button-primary validButton' onclick='send_feedback(\"".$this->plugin."\", \"".$this->pluginID."\");return false;' value='".__('Send feedback','SL_framework')."' /></p>" ; 
 				
 				$x = WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__)) ; 
 				echo "<img id='wait_feedback' src='".$x."/img/ajax-loader.gif' style='display:none;'>" ; 
@@ -59,6 +61,7 @@ if (!class_exists("feedbackSL")) {
 		public function send_feedback() {
 			// We sanitize the entries
 			$plugin = preg_replace("/[^a-zA-Z0-9_-]/","",$_POST['plugin']) ; 
+			$pluginID = preg_replace("/[^a-zA-Z0-9_]/","",$_POST['pluginID']) ; 
 			$name = strip_tags($_POST['name']) ; 
 			$mail = preg_replace("/[^:\/a-z0-9@A-Z_.-]/","",$_POST['mail']) ; 
 			$comment = strip_tags($_POST['comment']) ; 
@@ -74,7 +77,8 @@ if (!class_exists("feedbackSL")) {
 			$message = "" ; 
 			$message .= "From $name (".$mail.")\n\n\n" ; 
 			$message .= $comment."\n\n\n" ; 
-			$message .= "* Information * \n" ; 
+			$message .= "* Information \n" ; 
+			$message .= "**************************************** \n" ; 
 			$message .= "Plugin: ".$plugin."\n" ;
 			$message .= "Plugin Version: ".$info_file['Version']."\n" ; 
 			$message .= "Wordpress Version: ".get_bloginfo('version')."\n" ; 
@@ -83,8 +87,16 @@ if (!class_exists("feedbackSL")) {
 			$message .= "URL (wp): ".get_bloginfo('wpurl')."\n" ; 
 			$message .= "Language: ".get_bloginfo('language')."\n" ; 
 			$message .= "Charset: ".get_bloginfo('charset')."\n" ; 
-			$message .= "\n" ; 
-			$message .= "* Activated plugins * \n" ; 
+			$message .= "\n\n\n" ; 
+			$message .= "* Configuration of the plugin \n" ; 
+			$message .= "**************************************** \n" ; 
+			$options = get_option($pluginID.'_options'); 
+			ob_start() ; 
+				print_r($options) ; 
+			$message .= ob_get_clean() ; 
+			$message .= "\n\n\n" ; 
+			$message .= "* Activated plugins \n" ; 
+			$message .= "**************************************** \n" ; 
 			$plugins = get_plugins() ; 
 			$active = get_option('active_plugins') ; 
 			foreach($plugins as $file=>$p){

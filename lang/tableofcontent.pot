@@ -1,85 +1,95 @@
 Content-Transfer-Encoding: 8bit
 
-#: content-table.php:99
+#: content-table.php:98
 #@ tableofcontent
 msgid "If you want that the table of content appears in your post, just type:"
 msgstr ""
 
-#: content-table.php:99
+#: content-table.php:98
 #@ tableofcontent
 msgid "that is all !"
 msgstr ""
 
-#: content-table.php:113
+#: content-table.php:112
 #@ tableofcontent
 msgid "What is the title to be displayed in the table of content?"
 msgstr ""
 
-#: content-table.php:114
+#: content-table.php:113
 #@ tableofcontent
 msgid "Title of the table of content:"
 msgstr ""
 
-#: content-table.php:115
+#: content-table.php:114
 #@ tableofcontent
 msgid "Add prefix in your title:"
 msgstr ""
 
-#: content-table.php:116
+#: content-table.php:115
 #@ tableofcontent
 msgid "If you leave the field blank, nothing will be added !"
 msgstr ""
 
-#: content-table.php:116
+#: content-table.php:115
 #@ tableofcontent
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr ""
 
-#: content-table.php:117
+#: content-table.php:116
 #@ tableofcontent
 msgid "Prefix of the level 2:"
 msgstr ""
 
-#: content-table.php:118
+#: content-table.php:117
 #@ tableofcontent
 msgid "Prefix of the level 3:"
 msgstr ""
 
-#: content-table.php:119
+#: content-table.php:118
 #@ tableofcontent
 msgid "Prefix of the level 4:"
 msgstr ""
 
-#: content-table.php:120
+#: content-table.php:119
 #@ tableofcontent
 msgid "Prefix of the level 5:"
 msgstr ""
 
-#: content-table.php:121
+#: content-table.php:120
 #@ tableofcontent
 msgid "Prefix of the level 6:"
 msgstr ""
 
-#: content-table.php:125
+#: content-table.php:124
 #@ tableofcontent
 msgid "Parameters"
 msgstr ""
 
-#: content-table.php:132
+#: content-table.php:131
 #: core/templates/my-plugin.php:212
 #@ tableofcontent
 msgid "Manage translations"
 msgstr ""
 
-#: content-table.php:135
+#: content-table.php:134
 #: core/templates/my-plugin.php:215
 #@ tableofcontent
 msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
 msgstr ""
 
-#: content-table.php:139
+#: content-table.php:138
 #: core/templates/my-plugin.php:219
 #@ tableofcontent
 msgid "Give feedback"
+msgstr ""
+
+#: content-table.php:141
+#@ tableofcontent
+msgid "Here is the plugins developped by the author"
+msgstr ""
+
+#: content-table.php:144
+#@ tableofcontent
+msgid "Other possible plugins"
 msgstr ""
 

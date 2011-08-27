@@ -32,6 +32,7 @@ if (!class_exists('pluginSedLex')) {
 	require_once($url.'core/tabs.class.php') ; 
 	require_once($url.'core/box.class.php') ; 
 	require_once($url.'core/feedback.class.php') ; 
+	require_once($url.'core/otherplugins.class.php') ; 
 	require_once($url.'core/parameters.class.php') ; 
 	require_once($url.'core/phpdoc.class.php') ; 
 	require_once($url.'core/translation.class.php') ; 

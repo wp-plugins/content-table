@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-08-21T09:27:53+00:00\n"
+"PO-Revision-Date: 2011-08-25T16:43:05+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,18 @@ msgstr "A propos..."
 
 msgid "Settings"
 msgstr "Réglages"
+
+msgid "The advanced options and output will be displayed now !"
+msgstr "Les options et affichages avancés seront affichés à partir de maintenant !"
+
+msgid "The advanced options and output will be hidden now !"
+msgstr "Les options et affichages avancés seront masqués à partir de maintenant !"
+
+msgid "The developpers documentations will be displayed now !"
+msgstr "La documentation pour développeurs sera affichée à partir de maintenant !"
+
+msgid "The developpers documentations will be hidden now !"
+msgstr "La documentation pour développeurs sera masquée à partir de maintenant !"
 
 msgid "%s has been updated with %s !"
 msgstr "%s a été mis à jour avec %s"
@@ -47,8 +59,8 @@ msgstr "Nom du plugin"
 msgid "Description"
 msgstr "Description"
 
-msgid "Status"
-msgstr "Status"
+msgid "Status of the core"
+msgstr "Status du core"
 
 msgid "An Unexpected HTTP Error occurred during the API request."
 msgstr "Une erreur HTTP inattendue est survenue durant la requête API."
@@ -58,6 +70,9 @@ msgstr "Ce plugin ne semble pas être hébergé par Wordpress"
 
 msgid "This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)"
 msgstr "Ce plugin est hébergé par Wordpress et n&#039;est pas à jour (i.e. %s) !"
+
+msgid "(the repository)"
+msgstr "(le dépôt)"
 
 msgid "This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same"
 msgstr "Ce plugin est hébergé par Wordpress avec la même version mais le plugin n&#039;est pas tout à fait identique."
@@ -85,6 +100,12 @@ msgstr "Mettre à jour le core du plugin (seulement si vous savez ce que vous fa
 
 msgid "This core is currently used by the framework and plugins !"
 msgstr "Ce core est actuellement utilisé par le framework et les plugins !"
+
+msgid "Show the advanced options and parameters:"
+msgstr "Montrer les options et affichages avancés"
+
+msgid "Show the developpers documentation:"
+msgstr "Montrer la documentation pour développeurs"
 
 msgid "List of SL plugins"
 msgstr "Liste des plugins SL"
@@ -146,8 +167,8 @@ msgstr "octets"
 msgid "MD5 fingerprint of the framework:"
 msgstr "Empreinte MD5 du framework:"
 
-msgid "Last update of the core:"
-msgstr "Dernière mise à jour du framework"
+msgid "Last update of the core: %s at %s"
+msgstr "Dernière mise à jour du core : %s à %s"
 
 msgid "The available translation for the SL framework (contained in the '%s' folder)"
 msgstr "La traduction disponible pour le framework SL (contenu dans le répertoire &#039;%s&#039;)"
@@ -244,6 +265,9 @@ msgstr "Le fichier %s a été créé pour %s"
 
 msgid "%s file has been created from this file"
 msgstr "Le fichier %s a été créé à partir de ce fichier"
+
+msgid "Homepage:"
+msgstr "Page d&#039;accueil :"
 
 msgid "KB"
 msgstr "ko"

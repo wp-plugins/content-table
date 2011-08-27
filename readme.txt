@@ -36,7 +36,12 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
-= 1.0.6 =
+= 1.0.8 =
+* Thanks to Vincent (http://www.vincent.mabillot.net) a bug in the numbering have been corrected
+* Feedback have been improved to show the configuration of the submitters
+* Update of the framework
+
+= 1.0.6 and 1.0.7 =
 * Correction of a micro-bug (nothing to worry about)
 
 = 1.0.5 =
@@ -68,4 +73,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:a9ab7b8ce46e325f8bdca97ec2a27d36
+InfoVersion:033b8de2f5861fddcac20ce44cb24e0d

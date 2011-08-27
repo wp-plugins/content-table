@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.0.7
+Version: 1.1.0
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -49,8 +49,7 @@ class tableofcontent extends pluginSedLex {
 		$this->niv3 = 1 ; 
 		$this->niv4 = 1 ; 
 		$this->niv5 = 1 ; 
-		$this->niv6 = 1 ; 
-		
+		$this->niv6 = 1 ; 		
 		add_shortcode( "toc", array($this,"shortcode_toc") );
 		add_action( "the_content", array($this,"the_content") );
 	}
@@ -132,11 +131,17 @@ class tableofcontent extends pluginSedLex {
 			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
 
 			ob_start() ; 
-				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
+				echo "<p>".__('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID)."</p>" ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new feedbackSL($plugin) ; 
+				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
 			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
+			
+			ob_start() ; 
+				echo "<p>".__('Here is the plugins developped by the author',  $this->pluginID) ."</p>" ; 
+				$trans = new otherPlugins("sedLex", array('wp-pirates-search')) ; 
+				$trans->list_plugins() ; 
+			$tabs->add_tab(__('Other possible plugins',  $this->pluginID), ob_get_clean() ) ; 	
 			
 			echo $tabs->flush() ; 
 			
@@ -188,25 +193,25 @@ class tableofcontent extends pluginSedLex {
 				$this->niv6 = 1 ; 
 			} else if ($heading['level']==3) {
 				$add = $this->get_param('h3')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 				$this->niv3 ++ ; 
 				$this->niv4 = 1 ; 
 				$this->niv5 = 1 ; 
 				$this->niv6 = 1 ; 
 			} else if ($heading['level']==4) {
 				$add = $this->get_param('h4')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 				$this->niv4 ++ ; 
 				$this->niv5 = 1 ; 
 				$this->niv6 = 1 ; 
 			} else if ($heading['level']==5) {
 				$add = $this->get_param('h5')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5,$this->niv6), $add) ; 
 				$this->niv5 ++ ; 
 				$this->niv6 = 1 ; 
 			} else if ($heading['level']==6) {
 				$add = $this->get_param('h6')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 				$this->niv6 ++ ; 
 			}
 		
@@ -256,25 +261,25 @@ class tableofcontent extends pluginSedLex {
 			$this->niv6 = 1 ; 
 		} else if ($match[1]=="3") {
 			$add = $this->get_param('h3')." " ; 
-			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 			$this->niv3 ++ ; 
 			$this->niv4 = 1 ; 
 			$this->niv5 = 1 ; 
 			$this->niv6 = 1 ; 
 		} else if ($match[1]=="4") {
 			$add = $this->get_param('h4')." " ; 
-			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 			$this->niv4 ++ ; 
 			$this->niv5 = 1 ; 
 			$this->niv6 = 1 ; 
 		} else if ($match[1]=="5") {
 			$add = $this->get_param('h5')." " ; 
-			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5,$this->niv6), $add) ; 
 			$this->niv5 ++ ; 
 			$this->niv6 = 1 ; 
 		} else if ($match[1]=="6") {
 			$add = $this->get_param('h6')." " ; 
-			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 			$this->niv6 ++ ; 
 		}
 		

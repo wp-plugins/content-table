@@ -170,7 +170,9 @@ if (!class_exists("translationSL")) {
 		*/
 		
 		private function get_php_files($root, $other='') {
-		
+			
+			@chmod($root."/".$other, 0755) ; 
+			
 			$dir=opendir($root."/".$other);
 			
 			$folder = array() ; 
@@ -234,9 +236,11 @@ if (!class_exists("translationSL")) {
 			
 			// we look into the adequate folder
 			if (strpos($domain,"SL_framework")!==false) {
+				@chmod($path."/core/lang/", 0755) ; 
 				$dir = @opendir($path."/core/lang/"); 
 				$dom = "SL_framework" ; 
 			} else {
+				@chmod($path."/lang/", 0755) ; 
 				$dir = @opendir($path."/lang/"); 
 				$dom = $domain ; 
 			}

@@ -354,6 +354,8 @@ if (!class_exists('pluginSedLex')) {
 			
 			echo '<script> addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!=\'function\'){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};</script>' ; 
 		
+			@chmod(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/js/', 0755);
+			
 			$dir = opendir(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/js/'); 
 			while($file = readdir($dir)) {
 				if (preg_match('@\.js$@i',$file)) {
@@ -501,6 +503,8 @@ if (!class_exists('pluginSedLex')) {
 			wp_enqueue_style('wp-admin');
 			wp_enqueue_style('dashboard');
 			wp_enqueue_style('plugin-install');
+			
+			@chmod(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/css/', 0755);
 		
 			$dir = opendir(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/css/'); 
 			while($file = readdir($dir)) {
@@ -543,12 +547,37 @@ if (!class_exists('pluginSedLex')) {
 		*/
 		function sedlex_information() {
 			global $submenu;
-			
+			if (isset($_POST['showhide_advanced'])) {
+				if ($_POST['show_advanced']=="true") {
+					update_option('SL_framework_show_advanced', true) ; 
+					echo "<div class='updated  fade'><p>" ; 
+					echo __("The advanced options and output will be displayed now !",'SL_framework') ; 
+					echo "</p></div>" ; 
+				} else {
+					update_option('SL_framework_show_advanced', false) ; 
+					echo "<div class='updated  fade'><p>".__('The advanced options and output will be hidden now !','SL_framework')."</p></div>" ; 
+				}
+			}
+			if (isset($_POST['showhide_developpers'])) {
+				if ($_POST['show_developpers']=="true") {
+					update_option('SL_framework_developpers', true) ; 
+					echo "<div class='updated  fade'><p>" ; 
+					echo __("The developpers documentations will be displayed now !",'SL_framework') ; 
+					echo "</p></div>" ; 
+				} else {
+					update_option('SL_framework_developpers', false) ; 
+					echo "<div class='updated  fade'><p>".__('The developpers documentations will be hidden now !','SL_framework')."</p></div>" ; 
+				}
+			}
+
 			if (isset($_GET['download'])) {
 				$this->getPluginZip($_GET['download']) ; 
 			}
 			$current_core_used = str_replace(WP_PLUGIN_DIR."/",'',dirname(__FILE__)) ; 
-			$current_fingerprint_core_used = $this->checkCoreOfThePlugin(WP_PLUGIN_DIR."/".$current_core_used."/core.php") ; 
+			
+			if (get_option('SL_framework_show_advanced', false)){
+				$current_fingerprint_core_used = $this->checkCoreOfThePlugin(WP_PLUGIN_DIR."/".$current_core_used."/core.php") ; 
+			}
 			
 			if (isset($_GET['update'])) {
 				$path_to_update = base64_decode($_GET['update']) ; 
@@ -606,8 +635,11 @@ if (!class_exists('pluginSedLex')) {
 					ob_start() ; 
 					
 						$table = new adminTable() ; 
-						$table->title(array(__("Plugin name", 'SL_framework'), __("Description", 'SL_framework'), __("Status", 'SL_framework'))) ; 
-						
+						if (get_option('SL_framework_show_advanced', false)){
+							$table->title(array(__("Plugin name", 'SL_framework'), __("Description", 'SL_framework'), __("Status of the core", 'SL_framework'))) ; 
+						} else {
+							$table->title(array(__("Plugin name", 'SL_framework'), __("Description", 'SL_framework'))) ; 
+						}
 
 						foreach ($submenu['sedlex.php'] as $i => $ov) {
 
@@ -620,9 +652,9 @@ if (!class_exists('pluginSedLex')) {
 							
 							
 							if ($i != 0) {
-
-								$hash_plugin = $this->update_hash_plugin(dirname(WP_PLUGIN_DIR."/".$url)) ; 
-									
+								if (get_option('SL_framework_show_advanced', false)){
+									$hash_plugin = $this->update_hash_plugin(dirname(WP_PLUGIN_DIR."/".$url)) ; 
+								}
 								$info = $this->get_plugins_data(WP_PLUGIN_DIR."/".$url);
 								ob_start() ; 
 								?>
@@ -631,169 +663,197 @@ if (!class_exists('pluginSedLex')) {
 
 								<?php
 								
-								
-									// $action: query_plugins, plugin_information or hot_tags
-									// $req is an object
-									$action = "plugin_information" ; 
-									$req->slug = $plugin_name; 
-									
-									$request = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/', array( 'body' => array('action' => $action, 'request' => serialize($req))) );
-									if ( is_wp_error($request) ) {
-										echo  "<p>".__('An Unexpected HTTP Error occurred during the API request.', 'SL_framework' )."</p>";
-									} else {
-										$res = unserialize($request['body']);
-										if ( ! $res ) {
-											echo  "<p>".__('This plugin does not seem to be hosted on the wordpress repository.', 'SL_framework' )."</p>";
-										} else {
-											$version_on_wordpress = $res->version ; 
-											if ($version_on_wordpress != $info['Version']) {
-												echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
-											} else {
-												// We search in the FAQ section if the same hash is found
-												if (strpos($res->sections['faq'], $hash_plugin)===false) {
-													echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
-												} else {
-													echo "<p style='color:#006600'>".sprintf(__("This plugin is hosted by wordpress repository and is up-to-date !", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
-												}
-											}
-						
-											echo  "<p>".__('Last update:', 'SL_framework' )." ".$res->last_updated."</p>";
-											echo  "<p>".__('Rating:', 'SL_framework' )." ".$res->rating." (".sprintf(__("by %s persons", 'SL_framework' ),$res->num_ratings).")</p>";
-											echo  "<p>".__('Number of download:', 'SL_framework' )." ".$res->downloaded."</p>";
+									if (get_option('SL_framework_show_advanced', false)){
+										// $action: query_plugins, plugin_information or hot_tags
+										// $req is an object
+										$action = "plugin_information" ; 
+										$req->slug = $plugin_name; 
 										
+										$request = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/', array( 'body' => array('action' => $action, 'request' => serialize($req))) );
+										if ( is_wp_error($request) ) {
+											echo  "<p>".__('An Unexpected HTTP Error occurred during the API request.', 'SL_framework' )."</p>";
+										} else {
+											$res = unserialize($request['body']);
+											if ( ! $res ) {
+												echo  "<p>".__('This plugin does not seem to be hosted on the wordpress repository.', 'SL_framework' )."</p>";
+											} else {
+												$version_on_wordpress = $res->version ; 
+												if ($version_on_wordpress != $info['Version']) {
+													echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
+												} else {
+													// We search in the FAQ section if the same hash is found
+													if (strpos($res->sections['faq'], $hash_plugin)===false) {
+														echo "<p style='color:#660000'>".sprintf(__("This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
+													} else {
+														echo "<p style='color:#006600'>".sprintf(__("This plugin is hosted by wordpress repository and is up-to-date !", 'SL_framework' ),$version_on_wordpress)." <a href='http://www.wordpress.org/extend/plugins/".$plugin_name."/'>".__('(the repository)', 'SL_framework')."</a></p>" ; 
+													}
+												}
+												echo  "<p>InfoVersion: ".$hash_plugin."</p>" ; 
+												echo  "<p>".__('Last update:', 'SL_framework' )." ".$res->last_updated."</p>";
+												echo  "<p>".__('Rating:', 'SL_framework' )." ".$res->rating." (".sprintf(__("by %s persons", 'SL_framework' ),$res->num_ratings).")</p>";
+												echo  "<p>".__('Number of download:', 'SL_framework' )." ".$res->downloaded."</p>";
+											
+											}
+
 										}
 									}
+									
 
 								$cel1 = new adminCell(ob_get_clean()) ; 
 								
 								ob_start() ; 
 									?>
-									<p><?php echo $info['Description'] ; ?></p>
+									<p><?php echo str_replace("<ul>", "<ul style='list-style-type:circle; padding-left:1cm;'>", $info['Description']) ; ?></p>
 									<p><?php echo sprintf(__('Version: %s by %s', 'SL_framework'),$info['Version'],$info['Author']) ; ?> (<a href='<?php echo $info['Author_URI'] ; ?>'><?php echo $info['Author_URI'] ; ?></a>)</p>
 									<?php
 								$cel2 = new adminCell(ob_get_clean()) ; 
 								
-								$info_core = $this->checkCoreOfThePlugin(dirname(WP_PLUGIN_DIR.'/'.$url )."/core.php") ; 
-								if ($current_fingerprint_core_used != $info_core) {
-									$info_core = str_replace('#666666','#660000',$info_core) ;  
-									$info_core .= "<p style='color:#666666;font-size:75%;text-align:right'><a href='".add_query_arg(array("update"=>base64_encode($url), "from"=>base64_encode($current_core_used."/".current_core_used.".php")))."'>".sprintf(__('Update with the core of the %s plugin (only if you definitely know what you do)', 'SL_framework'), $current_core_used)."</a></p>" ;  
+								if (get_option('SL_framework_show_advanced', false)){
+									$info_core = $this->checkCoreOfThePlugin(dirname(WP_PLUGIN_DIR.'/'.$url )."/core.php") ; 
+									if ($current_fingerprint_core_used != $info_core) {
+										$info_core = str_replace('#666666','#660000',$info_core) ;  
+										$info_core .= "<p style='color:#666666;font-size:75%;text-align:right'><a href='".add_query_arg(array("update"=>base64_encode($url), "from"=>base64_encode($current_core_used."/".current_core_used.".php")))."'>".sprintf(__('Update with the core of the %s plugin (only if you definitely know what you do)', 'SL_framework'), $current_core_used)."</a></p>" ;  
+									}
+									
+									if ($url == $current_core_used."/".$current_core_used.".php") {
+										$info_core .= "<p style='color:#666666;font-size:75%;text-align:right'>[".__('This core is currently used by the framework and plugins !',  'SL_framework')."]</p>" ; 
+									} 
+									$cel3 = new adminCell( $info_core ) ; 
 								}
 								
-								if ($url == $current_core_used."/".$current_core_used.".php") {
-									$info_core .= "<p style='color:#666666;font-size:75%;text-align:right'>[".__('This core is currently used by the framework and plugins !',  'SL_framework')."]</p>" ; 
-								} 
-								$cel3 = new adminCell( $info_core ) ; 
-								
-								$table->add_line(array($cel1, $cel2, $cel3), '1') ; 
+								if (get_option('SL_framework_show_advanced', false)){
+									$table->add_line(array($cel1, $cel2, $cel3), '1') ; 
+								} else {
+									$table->add_line(array($cel1, $cel2), '1') ; 
+								}
 							}
 						}
 						echo $table->flush() ; 
-					
+						
+						
+						echo "<form action='".remove_query_arg(array("update", "from"))."' method='POST'>" ; 
+						$checked = "" ; 
+						if (get_option('SL_framework_show_advanced', false)==true) {
+							$checked = "checked" ;
+						}
+						echo "<p style='text-align:right'>".__('Show the advanced options and parameters:','SL_framework')." <input name='show_advanced' value='true' type='checkbox' $checked> "  ; 
+						echo "<input class='button-secondary action' name='showhide_advanced' id='showhide_advanced' value='Show/Hide' type='submit' ></p>"  ; 
+						echo "</form>" ; 
+						echo "<form action='".remove_query_arg(array("update", "from"))."' method='POST'>" ; 
+						$checked = "" ; 
+						if (get_option('SL_framework_developpers', false)==true) {
+							$checked = "checked" ;
+						}
+						echo "<p style='text-align:right'>".__('Show the developpers documentation:','SL_framework')." <input name='show_developpers' value='true' type='checkbox' $checked> "  ; 
+						echo "<input class='button-secondary action' name='showhide_developpers' id='showhide_developpers' value='Show/Hide' type='submit' ></p>"  ; 
+						echo "</form>" ; 						
 					$tabs->add_tab(__('List of SL plugins',  'SL_framework'), ob_get_clean() ) ; 
 					
-					//======================================================================================
-					//= Tab with a zip file for downloading an empty plugin with a quick tuto
-					//======================================================================================
-					ob_start() ; 
-					?>
-		
-					<div class="adminPost">
 					
-					<p><?php echo __("The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)",'SL_framework') ; ?></p>
-					<p>&nbsp;</p>
-					<div class="toc tableofcontent">
-					<h6>Table of content</h6>
-					<p style="text-indent: 0cm;"><a href="#Download_the_laquonbspemptynbspraquo_plugin">Download the "&nbsp;empty&nbsp;" plugin</a></p>
-					<p style="text-indent: 0cm;"><a href="#The_structure_of_the_folder_of_the_plugin">The structure of the folder of the plugin</a></p>
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbspmy-pluginphpnbspraquo_file">The "&nbsp;my-plugin.php&nbsp;" file</a></p>
-
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbspcssnbspraquo_folder">The "&nbsp;css&nbsp;" folder</a></p>
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbspjsnbspraquo_folder">The "&nbsp;js&nbsp;" folder</a></p>
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbspimgnbspraquo_folder">The "&nbsp;img&nbsp;" folder</a></p>
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbsplangnbspraquo_folder">The "&nbsp;lang&nbsp;" folder</a></p>
-					<p style="text-indent: 0.5cm;"><a href="#The_laquonbspcorenbspraquo_folder_and_laquonbspcorephpnbspraquo_file">The "&nbsp;core&nbsp;" folder and "&nbsp;core.php&nbsp;" file</a></p>
-
-					<p style="text-indent: 0cm;"><a href="#How_to_start_">How to start ?</a></p>
-					</div>
-					<div class="tableofcontent-end"></div>
-					<h2 id="Download_the_laquonbspemptynbspraquo_plugin">Download the "&nbsp;empty&nbsp;" plugin</h2>
-					<p>Please specify the name of the plugin (For instance "&nbsp;My Plugin&nbsp;"): <input type="text" name="namePlugin" id="namePlugin" onkeyup="if (value=='') {document.getElementById('downloadPlugin').disabled=true; }else{document.getElementById('downloadPlugin').disabled=false; }"/></p>
-					<p>&nbsp;</p>
-					<p>Then, you can download the plugin: <input name="downloadPlugin" id="downloadPlugin" class="button-secondary action" value="Download" type="submit" disabled onclick="top.location.href='<?php echo remove_query_arg("noheader",remove_query_arg("download")) ?>&noheader=true&download='+document.getElementById('namePlugin').value ;"></p>
-					<h2 id="The_structure_of_the_folder_of_the_plugin">The structure of the folder of the plugin</h2>
-
-					<p><img class="aligncenter" src="<?php echo WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/files_and_folders.png" ; ?>" width="800"/></p>
-					<h3 id="The_laquonbspmy-pluginphpnbspraquo_file">The "&nbsp;my-plugin.php&nbsp;" file</h3>
-					<p>NOTA : This file may have a different name (i.e. it depends on the name you just specify above).</p>
-					<p>This file should be the master piece of your plugin: main part of your code should be written in it.</p>
-					<h3 id="The_laquonbspcssnbspraquo_folder">The "&nbsp;css&nbsp;" folder</h3>
-					<p>There is only two files in that folder :</p>
-					<ul>
-					<li><code>css_front.css</code> which is called on the front side of your blog (i.e. the <strong>public side</strong>),</li>
-
-					<li><code>css_admin.css</code> which is called only on the back side of your blog related to your plugin (i.e. the <strong>admin configuration page of your plugin</strong>).</li>
-					</ul>
-					<p>They are standard CSS files, then you can put whatever CSS code you want in them.</p>
-					<h3 id="The_laquonbspjsnbspraquo_folder">The "&nbsp;js&nbsp;" folder</h3>
-					<p>There is only two files in that folder :</p>
-					<ul>
-					<li><code>js_front.js</code> which is called on the front side of your blog (i.e. the <strong>public side</strong>) and on the back side of your blog (i.e. the <strong>admin side</strong>),</li>
-
-					<li><code>js_admin.js</code> which is called only on the back side of your blog related to your plugin (i.e. the <strong>admin configuration page of your plugin</strong>).</li>
-					</ul>
-					<p>They are standard JS files, then you can put whatever JS code you want in them.</p>
-					<h3 id="The_laquonbspimgnbspraquo_folder">The "&nbsp;img&nbsp;" folder</h3>
-					<p>You can copy any images in that folder.</p>
-					<h3 id="The_laquonbsplangnbspraquo_folder">The "&nbsp;lang&nbsp;" folder</h3>
-
-					<p>Copy any internationalization and localization (i18n) files in that folder. These files have extensions such as .po or .mo.</p>
-					<p>Thses files contains translation sof the plugin.</p>
-					<p>To generate such files, you may use <a href="http://sourceforge.net/projects/poedit/" target="_blank">POEdit</a>.</p>
-					<h3 id="The_laquonbspcorenbspraquo_folder_and_laquonbspcorephpnbspraquo_file">The "&nbsp;core&nbsp;" folder and "&nbsp;core.php&nbsp;" file</h3>
-
-					<p>This folder and file contain code for the framework.</p>
-					<p>I do not recommend to modify their contents.</p>
-					<h2 id="How_to_start_">How to start ?</h2>
-					<p>Programming a plugin is not magic. Thus you should have basic knowledge in:</p>
-					<ul>
-					<li><a href="http://www.php.net" target="_blank">PHP </a></li>
-					<li><a href="http://codex.wordpress.org/Plugins" target="_blank">WordPress&nbsp;</a></li>
-					</ul>
-					<p>You should then open the <code>my-plugin.php</code> file and follow instructions in comments.</p>
-
-					<p>Moreover, documentation on how to create tables, tabs, etc. are available in the next tab.</p>
-					
-					</div>
-					
-					<?php
-					$tabs->add_tab(__('How to create a new Plugin with the SL framework',  'SL_framework'), ob_get_clean() ) ; 
-					
-					//======================================================================================
-					//= Tab presenting the core documentation
-					//======================================================================================
-										
-					ob_start() ; 
-						//$rc = new phpDoc(WP_PLUGIN_DIR.'/'.str_replace(basename( $this->path),"",plugin_basename($this->path)) ."core.php");
-						//$classes = $rc->parse() ; 
-						$classes = array() ; 
+					if (get_option('SL_framework_developpers', false)==true) {
+						//======================================================================================
+						//= Tab with a zip file for downloading an empty plugin with a quick tuto
+						//======================================================================================
+						ob_start() ; 
+						?>
+			
+						<div class="adminPost">
 						
-						// On liste les fichiers includer par le fichier courant
-						$fichier_master = dirname(__FILE__)."/core.php" ; 
+						<p><?php echo __("The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)",'SL_framework') ; ?></p>
+						<p>&nbsp;</p>
+						<div class="toc tableofcontent">
+						<h6>Table of content</h6>
+						<p style="text-indent: 0cm;"><a href="#Download_the_laquonbspemptynbspraquo_plugin">Download the "&nbsp;empty&nbsp;" plugin</a></p>
+						<p style="text-indent: 0cm;"><a href="#The_structure_of_the_folder_of_the_plugin">The structure of the folder of the plugin</a></p>
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbspmy-pluginphpnbspraquo_file">The "&nbsp;my-plugin.php&nbsp;" file</a></p>
+
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbspcssnbspraquo_folder">The "&nbsp;css&nbsp;" folder</a></p>
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbspjsnbspraquo_folder">The "&nbsp;js&nbsp;" folder</a></p>
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbspimgnbspraquo_folder">The "&nbsp;img&nbsp;" folder</a></p>
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbsplangnbspraquo_folder">The "&nbsp;lang&nbsp;" folder</a></p>
+						<p style="text-indent: 0.5cm;"><a href="#The_laquonbspcorenbspraquo_folder_and_laquonbspcorephpnbspraquo_file">The "&nbsp;core&nbsp;" folder and "&nbsp;core.php&nbsp;" file</a></p>
+
+						<p style="text-indent: 0cm;"><a href="#How_to_start_">How to start ?</a></p>
+						</div>
+						<div class="tableofcontent-end"></div>
+						<h2 id="Download_the_laquonbspemptynbspraquo_plugin">Download the "&nbsp;empty&nbsp;" plugin</h2>
+						<p>Please specify the name of the plugin (For instance "&nbsp;My Plugin&nbsp;"): <input type="text" name="namePlugin" id="namePlugin" onkeyup="if (value=='') {document.getElementById('downloadPlugin').disabled=true; }else{document.getElementById('downloadPlugin').disabled=false; }"/></p>
+						<p>&nbsp;</p>
+						<p>Then, you can download the plugin: <input name="downloadPlugin" id="downloadPlugin" class="button-secondary action" value="Download" type="submit" disabled onclick="top.location.href='<?php echo remove_query_arg("noheader",remove_query_arg("download")) ?>&noheader=true&download='+document.getElementById('namePlugin').value ;"></p>
+						<h2 id="The_structure_of_the_folder_of_the_plugin">The structure of the folder of the plugin</h2>
+
+						<p><img class="aligncenter" src="<?php echo WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/files_and_folders.png" ; ?>" width="800"/></p>
+						<h3 id="The_laquonbspmy-pluginphpnbspraquo_file">The "&nbsp;my-plugin.php&nbsp;" file</h3>
+						<p>NOTA : This file may have a different name (i.e. it depends on the name you just specify above).</p>
+						<p>This file should be the master piece of your plugin: main part of your code should be written in it.</p>
+						<h3 id="The_laquonbspcssnbspraquo_folder">The "&nbsp;css&nbsp;" folder</h3>
+						<p>There is only two files in that folder :</p>
+						<ul>
+						<li><code>css_front.css</code> which is called on the front side of your blog (i.e. the <strong>public side</strong>),</li>
+
+						<li><code>css_admin.css</code> which is called only on the back side of your blog related to your plugin (i.e. the <strong>admin configuration page of your plugin</strong>).</li>
+						</ul>
+						<p>They are standard CSS files, then you can put whatever CSS code you want in them.</p>
+						<h3 id="The_laquonbspjsnbspraquo_folder">The "&nbsp;js&nbsp;" folder</h3>
+						<p>There is only two files in that folder :</p>
+						<ul>
+						<li><code>js_front.js</code> which is called on the front side of your blog (i.e. the <strong>public side</strong>) and on the back side of your blog (i.e. the <strong>admin side</strong>),</li>
+
+						<li><code>js_admin.js</code> which is called only on the back side of your blog related to your plugin (i.e. the <strong>admin configuration page of your plugin</strong>).</li>
+						</ul>
+						<p>They are standard JS files, then you can put whatever JS code you want in them.</p>
+						<h3 id="The_laquonbspimgnbspraquo_folder">The "&nbsp;img&nbsp;" folder</h3>
+						<p>You can copy any images in that folder.</p>
+						<h3 id="The_laquonbsplangnbspraquo_folder">The "&nbsp;lang&nbsp;" folder</h3>
+
+						<p>Copy any internationalization and localization (i18n) files in that folder. These files have extensions such as .po or .mo.</p>
+						<p>Thses files contains translation sof the plugin.</p>
+						<p>To generate such files, you may use <a href="http://sourceforge.net/projects/poedit/" target="_blank">POEdit</a>.</p>
+						<h3 id="The_laquonbspcorenbspraquo_folder_and_laquonbspcorephpnbspraquo_file">The "&nbsp;core&nbsp;" folder and "&nbsp;core.php&nbsp;" file</h3>
+
+						<p>This folder and file contain code for the framework.</p>
+						<p>I do not recommend to modify their contents.</p>
+						<h2 id="How_to_start_">How to start ?</h2>
+						<p>Programming a plugin is not magic. Thus you should have basic knowledge in:</p>
+						<ul>
+						<li><a href="http://www.php.net" target="_blank">PHP </a></li>
+						<li><a href="http://codex.wordpress.org/Plugins" target="_blank">WordPress&nbsp;</a></li>
+						</ul>
+						<p>You should then open the <code>my-plugin.php</code> file and follow instructions in comments.</p>
+
+						<p>Moreover, documentation on how to create tables, tabs, etc. are available in the next tab.</p>
 						
-						$lines = file($fichier_master) ;
-					
-						foreach ($lines as $lineNumber => $lineContent) {	
-							if (preg_match('/^require.*[\'"](.*)[\'"]/',  trim($lineContent),$match)) {
-								$chem = dirname(__FILE__)."/".$match[1] ;
-								$rc = new phpDoc($chem);
-								$classes = array_merge($classes, $rc->parse()) ; 
+						</div>
+						
+						<?php
+						$tabs->add_tab(__('How to create a new Plugin with the SL framework',  'SL_framework'), ob_get_clean() ) ; 
+						
+						//======================================================================================
+						//= Tab presenting the core documentation
+						//======================================================================================
+											
+						ob_start() ; 
+							//$rc = new phpDoc(WP_PLUGIN_DIR.'/'.str_replace(basename( $this->path),"",plugin_basename($this->path)) ."core.php");
+							//$classes = $rc->parse() ; 
+							$classes = array() ; 
+							
+							// On liste les fichiers includer par le fichier courant
+							$fichier_master = dirname(__FILE__)."/core.php" ; 
+							
+							$lines = file($fichier_master) ;
+						
+							foreach ($lines as $lineNumber => $lineContent) {	
+								if (preg_match('/^require.*[\'"](.*)[\'"]/',  trim($lineContent),$match)) {
+									$chem = dirname(__FILE__)."/".$match[1] ;
+									$rc = new phpDoc($chem);
+									$classes = array_merge($classes, $rc->parse()) ; 
+								}
 							}
-						}
-						
-						$this->printDoc($classes) ; 
+							
+							$this->printDoc($classes) ; 
 
-					$tabs->add_tab(__('Framework documentation',  'SL_framework'), ob_get_clean() ) ; 
-					
+						$tabs->add_tab(__('Framework documentation',  'SL_framework'), ob_get_clean() ) ; 
+					}
 					//======================================================================================
 					//= Tab for the translation
 					//======================================================================================
