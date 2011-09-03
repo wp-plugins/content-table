@@ -36,6 +36,9 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.1.1 =
+* Ensure that folders and files permissions are correct for an adequate behavior
+
 = 1.0.8 =
 * Thanks to Vincent (http://www.vincent.mabillot.net) a bug in the numbering have been corrected
 * Feedback have been improved to show the configuration of the submitters
@@ -73,4 +76,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:033b8de2f5861fddcac20ce44cb24e0d
+InfoVersion:d1b9dc4dfc0fc17b6e07d5301836938e

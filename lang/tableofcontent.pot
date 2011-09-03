@@ -10,85 +10,85 @@ msgstr ""
 msgid "that is all !"
 msgstr ""
 
-#: content-table.php:112
+#: content-table.php:113
 #@ tableofcontent
 msgid "What is the title to be displayed in the table of content?"
 msgstr ""
 
-#: content-table.php:113
+#: content-table.php:114
 #@ tableofcontent
 msgid "Title of the table of content:"
 msgstr ""
 
-#: content-table.php:114
+#: content-table.php:115
 #@ tableofcontent
 msgid "Add prefix in your title:"
 msgstr ""
 
-#: content-table.php:115
+#: content-table.php:116
 #@ tableofcontent
 msgid "If you leave the field blank, nothing will be added !"
 msgstr ""
 
-#: content-table.php:115
+#: content-table.php:116
 #@ tableofcontent
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr ""
 
-#: content-table.php:116
+#: content-table.php:117
 #@ tableofcontent
 msgid "Prefix of the level 2:"
 msgstr ""
 
-#: content-table.php:117
+#: content-table.php:118
 #@ tableofcontent
 msgid "Prefix of the level 3:"
 msgstr ""
 
-#: content-table.php:118
+#: content-table.php:119
 #@ tableofcontent
 msgid "Prefix of the level 4:"
 msgstr ""
 
-#: content-table.php:119
+#: content-table.php:120
 #@ tableofcontent
 msgid "Prefix of the level 5:"
 msgstr ""
 
-#: content-table.php:120
+#: content-table.php:121
 #@ tableofcontent
 msgid "Prefix of the level 6:"
 msgstr ""
 
-#: content-table.php:124
+#: content-table.php:125
 #@ tableofcontent
 msgid "Parameters"
 msgstr ""
 
-#: content-table.php:131
+#: content-table.php:132
 #: core/templates/my-plugin.php:212
 #@ tableofcontent
 msgid "Manage translations"
 msgstr ""
 
-#: content-table.php:134
+#: content-table.php:135
 #: core/templates/my-plugin.php:215
 #@ tableofcontent
 msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
 msgstr ""
 
-#: content-table.php:138
+#: content-table.php:139
 #: core/templates/my-plugin.php:219
 #@ tableofcontent
 msgid "Give feedback"
 msgstr ""
 
-#: content-table.php:141
+#: content-table.php:142
 #@ tableofcontent
 msgid "Here is the plugins developped by the author"
 msgstr ""
 
-#: content-table.php:144
+#: content-table.php:145
 #@ tableofcontent
 msgid "Other possible plugins"
 msgstr ""
