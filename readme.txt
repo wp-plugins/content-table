@@ -36,6 +36,10 @@ It is stressed that the first level taken in account is "Title 2".
 
 == Changelog ==
 
+= 1.1.2 =
+* Correction bug for the numbering in the RSS feed
+* ZipArchive class has been suppressed and pclzip is used instead
+
 = 1.1.1 =
 * Ensure that folders and files permissions are correct for an adequate behavior
 
@@ -76,4 +80,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:d1b9dc4dfc0fc17b6e07d5301836938e
+InfoVersion:b57a64d6ca774b2ead61362d26a14aa0

@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.1.1
+Version: 1.1.2
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -293,11 +293,28 @@ class tableofcontent extends pluginSedLex {
 	* @return void
 	*/	
 	
-	function the_content($content) {		
+	function the_content($content) {	
+	
+		//Ré-initialisation
+		$this->niv2 = 1 ; 
+		$this->niv3 = 1 ; 
+		$this->niv4 = 1 ; 
+		$this->niv5 = 1 ; 
+		$this->niv6 = 1 ; 
+		
 		$this->used_names = array();
 		$out = preg_replace_callback("#<h([2-6])>(.*?)</h[2-6]>#i", array($this,"heading_anchor"), $content);
+		
+		//Ré-initialisation
+		$this->niv2 = 1 ; 
+		$this->niv3 = 1 ; 
+		$this->niv4 = 1 ; 
+		$this->niv5 = 1 ; 
+		$this->niv6 = 1 ; 
+		
 		return $out;
 	}
+	
 }
 
 $efficientRelatedPosts = tableofcontent::getInstance();
