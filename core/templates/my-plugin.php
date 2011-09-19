@@ -34,12 +34,16 @@ class my_plugin extends pluginSedLex {
 	static $instance = false;
 
 	protected function _init() {
+		global $wpdb ; 
+		
 		// Name of the plugin (Please modify)
 		$this->pluginName = 'My Plugin' ; 
 		
 		// The structure of the SQL table if needed (for instance, 'id_post mediumint(9) NOT NULL, short_url TEXT DEFAULT '', UNIQUE KEY id_post (id_post)') 
 		$this->table_sql = '' ; 
-
+		// The name of the SQL table (Do no modify except if you know what you do)
+		$this->table_name = $wpdb->prefix . "pluginSL_" . get_class() ; 
+		
 		//Initilisation of plugin variables if needed (Please modify)
 		$this->your_var1 = 1 ; 
 		$this->your_var2 = array() ; 
@@ -78,6 +82,17 @@ class my_plugin extends pluginSedLex {
 	
 	public function _update() {
 		
+	}
+	
+	/**====================================================================================================================================================
+	* Function called to return a number of notification of this plugin
+	* This number will be displayed in the admin menu
+	*
+	* @return int the number of notifications available
+	*/
+	
+	public function _notify() {
+		return 0 ; 
 	}
 	
 	/**====================================================================================================================================================
@@ -214,7 +229,7 @@ class my_plugin extends pluginSedLex {
 			ob_start() ; 
 				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new feedbackSL($plugin) ; 
+				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
 			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
 			

@@ -1,180 +1,180 @@
 Content-Transfer-Encoding: 8bit
 
-#: core.class.php:177
-#: core.class.php:177
+#: core.class.php:176
+#: core.class.php:176
 #: core/translation.class.php:283
 #@ SL_framework
 msgid "About..."
 msgstr ""
 
-#: core.class.php:220
-#: core.class.php:664
+#: core.class.php:219
+#: core.class.php:663
 #@ SL_framework
 msgid "Settings"
 msgstr ""
 
-#: core.class.php:556
+#: core.class.php:555
 #@ SL_framework
 msgid "The advanced options and output will be displayed now !"
 msgstr ""
 
-#: core.class.php:560
+#: core.class.php:559
 #@ SL_framework
 msgid "The advanced options and output will be hidden now !"
 msgstr ""
 
-#: core.class.php:567
+#: core.class.php:566
 #@ SL_framework
 msgid "The developpers documentations will be displayed now !"
 msgstr ""
 
-#: core.class.php:571
+#: core.class.php:570
 #@ SL_framework
 msgid "The developpers documentations will be hidden now !"
 msgstr ""
 
-#: core.class.php:606
+#: core.class.php:605
 #@ SL_framework
 msgid "%s has been updated with %s !"
 msgstr ""
 
-#: core.class.php:608
+#: core.class.php:607
 #@ SL_framework
 msgid "Please click %shere%s to refresh the page and ensure everything is ok!"
 msgstr ""
 
-#: core.class.php:615
+#: core.class.php:614
 #@ SL_framework
 msgid "Summary page for the plugins developped with the SL framework"
 msgstr ""
 
-#: core.class.php:619
+#: core.class.php:618
 #@ SL_framework
 msgid "The core file used for the SedLex plugins is:"
 msgstr ""
 
-#: core.class.php:630
+#: core.class.php:629
 #@ SL_framework
 msgid "For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':"
 msgstr ""
 
-#: core.class.php:641
-#: core.class.php:643
+#: core.class.php:640
+#: core.class.php:642
 #@ SL_framework
 msgid "Plugin name"
 msgstr ""
 
-#: core.class.php:641
-#: core.class.php:643
+#: core.class.php:640
+#: core.class.php:642
 #@ SL_framework
 msgid "Description"
 msgstr ""
 
-#: core.class.php:641
+#: core.class.php:640
 #@ SL_framework
 msgid "Status of the core"
 msgstr ""
 
-#: core.class.php:676
+#: core.class.php:675
 #: core/otherplugins.class.php:40
 #: core/otherplugins.class.php:77
 #@ SL_framework
 msgid "An Unexpected HTTP Error occurred during the API request."
 msgstr ""
 
-#: core.class.php:680
+#: core.class.php:679
 #@ SL_framework
 msgid "This plugin does not seem to be hosted on the wordpress repository."
 msgstr ""
 
-#: core.class.php:684
+#: core.class.php:683
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)"
 msgstr ""
 
-#: core.class.php:684
-#: core.class.php:688
-#: core.class.php:690
+#: core.class.php:683
+#: core.class.php:687
+#: core.class.php:689
 #@ SL_framework
 msgid "(the repository)"
 msgstr ""
 
-#: core.class.php:688
+#: core.class.php:687
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same"
 msgstr ""
 
-#: core.class.php:690
+#: core.class.php:689
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository and is up-to-date !"
 msgstr ""
 
-#: core.class.php:694
+#: core.class.php:693
 #@ SL_framework
 msgid "Last update:"
 msgstr ""
 
-#: core.class.php:695
+#: core.class.php:694
 #@ SL_framework
 msgid "by %s persons"
 msgstr ""
 
-#: core.class.php:695
+#: core.class.php:694
 #@ SL_framework
 msgid "Rating:"
 msgstr ""
 
-#: core.class.php:696
+#: core.class.php:695
 #@ SL_framework
 msgid "Number of download:"
 msgstr ""
 
-#: core.class.php:709
+#: core.class.php:708
 #@ SL_framework
 msgid "Version: %s by %s"
 msgstr ""
 
-#: core.class.php:717
+#: core.class.php:716
 #@ SL_framework
 msgid "Update with the core of the %s plugin (only if you definitely know what you do)"
 msgstr ""
 
-#: core.class.php:721
+#: core.class.php:720
 #@ SL_framework
 msgid "This core is currently used by the framework and plugins !"
 msgstr ""
 
-#: core.class.php:741
+#: core.class.php:740
 #@ SL_framework
 msgid "Show the advanced options and parameters:"
 msgstr ""
 
-#: core.class.php:749
+#: core.class.php:748
 #@ SL_framework
 msgid "Show the developpers documentation:"
 msgstr ""
 
-#: core.class.php:752
+#: core.class.php:751
 #@ SL_framework
 msgid "List of SL plugins"
 msgstr ""
 
-#: core.class.php:764
+#: core.class.php:763
 #@ SL_framework
 msgid "The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)"
 msgstr ""
 
-#: core.class.php:831
+#: core.class.php:830
 #@ SL_framework
 msgid "How to create a new Plugin with the SL framework"
 msgstr ""
 
-#: core.class.php:857
+#: core.class.php:856
 #@ SL_framework
 msgid "Framework documentation"
 msgstr ""
 
-#: core.class.php:867
+#: core.class.php:866
 #: core/translation.class.php:283
 #@ SL_framework
 msgid "Manage translation of the framework"
@@ -470,24 +470,34 @@ msgstr ""
 msgid "%s file has been created from this file"
 msgstr ""
 
-#: core/otherplugins.class.php:55
+#: core/feedback.class.php:40
 #@ SL_framework
-msgid "Homepage:"
+msgid "Your email (for response):"
 msgstr ""
 
-#: core/utils.class.php:123
+#: core/feedback.class.php:41
 #@ SL_framework
-msgid "KB"
+msgid "Your comments:"
 msgstr ""
 
-#: core/utils.class.php:127
+#: core/feedback.class.php:43
 #@ SL_framework
-msgid "MB"
+msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
 msgstr ""
 
-#: core/utils.class.php:130
+#: core/feedback.class.php:44
 #@ SL_framework
-msgid "GB"
+msgid "Send feedback"
+msgstr ""
+
+#: core/feedback.class.php:49
+#@ SL_framework
+msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
+msgstr ""
+
+#: core/feedback.class.php:120
+#@ SL_framework
+msgid "The feedback has been sent"
 msgstr ""
 
 #: core/parameters.class.php:129
@@ -525,33 +535,23 @@ msgstr ""
 msgid "Parameters have been updated successfully !"
 msgstr ""
 
-#: core/feedback.class.php:40
+#: core/otherplugins.class.php:55
 #@ SL_framework
-msgid "Your email (for response):"
+msgid "Homepage:"
 msgstr ""
 
-#: core/feedback.class.php:41
+#: core/utils.class.php:123
 #@ SL_framework
-msgid "Your comments:"
+msgid "KB"
 msgstr ""
 
-#: core/feedback.class.php:43
+#: core/utils.class.php:127
 #@ SL_framework
-msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
+msgid "MB"
 msgstr ""
 
-#: core/feedback.class.php:44
+#: core/utils.class.php:130
 #@ SL_framework
-msgid "Send feedback"
-msgstr ""
-
-#: core/feedback.class.php:49
-#@ SL_framework
-msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
-msgstr ""
-
-#: core/feedback.class.php:120
-#@ SL_framework
-msgid "The feedback has been sent"
+msgid "GB"
 msgstr ""
 

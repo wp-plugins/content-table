@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.1.2
+Version: 1.1.3
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -13,8 +13,6 @@ License: GPL3
 
 require_once('core.php') ; 
 
-
-
 class tableofcontent extends pluginSedLex {
 	
 	var $tableofcontent_used_names ;
@@ -23,7 +21,6 @@ class tableofcontent extends pluginSedLex {
 	var $niv4 ;
 	var $niv5 ;
 	var $niv6 ;
-	
 
 	/** ====================================================================================================================================================
 	* Initialisation du plugin
@@ -36,6 +33,7 @@ class tableofcontent extends pluginSedLex {
 		// Configuration
 		$this->pluginName = 'Table of content' ; 
 		$this->table_sql = '' ; 
+		$this->table_name = $wpdb->prefix . "pluginSL_" . get_class() ; 
 		$this->path = __FILE__ ; 
 		$this->pluginID = get_class() ; 
 		
@@ -54,14 +52,14 @@ class tableofcontent extends pluginSedLex {
 		add_action( "the_content", array($this,"the_content") );
 	}
 	/**
-		 * Function to instantiate our class and make it a singleton
-		 */
-		public static function getInstance() {
-			if ( !self::$instance ) {
-				self::$instance = new self;
-			}
-			return self::$instance;
+	 * Function to instantiate our class and make it a singleton
+	 */
+	public static function getInstance() {
+		if ( !self::$instance ) {
+			self::$instance = new self;
 		}
+		return self::$instance;
+	}
 	
 	/** ====================================================================================================================================================
 	* Define the default option value of the plugin
@@ -119,9 +117,7 @@ class tableofcontent extends pluginSedLex {
 				$params->add_param('h4', __('Prefix of the level 4:',$this->pluginID)) ; 
 				$params->add_param('h5', __('Prefix of the level 5:',$this->pluginID)) ; 
 				$params->add_param('h6', __('Prefix of the level 6:',$this->pluginID)) ; 
-				
 				$params->flush() ; 
-					
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
 			
 			
@@ -317,6 +313,6 @@ class tableofcontent extends pluginSedLex {
 	
 }
 
-$efficientRelatedPosts = tableofcontent::getInstance();
+$tableofcontent = tableofcontent::getInstance();
 
 ?>

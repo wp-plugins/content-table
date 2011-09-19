@@ -17,9 +17,21 @@ Create a table of content in you posts.
 
 You only have to insert the shortcode *[toc]* in your post to display the table of content. 
 
-Please note that you can also configure a text to be inserted before the title of you post such as 'Chapter' or 'Section' with numbers.
+Please note that you can also configure a text to be inserted before the title of you post such as 'Chapter' or 'Section' with an auto-numbering feature.
 
 It is stressed that the first level taken in account is "Title 2". 
+
+Plugin developped from the orginal plugin *Toc for Wordpress*. 
+
+= Localizations =
+* French translation (by me)
+
+= Features of the framework = 
+This plugin use SL framework.
+
+You may translate this plugin with an embedded feature which is very easy to use by any end-users (without any external tools / knowledge).
+
+You may also create a new plugin. You will download, from the plugin, an "hello World" plugin: You just have to fill the blank and follow the comments.
 
 == Installation ==
 
@@ -35,6 +47,9 @@ It is stressed that the first level taken in account is "Title 2".
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.1.3 =
+* Update of the core plugin
 
 = 1.1.2 =
 * Correction bug for the numbering in the RSS feed
@@ -80,4 +95,4 @@ It is stressed that the first level taken in account is "Title 2".
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b57a64d6ca774b2ead61362d26a14aa0
+InfoVersion:ccc9c9e833fcace4b1b7073f1299d251

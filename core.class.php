@@ -78,15 +78,14 @@ if (!class_exists('pluginSedLex')) {
 		public function install () {
 			global $wpdb;
 			global $db_version;
-		
-			$table_name = $wpdb->prefix . $this->pluginID;
-			
-			if (strlen(trim($this->tableSQL))>0) {
-				if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
-					$sql = "CREATE TABLE " . $table_name . " (".$this->tableSQL. ") DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;";
-			
+			if (strlen(trim($this->table_sql))>0) {
+				if($wpdb->get_var("show tables like '".$this->table_name."'") != $this->table_name) {
+					
+					$sql = "CREATE TABLE " . $this->table_name . " (".$this->table_sql. ") DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;";
 					require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 					dbDelta($sql);
+					// Print the error if needed
+					$wpdb->print_error();
 			
 					add_option("db_version", $db_version);
 				}
@@ -956,6 +955,7 @@ if (!class_exists('pluginSedLex')) {
 				Utils::copy_rec($plugin_dir.'/core',$path.'/core') ; 
 				Utils::copy_rec($plugin_dir.'/core.php',$path."/core.php") ; 
 				Utils::copy_rec($plugin_dir.'/core.class.php',$path."/core.class.php") ; 
+				Utils::copy_rec($plugin_dir.'/core.nfo',$path."/core.nfo") ; 
 				
 				// Copy the dynamic files
 				$content = file_get_contents($plugin_dir.'/core/templates/my-plugin.php') ; 
