@@ -24,9 +24,11 @@ It is stressed that the first level taken in account is "Title 2".
 Plugin developped from the orginal plugin *Toc for Wordpress*. 
 
 = Localizations =
+
 * French translation (by me)
 
 = Features of the framework = 
+
 This plugin use SL framework.
 
 You may translate this plugin with an embedded feature which is very easy to use by any end-users (without any external tools / knowledge).
@@ -47,6 +49,9 @@ You may also create a new plugin. You will download, from the plugin, an "hello 
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.1.4 =
+* Fix a bug in computing the hash of the plugin and the core to determine which one is the most up-to-date
 
 = 1.1.3 =
 * Update of the core plugin
@@ -95,4 +100,4 @@ You may also create a new plugin. You will download, from the plugin, an "hello 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:ccc9c9e833fcace4b1b7073f1299d251
+InfoVersion:00140ee76903192b1968b87bae043887
