@@ -35,6 +35,13 @@ You may translate this plugin with an embedded feature which is very easy to use
 
 You may also create a new plugin. You will download, from the plugin, an "hello World" plugin: You just have to fill the blank and follow the comments.
 
+Moreover, all the plugins developped with this framework is able to use astonishing tools, such as :
+
+* embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
+* detailled documentation of all available classes and methodes ; 
+* updating the core with a single click ; 
+* etc.
+
 == Installation ==
 
 1. Upload this folder to your plugin directory (for instance '/wp-content/plugins/')
@@ -49,6 +56,9 @@ You may also create a new plugin. You will download, from the plugin, an "hello 
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.1.5 =
+* Major update of the core (beta SVN support)
 
 = 1.1.4 =
 * Fix a bug in computing the hash of the plugin and the core to determine which one is the most up-to-date
@@ -100,4 +110,4 @@ You may also create a new plugin. You will download, from the plugin, an "hello 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:00140ee76903192b1968b87bae043887
+InfoVersion:7b144364315bb1aa11d86f1d540bd6c3

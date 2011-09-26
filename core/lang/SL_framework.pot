@@ -1,292 +1,446 @@
 Content-Transfer-Encoding: 8bit
 
-#: core.class.php:186
-#: core.class.php:186
+#: core.class.php:192
+#: core.class.php:192
 #: core/translation.class.php:283
 #@ SL_framework
 msgid "About..."
 msgstr ""
 
-#: core.class.php:236
-#: core.class.php:680
+#: core.class.php:242
+#: core.class.php:706
 #@ SL_framework
 msgid "Settings"
 msgstr ""
 
-#: core.class.php:572
+#: core.class.php:579
 #@ SL_framework
 msgid "The advanced options and output will be displayed now !"
 msgstr ""
 
-#: core.class.php:576
+#: core.class.php:583
 #@ SL_framework
 msgid "The advanced options and output will be hidden now !"
 msgstr ""
 
-#: core.class.php:583
+#: core.class.php:590
 #@ SL_framework
 msgid "The developpers documentations will be displayed now !"
 msgstr ""
 
-#: core.class.php:587
+#: core.class.php:594
 #@ SL_framework
 msgid "The developpers documentations will be hidden now !"
 msgstr ""
 
-#: core.class.php:622
+#: core.class.php:601
+#@ SL_framework
+msgid "The SVN interface will be displayed now !"
+msgstr ""
+
+#: core.class.php:605
+#@ SL_framework
+msgid "The SVN interface will be hidden now !"
+msgstr ""
+
+#: core.class.php:609
+#@ SL_framework
+msgid "The SVN parameters have been updated !"
+msgstr ""
+
+#: core.class.php:646
 #@ SL_framework
 msgid "%s has been updated with %s !"
 msgstr ""
 
-#: core.class.php:625
+#: core.class.php:649
 #@ SL_framework
 msgid "Please click %shere%s to refresh the page and ensure everything is ok!"
 msgstr ""
 
-#: core.class.php:632
+#: core.class.php:656
 #@ SL_framework
 msgid "Summary page for the plugins developped with the SL framework"
 msgstr ""
 
-#: core.class.php:636
+#: core.class.php:660
 #@ SL_framework
 msgid "The core file used for the SedLex plugins is:"
 msgstr ""
 
-#: core.class.php:647
+#: core.class.php:671
 #@ SL_framework
 msgid "For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':"
 msgstr ""
 
-#: core.class.php:658
-#: core.class.php:660
+#: core.class.php:684
+#: core.class.php:686
 #@ SL_framework
 msgid "Plugin name"
 msgstr ""
 
-#: core.class.php:658
-#: core.class.php:660
+#: core.class.php:684
+#: core.class.php:686
 #@ SL_framework
 msgid "Description"
 msgstr ""
 
-#: core.class.php:658
+#: core.class.php:684
 #@ SL_framework
 msgid "Status of the core"
 msgstr ""
 
-#: core.class.php:692
+#: core.class.php:718
 #: core/otherplugins.class.php:40
 #: core/otherplugins.class.php:77
 #@ SL_framework
 msgid "An Unexpected HTTP Error occurred during the API request."
 msgstr ""
 
-#: core.class.php:696
+#: core.class.php:722
 #@ SL_framework
 msgid "This plugin does not seem to be hosted on the wordpress repository."
 msgstr ""
 
-#: core.class.php:700
+#: core.class.php:726
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository and is not up-to-date ! (i.e. %s)"
 msgstr ""
 
-#: core.class.php:700
-#: core.class.php:704
-#: core.class.php:706
+#: core.class.php:726
+#: core.class.php:730
+#: core.class.php:732
 #@ SL_framework
 msgid "(the repository)"
 msgstr ""
 
-#: core.class.php:704
+#: core.class.php:730
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository with the same version but the plugin is not exactly the same"
 msgstr ""
 
-#: core.class.php:706
+#: core.class.php:732
 #@ SL_framework
 msgid "This plugin is hosted by wordpress repository and is up-to-date !"
 msgstr ""
 
-#: core.class.php:710
+#: core.class.php:736
 #@ SL_framework
 msgid "Last update:"
 msgstr ""
 
-#: core.class.php:711
+#: core.class.php:737
 #@ SL_framework
 msgid "by %s persons"
 msgstr ""
 
-#: core.class.php:711
+#: core.class.php:737
 #@ SL_framework
 msgid "Rating:"
 msgstr ""
 
-#: core.class.php:712
+#: core.class.php:738
 #@ SL_framework
 msgid "Number of download:"
 msgstr ""
 
-#: core.class.php:725
+#: core.class.php:751
 #@ SL_framework
 msgid "Version: %s by %s"
 msgstr ""
 
-#: core.class.php:733
+#: core.class.php:759
 #@ SL_framework
 msgid "Update with the core of the %s plugin (only if you definitely know what you do)"
 msgstr ""
 
-#: core.class.php:737
+#: core.class.php:763
 #@ SL_framework
 msgid "This core is currently used by the framework and plugins !"
 msgstr ""
 
-#: core.class.php:757
+#: core.class.php:771
+#@ SL_framework
+msgid "SVN management"
+msgstr ""
+
+#: core.class.php:776
+#@ SL_framework
+msgid "An error occurs when requesting %s"
+msgstr ""
+
+#: core.class.php:779
+#@ SL_framework
+msgid "You do not seem to have a repository for Wordpress because %s returns a 404 error. Thus, ask for one here: %s"
+msgstr ""
+
+#: core.class.php:786
+#@ SL_framework
+msgid "Overwrite the local plugin files with files stored the SVN repository"
+msgstr ""
+
+#: core.class.php:792
+#@ SL_framework
+msgid "Update the SVN repository with your current local plugin files"
+msgstr ""
+
+#: core.class.php:821
 #@ SL_framework
 msgid "Show the advanced options and parameters:"
 msgstr ""
 
-#: core.class.php:765
+#: core.class.php:822
+#: core.class.php:830
+#@ SL_framework
+msgid "Show/Hide"
+msgstr ""
+
+#: core.class.php:829
 #@ SL_framework
 msgid "Show the developpers documentation:"
 msgstr ""
 
-#: core.class.php:768
+#: core.class.php:840
 #@ SL_framework
-msgid "List of SL plugins"
+msgid "Enable SVN to commit your developed plugin to wordpress.org:"
 msgstr ""
 
-#: core.class.php:780
+#: core.class.php:841
 #@ SL_framework
-msgid "The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)"
+msgid "Enable/Disable"
+msgstr ""
+
+#: core.class.php:846
+#@ SL_framework
+msgid "Your SVN Login:"
 msgstr ""
 
 #: core.class.php:847
 #@ SL_framework
-msgid "How to create a new Plugin with the SL framework"
+msgid "Your SVN password:"
 msgstr ""
 
-#: core.class.php:873
+#: core.class.php:848
+#@ SL_framework
+msgid "The author name displayed in the Wordpress plugin (probably close to your login):"
+msgstr ""
+
+#: core.class.php:849
+#: core/parameters.class.php:321
+#@ SL_framework
+msgid "Update"
+msgstr ""
+
+#: core.class.php:854
+#@ SL_framework
+msgid "List of SL plugins"
+msgstr ""
+
+#: core.class.php:866
+#@ SL_framework
+msgid "The following description is a quick tutorial on about how to create a plugin with the SL framework. (Please note that the following description is in English for developpers, sorry for this inconvenience)"
+msgstr ""
+
+#: core.class.php:933
+#@ SL_framework
+msgid "How to develop a plugin?"
+msgstr ""
+
+#: core.class.php:959
 #@ SL_framework
 msgid "Framework documentation"
 msgstr ""
 
-#: core.class.php:883
+#: core.class.php:969
 #: core/translation.class.php:283
 #@ SL_framework
 msgid "Manage translation of the framework"
 msgstr ""
 
-#: core.class.php:1022
+#: core.class.php:1108
 #@ SL_framework
 msgid "Please find hearafter all the possible classes and methods for the development with this framework"
 msgstr ""
 
-#: core.class.php:1037
+#: core.class.php:1123
 #@ SL_framework
 msgid "[CLASS]"
 msgstr ""
 
-#: core.class.php:1045
+#: core.class.php:1131
 #@ SL_framework
 msgid "Here is the method of the class:"
 msgstr ""
 
-#: core.class.php:1059
+#: core.class.php:1145
 #@ SL_framework
 msgid "[METHOD]"
 msgstr ""
 
-#: core.class.php:1062
+#: core.class.php:1148
 #@ SL_framework
 msgid "Description:"
 msgstr ""
 
-#: core.class.php:1077
-#: core.class.php:1103
+#: core.class.php:1163
+#: core.class.php:1189
 #@ SL_framework
 msgid "Parameters:"
 msgstr ""
 
-#: core.class.php:1087
+#: core.class.php:1173
 #@ SL_framework
 msgid "[optional]"
 msgstr ""
 
-#: core.class.php:1087
+#: core.class.php:1173
 #@ SL_framework
 msgid "(by default, its value is:"
 msgstr ""
 
-#: core.class.php:1103
+#: core.class.php:1189
 #@ SL_framework
 msgid "No param"
 msgstr ""
 
-#: core.class.php:1110
+#: core.class.php:1196
 #@ SL_framework
 msgid "Return value:"
 msgstr ""
 
-#: core.class.php:1116
+#: core.class.php:1202
 #@ SL_framework
 msgid "Typical call:"
 msgstr ""
 
-#: core.class.php:1121
+#: core.class.php:1207
 #@ SL_framework
 msgid "See also:"
 msgstr ""
 
-#: core.class.php:1200
-#: core.class.php:1209
-#: core.class.php:1215
+#: core.class.php:1286
+#: core.class.php:1295
+#: core.class.php:1301
 #@ SL_framework
 msgid "Version of"
 msgstr ""
 
-#: core.class.php:1259
+#: core.class.php:1345
 #@ SL_framework
 msgid "MD5 fingerprint of the framework:"
 msgstr ""
 
-#: core.class.php:1260
+#: core.class.php:1346
 #@ SL_framework
 msgid "Last update of the core: %s at %s"
 msgstr ""
 
-#: core.class.php:1311
+#: core.class.php:1397
 #@ SL_framework
 msgid "The folder %s is not %s !"
 msgstr ""
 
-#: core.class.php:1313
+#: core.class.php:1399
 #@ SL_framework
 msgid "The file %s is not %s !"
 msgstr ""
 
-#: core.class.php:1320
-#: core.class.php:1326
+#: core.class.php:1406
+#: core.class.php:1412
 #@ SL_framework
 msgid "The folder %s does not exists and cannot be created !"
 msgstr ""
 
-#: core.class.php:1331
+#: core.class.php:1417
 #@ SL_framework
 msgid "The file %s does not exists and cannot be created !"
 msgstr ""
 
-#: core.class.php:1338
+#: core.class.php:1424
 #@ SL_framework
 msgid "There are some issues with folders rights. Please corret them as soon as possible as they could induce bugs and instabilities."
 msgstr ""
 
-#: core.class.php:1338
+#: core.class.php:1424
 #@ SL_framework
 msgid "Please see below:"
+msgstr ""
+
+#: core.class.php:1443
+#@ SL_framework
+msgid "Update the SVN repository %s with your current local plugin files"
+msgstr ""
+
+#: core.class.php:1446
+#@ SL_framework
+msgid "Overwrite the local plugin %s files with files stored the SVN repository"
+msgstr ""
+
+#: core.class.php:1487
+#@ SL_framework
+msgid "Update the local cache"
+msgstr ""
+
+#: core.class.php:1490
+#@ SL_framework
+msgid "Compare the local cache with the plugins files"
+msgstr ""
+
+#: core.class.php:1499
+#: core.class.php:1512
+#@ SL_framework
+msgid "Confirmation"
+msgstr ""
+
+#: core.class.php:1501
+#@ SL_framework
+msgid "Commit comment:"
+msgstr ""
+
+#: core.class.php:1503
+#@ SL_framework
+msgid "Yes, the SVN version will be deleted and be replaced by the local version"
+msgstr ""
+
+#: core.class.php:1514
+#@ SL_framework
+msgid "Yes, the local version will be deleted and be replaced by the files stored on the SVN repository"
+msgstr ""
+
+#: core.class.php:1519
+#@ SL_framework
+msgid "Retry the SVN preparation!"
+msgstr ""
+
+#: core.class.php:1557
+#@ SL_framework
+msgid "Add a file: %s"
+msgstr ""
+
+#: core.class.php:1571
+#@ SL_framework
+msgid "Delete a file: %s"
+msgstr ""
+
+#: core.class.php:1576
+#@ SL_framework
+msgid "Final commit:"
+msgstr ""
+
+#: core.class.php:1580
+#@ SL_framework
+msgid "The commit has ended and you may restart a normal life by closing the window..."
+msgstr ""
+
+#: core.class.php:1581
+#: core.class.php:1639
+#@ SL_framework
+msgid "Thank you!"
+msgstr ""
+
+#: core.class.php:1638
+#@ SL_framework
+msgid "The overwrite has ended and you may restart a normal life by closing the window..."
 msgstr ""
 
 #: core/translation.class.php:256
@@ -480,11 +634,6 @@ msgstr ""
 msgid "Error: the submitted string does not match the constrains"
 msgstr ""
 
-#: core/parameters.class.php:321
-#@ SL_framework
-msgid "Update"
-msgstr ""
-
 #: core/parameters.class.php:333
 #@ SL_framework
 msgid "Some parameters have not been updated due to errors (see below) !"
@@ -530,9 +679,79 @@ msgstr ""
 msgid "The feedback has been sent"
 msgstr ""
 
+#: core/popup.class.php:71
+#@ SL_framework
+msgid "Close popup"
+msgstr ""
+
 #: core/otherplugins.class.php:55
 #@ SL_framework
 msgid "Homepage:"
+msgstr ""
+
+#: core/svn.class.php:57
+#@ SL_framework
+msgid "The file %s cannot be created. Therefore, no svn script can be created. Please make the folder writable or visit %s to install a SubVersion package on your server."
+msgstr ""
+
+#: core/svn.class.php:67
+#@ SL_framework
+msgid "The folder %s does not exists and cannot be created. Therefore, no svn script can be created in that folder. Please create this folder (and make it writable) or visit %s to install a SubVersion package on your server."
+msgstr ""
+
+#: core/svn.class.php:77
+#@ SL_framework
+msgid "The operating system of your server is %s. No installation of SVN has been found. Please visit %s to install a SubVersion package on your server."
+msgstr ""
+
+#: core/svn.class.php:84
+#@ SL_framework
+msgid "The exec function is disabled on your installation. This function is mandatory to be able to use SVN."
+msgstr ""
+
+#: core/svn.class.php:95
+#: core/svn.class.php:98
+#@ SL_framework
+msgid "SVN command:"
+msgstr ""
+
+#: core/svn.class.php:121
+#: core/svn.class.php:155
+#: core/svn.class.php:231
+#: core/svn.class.php:258
+#: core/svn.class.php:284
+#@ SL_framework
+msgid "%s returns the following code: %s"
+msgstr ""
+
+#: core/svn.class.php:161
+#@ SL_framework
+msgid "Checkout has failed! Please retry ..."
+msgstr ""
+
+#: core/svn.class.php:162
+#@ SL_framework
+msgid "Indeed, it is known that the Checkout command have some difficulties to work. You may have to re-test several times (1-20 times) to finally succeed."
+msgstr ""
+
+#: core/svn.class.php:163
+#@ SL_framework
+msgid "Do not panic: once the checkout have worked one time, the update command will be used and it is far more robust!"
+msgstr ""
+
+#: core/svn.class.php:165
+#@ SL_framework
+msgid "NOTE: The command outputs the following information:"
+msgstr ""
+
+#: core/svn.class.php:173
+#@ SL_framework
+msgid "The checkout have begun but have been interrupted without any reason!"
+msgstr ""
+
+#: core/svn.class.php:178
+#@ SL_framework
+msgid "NOTE: The command does not output any information."
 msgstr ""
 
 #: core/utils.class.php:123

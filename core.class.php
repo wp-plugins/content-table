@@ -50,6 +50,12 @@ if (!class_exists('pluginSedLex')) {
 			// We add an ajax call for the feedback classe
 			add_action('wp_ajax_send_feedback', array('feedbackSL','send_feedback')) ; 
 			
+			// We add an ajax call for SVN
+			add_action('wp_ajax_svn_prepare', array($this,'svn_prepare')) ; 
+			add_action('wp_ajax_svn_to_repo', array($this,'svn_to_repo')) ; 
+			add_action('wp_ajax_repo_to_svn', array($this,'repo_to_svn')) ; 
+			add_action('wp_ajax_svn_show_popup', array($this,'svn_show_popup')) ; 
+			
 			remove_action('wp_head', 'feed_links_extra', 3); // Displays the links to the extra feeds such as category feeds
 			remove_action('wp_head', 'feed_links', 2); // Displays the links to the general feeds: Post and Comment Feed
 			remove_action('wp_head', 'rsd_link'); // Displays the link to the Really Simple Discovery service endpoint, EditURI link
@@ -564,6 +570,7 @@ if (!class_exists('pluginSedLex')) {
 		* @return void
 		*/
 		function sedlex_information() {
+			echo "<a name='top'></a>" ; 
 			global $submenu;
 			if (isset($_POST['showhide_advanced'])) {
 				if ($_POST['show_advanced']=="true") {
@@ -586,6 +593,23 @@ if (!class_exists('pluginSedLex')) {
 					update_option('SL_framework_developpers', false) ; 
 					echo "<div class='updated  fade'><p>".__('The developpers documentations will be hidden now !','SL_framework')."</p></div>" ; 
 				}
+			}
+			if (isset($_POST['showhide_svn'])) {
+				if ($_POST['show_svn']=="true") {
+					update_option('SL_framework_SVN', true) ; 
+					echo "<div class='updated  fade'><p>" ; 
+					echo __("The SVN interface will be displayed now !",'SL_framework') ; 
+					echo "</p></div>" ; 
+				} else {
+					update_option('SL_framework_SVN', false) ; 
+					echo "<div class='updated  fade'><p>".__('The SVN interface will be hidden now !','SL_framework')."</p></div>" ; 
+				}
+			}
+			if (isset($_POST['update_svn'])) {
+				echo __("The SVN parameters have been updated !",'SL_framework') ; 
+				update_option('SL_framework_SVN_login', $_POST['svn_login']) ; 
+				update_option('SL_framework_SVN_password', $_POST['svn_password']) ; 
+				update_option('SL_framework_SVN_author', $_POST['svn_author']) ; 
 			}
 
 			if (isset($_GET['download'])) {
@@ -646,11 +670,13 @@ if (!class_exists('pluginSedLex')) {
 ?>
 					<p><?php printf(__("For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':",'SL_framework'), count($plugins), $sl_count)?><p/>
 <?php
+					
 					//======================================================================================
 					//= Tab listing all the plugins
 					//======================================================================================
 			
 					$tabs = new adminTabs() ; 
+										
 					ob_start() ; 
 					
 						$table = new adminTable() ; 
@@ -736,6 +762,44 @@ if (!class_exists('pluginSedLex')) {
 									if ($url == $current_core_used."/".$current_core_used.".php") {
 										$info_core .= "<p style='color:#666666;font-size:75%;text-align:right'>[".__('This core is currently used by the framework and plugins !',  'SL_framework')."]</p>" ; 
 									} 
+									
+									// SVN interface
+									if (get_option('SL_framework_SVN', false)==true) {
+										if (strlen(get_option('SL_framework_SVN_author', ""))>0) {
+											if (preg_match("/".get_option('SL_framework_SVN_author', "")."/i", $info['Author'])) {
+												$info_core .= "<hr/>" ; 
+												$info_core .= "<div><img style='border:0px' src='".WP_PLUGIN_URL.'/'.str_replace(basename(  __FILE__),"",plugin_basename( __FILE__))."core/img/SVN.png' height='24px'><b>".__("SVN management", 'SL_framework')."</b></div>"; 
+												// We check if the repository exists
+												
+												$request = wp_remote_get('http://svn.wp-plugins.org/'.$plugin_name );
+												if( is_wp_error( $response ) ) {
+													$info_core .= "<p>".sprintf(__("An error occurs when requesting %s", 'SL_framework'), "<a href='http://svn.wp-plugins.org/$plugin_name'>http://svn.wp-plugins.org/$plugin_name</a>") ."</p>" ; 
+												} else {
+													if ($request['response']['code']!='200') {
+														$info_core .= "<p>".sprintf(__("You do not seem to have a repository for Wordpress because %s returns a 404 error. Thus, ask for one here: %s", 'SL_framework'), "<a href='http://svn.wp-plugins.org/$plugin_name'>http://svn.wp-plugins.org/$plugin_name</a>", "<a href='http://wordpress.org/extend/plugins/add/'>Wordpress Repository</a>") ."</p>" ; 
+													} else {													
+														$info_core .=  "<ul>" ; 
+														
+														$md5 = md5($plugin_name." to_local") ; 
+														$info_core .=  "<li style='padding-left:2em; '>" ; 
+														$info_core .= "<img id='wait_svn_".$md5."' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'>" ; 
+														$info_core .= "<a href='#' onClick='showSvnPopup(\"".$md5."\", \"".$plugin_name."\", \"to_local\"); return false;'>".__("Overwrite the local plugin files with files stored the SVN repository", 'SL_framework')."</a>" ;
+														$info_core .=  "</li>" ;
+														
+														$md5 = md5($plugin_name." to_repo") ; 
+														$info_core .= "<li style='padding-left:2em; '>" ; 
+														$info_core .= "<img id='wait_svn_".$md5."' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'>" ; 
+														$info_core .=  "<a href='#' onClick='showSvnPopup(\"".$md5."\", \"".$plugin_name."\", \"to_repo\"); return false;'>".__("Update the SVN repository with your current local plugin files", 'SL_framework')."</a>" ; 
+														$info_core .=  "</li>" ; 
+														
+														$info_core .=  "</ul>" ; 
+														
+													}
+												}
+											}
+										}
+									}
+									
 									$cel3 = new adminCell( $info_core ) ; 
 								}
 								
@@ -755,7 +819,7 @@ if (!class_exists('pluginSedLex')) {
 							$checked = "checked" ;
 						}
 						echo "<p style='text-align:right'>".__('Show the advanced options and parameters:','SL_framework')." <input name='show_advanced' value='true' type='checkbox' $checked> "  ; 
-						echo "<input class='button-secondary action' name='showhide_advanced' id='showhide_advanced' value='Show/Hide' type='submit' ></p>"  ; 
+						echo "<input class='button-secondary action' name='showhide_advanced' id='showhide_advanced' value='".__('Show/Hide', 'SL_framework')."' type='submit' ></p>"  ; 
 						echo "</form>" ; 
 						echo "<form action='".remove_query_arg(array("update", "from"))."' method='POST'>" ; 
 						$checked = "" ; 
@@ -763,8 +827,30 @@ if (!class_exists('pluginSedLex')) {
 							$checked = "checked" ;
 						}
 						echo "<p style='text-align:right'>".__('Show the developpers documentation:','SL_framework')." <input name='show_developpers' value='true' type='checkbox' $checked> "  ; 
-						echo "<input class='button-secondary action' name='showhide_developpers' id='showhide_developpers' value='Show/Hide' type='submit' ></p>"  ; 
-						echo "</form>" ; 						
+						echo "<input class='button-secondary action' name='showhide_developpers' id='showhide_developpers' value='".__('Show/Hide', 'SL_framework')."' type='submit' ></p>"  ; 
+						echo "</form>" ; 	
+						
+						// SVN
+						if (get_option('SL_framework_show_advanced', false)==true) {
+							echo "<form action='".remove_query_arg(array("update", "from"))."' method='POST'>" ; 
+							$checked = "" ; 
+							if (get_option('SL_framework_SVN', false)==true) {
+								$checked = "checked" ;
+							}
+							echo "<p style='text-align:right'>".__('Enable SVN to commit your developed plugin to wordpress.org:','SL_framework')." <input name='show_svn' value='true' type='checkbox' $checked> "  ; 
+							echo "<input class='button-secondary action' name='showhide_svn' id='showhide_svn' value='".__('Enable/Disable', 'SL_framework')."' type='submit' ></p>"  ; 
+							echo "</form>" ; 	
+							
+							if (get_option('SL_framework_SVN', false)==true) {
+								echo "<form action='".remove_query_arg(array("update", "from"))."' method='POST'>" ; 
+								echo "<p style='text-align:right'>".__('Your SVN Login:','SL_framework')." <input name='svn_login' value='".get_option('SL_framework_SVN_login', "")."'> "  ; 
+								echo "<br/>".__('Your SVN password:','SL_framework')." <input name='svn_password' value='".get_option('SL_framework_SVN_password', "")."' type='password'> "  ; 
+								echo "<br/>".__('The author name displayed in the Wordpress plugin (probably close to your login):','SL_framework')." <input name='svn_author' value='".get_option('SL_framework_SVN_author', "")."' > "  ; 
+								echo "<br/><input class='button-secondary action' name='update_svn' id='update_svn' value='".__('Update', 'SL_framework')."' type='submit' ></p>"  ; 
+								echo "</form>" ; 	
+							}
+							
+						}
 					$tabs->add_tab(__('List of SL plugins',  'SL_framework'), ob_get_clean() ) ; 
 					
 					
@@ -844,7 +930,7 @@ if (!class_exists('pluginSedLex')) {
 						</div>
 						
 						<?php
-						$tabs->add_tab(__('How to create a new Plugin with the SL framework',  'SL_framework'), ob_get_clean() ) ; 
+						$tabs->add_tab(__('How to develop a plugin?',  'SL_framework'), ob_get_clean() ) ; 
 						
 						//======================================================================================
 						//= Tab presenting the core documentation
@@ -1338,6 +1424,221 @@ if (!class_exists('pluginSedLex')) {
 				echo "<div class='error fade'><p>".__('There are some issues with folders rights. Please corret them as soon as possible as they could induce bugs and instabilities.','SL_framework')."</p><p>".__('Please see below:','SL_framework')."</p>".$result."</div>" ; 
 			}
 			
+		}
+		
+		/** ====================================================================================================================================================
+		* Callback for displaying the SVN popup
+		* 
+		* @access private
+		* @return void
+		*/		
+		
+		function svn_show_popup() {
+		
+			// get the arguments
+			$plugin = $_POST['plugin'];
+			$sens = $_POST['sens'];
+
+			if ($sens=="to_repo") {
+				$title = sprintf(__('Update the SVN repository %s with your current local plugin files', 'SL_framework'),'<em>'.$plugin.'</em>') ;
+			}
+			if ($sens=="to_local") {
+				$title = sprintf(__('Overwrite the local plugin %s files with files stored the SVN repository', 'SL_framework'),'<em>'.$plugin.'</em>') ; ;
+			}
+			
+			ob_start() ; 
+			echo "<div id='svn_div'>" ; 
+			$this->func_svn_prepare($plugin, $sens) ; 	
+			echo "</div>" ; 
+			$content = ob_get_clean() ; 	
+
+			$popup = new popupAdmin($title, $content, "") ; 
+			$popup->render() ; 
+			die() ; 
+		}
+		
+		/** ====================================================================================================================================================
+		* Callback for preparing SVN command
+		* 
+		* @access private
+		* @return void
+		*/			
+		function svn_prepare() {
+			// get the arguments
+			$plugin = $_POST['plugin'];
+			$sens = $_POST['sens'];
+			$this->func_svn_prepare($plugin, $sens) ; 
+			die() ; 
+		}
+		
+		/** ====================================================================================================================================================
+		* Function for preparing SVN command
+		* 
+		* @access private
+		* @return void
+		*/			
+		
+		function func_svn_prepare($plugin, $sens) {
+		
+			$local_cache = WP_CONTENT_DIR."/sedlex/svn/".$plugin ; 
+			$repository = "http://svn.wp-plugins.org/".$plugin ; 
+			$svn = new svnAdmin() ; 
+			// On met a jour le cache local !
+			echo "<h3>".__('Update the local cache', 'SL_framework')."</h3>" ; 
+			$resulta = $svn->update_checkout($local_cache, $repository) ; 
+			if ($resulta==0) {
+				echo "<br/><h3>".__('Compare the local cache with the plugins files', 'SL_framework')."</h3>" ; 
+				$folddiff = new foldDiff() ; 
+				
+				if ($sens=="to_repo") {
+					// DIFF
+					$result = $folddiff->diff(WP_PLUGIN_DIR."/".$plugin, $local_cache."/trunk") ; 
+					
+					$folddiff->render() ; 
+					// Confirmation asked
+					echo "<h3>".__('Confirmation', 'SL_framework')."</h3>" ; 
+					
+					echo "<p>".__('Commit comment:', 'SL_framework')."</p>" ; 
+					echo 	"<p><textarea cols='70' rows='5' name='svn_comment' id='svn_comment'/></textarea></p>\n" ;  
+					echo "<p id='svn_button'><input onclick='svnToRepo(\"".$plugin."\") ; return false ; ' type='submit' name='submit' class='button-primary validButton' value='".__('Yes, the SVN version will be deleted and be replaced by the local version', 'SL_framework')."' /></p>" ;  
+					echo "<p><img id='wait_svn' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'></p>" ; 
+				}	
+				
+				
+				if ($sens=="to_local") { 
+					$folddiff->diff($local_cache."/trunk", WP_PLUGIN_DIR."/".$plugin) ; 
+					$folddiff->render() ; 
+					// Confirmation asked
+					echo "<h3>".__('Confirmation', 'SL_framework')."</h3>" ; 
+					
+					echo "<p id='svn_button'><input onclick='repoToSvn(\"".$plugin."\") ; return false ; ' type='submit' name='submit' class='button-primary validButton' value='".__('Yes, the local version will be deleted and be replaced by the files stored on the SVN repository', 'SL_framework')."' /></p>" ;  
+					echo "<p><img id='wait_svn' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'></p>" ; 
+
+				}
+			} else {
+				echo "<p><a href='#' onClick='reTrySvnPreparation(\"".$plugin."\", \"to_repo\"); return false;'>".__('Retry the SVN preparation!', 'SL_framework')."</a> " ; 
+				echo " <img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/refresh.png'>" ; 
+				echo " <img id='wait_svn' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'></p>" ; 
+			} 
+		}
+		
+		/** ====================================================================================================================================================
+		* Callback for SVN to repository
+		* 
+		* @access private
+		* @return void
+		*/		
+		function svn_to_repo() {
+			// get the arguments
+			$plugin = $_POST['plugin'];
+			$comment = $_POST['comment'];
+
+			$path = WP_PLUGIN_DIR."/".$plugin ; 
+			$local = WP_CONTENT_DIR."/sedlex/svn/".$plugin ; 
+
+			// We get the list of the diff
+			$svn = new svnAdmin() ; 
+			$diff = new foldDiff();
+			$fold = $diff->diff($path, $local."/trunk");
+			
+			foreach ($fold as $f) {
+			
+				// We add the file if needed
+				if (($f[1]==2)&&($f[2]!="directory")) { // ADDED
+					// On cree le repertoire s il n existe pas
+					$directory = str_replace(basename($f[3]),"",$local."/trunk/".$f[3]) ; 
+					
+					if (!is_dir($directory)) {
+						mkdir($directory, 0777, true) ; 
+					}
+					
+					copy ( $path."/".$f[3], $local."/trunk/".$f[3]) ; 
+					
+					echo "<p>".sprintf(__('Add a file: %s', 'SL_framework')," <code>".$f[3]."</code>")."</p>\n" ; 
+					
+					$result = $svn->add($local."/trunk/",$f[3]) ; 
+					if ($result != 0) {
+						// We delete the file 
+						unlink($local."/trunk/".$f[3]) ; 
+					}
+				}
+				
+				if (($f[1]==3)&&($f[2]!="directory")) { // MODIFIED
+					copy ( $path."/".$f[3], $local."/trunk/".$f[3]) ; 
+				}
+				
+				if (($f[1]==1)&&($f[2]!="directory")) {// DELETED
+					echo "<p>".sprintf(__('Delete a file: %s', 'SL_framework')," <code>".$f[3]."</code>")."</p>\n" ; 
+					$svn->delete($local."/trunk/",$f[3]) ; 
+				}
+			}
+									
+			echo "<p>".__('Final commit:', 'SL_framework')." <code>commit</code></p>\n" ; 
+			$svn->commit($local, get_option('SL_framework_SVN_login', ""), get_option('SL_framework_SVN_password', ""), $comment) ; 
+			
+			echo "<p> </p>" ; 
+			echo "<p>".__("The commit has ended and you may restart a normal life by closing the window...", 'SL_framework')."</p>" ; 
+			echo "<p>".__("Thank you!", 'SL_framework')."</p>" ; 
+			
+			die() ; 
+		}
+		
+		/** ====================================================================================================================================================
+		* Callback for SVN to repository
+		* 
+		* @access private
+		* @return void
+		*/		
+		
+		function repo_to_svn() {
+			// get the arguments
+			$plugin = $_POST['plugin'];
+			$comment = $_POST['comment'];
+
+			$path = WP_PLUGIN_DIR."/".$plugin ; 
+			$local = WP_CONTENT_DIR."/sedlex/svn/".$plugin ; 
+
+			// We get the list of the diff
+			$svn = new svnAdmin() ; 
+			$diff = new foldDiff();
+			$fold = $diff->diff($local."/trunk", $path);
+			
+			echo "<p class='console'>\n" ; 
+			echo "To local: <br/>\n" ;
+			
+			foreach ($fold as $f) {
+						
+				// We add the file if needed
+				if (($f[1]==2)&&($f[2]!="directory")) { // ADDED
+					// On cree le repertoire s il n existe pas
+					$directory = str_replace(basename($f[3]),"",$path."/".$f[3]) ; 
+					
+					if (!is_dir($directory)) {
+						mkdir($directory, 0777, true) ; 
+					}
+					
+					copy ( $local."/trunk/".$f[3], $path."/".$f[3] ) ; 
+					echo "A ".$f[3]."<br/>\n" ;
+					
+				}
+				
+				if (($f[1]==3)&&($f[2]!="directory")) { // MODIFIED
+					copy ($local."/trunk/".$f[3], $path."/".$f[3]) ; 
+					echo "U ".$f[3]."<br/>\n" ;
+				}
+				
+				if (($f[1]==1)&&($f[2]!="directory")) {// DELETED
+					unlink ($path."/".$f[3]) ; 
+					echo "D ".$f[3]."<br/>\n" ;
+				}
+			}
+			echo "</p>\n" ; 
+	
+			echo "<p> </p>" ; 
+			echo "<p>".__("The overwrite has ended and you may restart a normal life by closing the window...", 'SL_framework')."</p>" ; 
+			echo "<p>".__("Thank you!", 'SL_framework')."</p>" ; 
+			
+			die() ; 
 		}
 	}
 
