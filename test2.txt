@@ -3,8 +3,7 @@ Host: svn.wp-plugins.org
 User-Agent: php_svn_SLclient v1.0
 Content-Length: 271
 Content-Type: text/xml
-
-<S:update-report send-all="true" xmlns:S="svn:">
+ajout
 	<S:src-path>http://svn.wp-plugins.org/content-table</S:src-path>
 	<S:target-revision>446085</S:target-revision>
 	<S:depth>infinity</S:depth>
