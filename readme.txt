@@ -25,6 +25,8 @@ Plugin developped from the orginal plugin *Toc for Wordpress*.
 
 = Localizations =
 
+* Russian translation (by Limych)
+* Italian translation (by Jkappa)
 * French translation (by me)
 
 = Features of the framework = 
@@ -56,6 +58,13 @@ Moreover, all the plugins developped with this framework is able to use astonish
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.2.0 =
+* SVN support for committing changes
+
+= 1.1.6 =
+* Russian translation (by Limych)
+* Italian translation (by Jkappa)
 
 = 1.1.5 =
 * Major update of the core (beta SVN support)
@@ -110,4 +119,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:7b144364315bb1aa11d86f1d540bd6c3
+InfoVersion:709c8997ba484256c5f82fecdff359f5

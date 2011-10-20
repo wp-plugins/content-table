@@ -120,14 +120,36 @@ if (!class_exists("foldDiff")) {
 		/** ====================================================================================================================================================
 		* Display the difference
 		* 
+		* @param boolean $withTick display ticks 
+		* @param bollean $closeNotModifiedFolders close folders if their contents have not been modified
 		* @return void
 		*/
 		
-		function render() {
+		function render($closeNotModifiedFolders=true, $withTick=false) {
 			
 			// On affiche les repertoires
 			$rep_current = Utils::multicolumn_sort($this->folder, 3) ; 
 			$prev_fold = "" ; 
+			$reduire = "<script>\r\n" ; 
+			$hasmodif = array() ; 
+			$foldlist = array() ; 
+			$niveau = 1 ; 
+			
+			if ($withTick) {
+				echo "<p><input class='button-secondary action' onClick='allTick(true)' value='".__('Select all', 'SL_framework')."'>"  ; 
+				echo "&nbsp; <input class='button-secondary action' onClick='allTick(false)' value='".__('Un-select all', 'SL_framework')."'></p>"  ; 
+				echo "<script>\r\n";
+				echo "function allTick(val) {\r\n" ;
+				echo "     jQuery('.toDelete').attr('checked', val);\r\n" ; 
+				echo "     jQuery('.toDeleteFolder').attr('checked', val);\r\n" ; 
+				echo "     jQuery('.toPut').attr('checked', val);\r\n" ; 
+				echo "     jQuery('.toPutFolder').attr('checked', val);\r\n" ; 
+				echo "     jQuery('.toModify').attr('checked', val);\r\n" ; 
+				echo "		return false ; " ; 
+				echo "}\r\n" ; 
+				echo "</script>\r\n" ; 
+			}
+				
 			foreach ($rep_current as $rc) {
 				$color = "" ; 
 				$binary = "" ;
@@ -135,13 +157,25 @@ if (!class_exists("foldDiff")) {
 				$plus="<img style='border:0px' src='".WP_PLUGIN_URL.'/'.str_replace(basename(  __FILE__),"",plugin_basename( __FILE__))."img/vide-8.png' />\n" ; 
 				$icone = "<img style='border:0px' src='".WP_PLUGIN_URL.'/'.str_replace(basename(  __FILE__),"",plugin_basename( __FILE__))."img/default.png'/>\n" ; 
 				
+				$tick = "<span style='width:30px;display:block;float:left;'>&nbsp;</span>" ; 
 				
-				if ($rc[1]==1)
+				if (($rc[1]==1)) {
 					$color = "color:red;text-decoration:line-through;" ; 
-				if ($rc[1]==2)
+					$tick = "<span style='width:30px;display:block;float:left;'><input class='toDelete' type='checkbox' name='toDelete' value='".$rc[3]."' checked /></span>" ; 
+					if ($rc[2]=="directory") 
+						$tick = "<span style='width:30px;display:block;float:left;'><input class='toDeleteFolder' type='checkbox' name='toDeleteFolder' value='".$rc[3]."' checked /></span>" ; 
+				}
+				if (($rc[1]==2)) {
 					$color = "color:green;" ; 
-				if ($rc[1]==3)
+					$tick = "<span style='width:30px;display:block;float:left;'><input class='toPut' type='checkbox' name='toPut' value='".$rc[3]."' checked ></span>" ; 
+					if ($rc[2]=="directory") 
+						$tick = "<span style='width:30px;display:block;float:left;'><input class='toPutFolder' type='checkbox' name='toPutFolder' value='".$rc[3]."' checked /></span>" ; 
+				}
+				if (($rc[1]==3)) {
 					$color = "color:blue;" ; 
+					$tick = "<span style='width:30px;display:block;float:left;'><input class='toModify' type='checkbox' name='toModify' value='".$rc[3]."' checked ></span>" ; 
+				}
+				
 				if ($rc[2]=="binary_file") {
 					$binary = "*" ; 
 					$icone = "<img style='border:0px' src='".WP_PLUGIN_URL.'/'.str_replace(basename(  __FILE__),"",plugin_basename( __FILE__))."img/binary.png'/>\n" ; 
@@ -171,17 +205,29 @@ if (!class_exists("foldDiff")) {
 				if ($old_niv>$niveau) {
 					for ($i=0 ; $i<$old_niv-$niveau ; $i++) {
 						echo "</div>\n" ; 
+						if (!$hasmodif[$niveau+$i]) { 
+							$reduire .= "folderToggle(\"".md5($listfolder[$niveau+$i])."\") ; \r\n"; 
+						}
+						$hasmodif[$niveau+$i] = false ; 
 					}
 				}
 				if ($old_niv<$niveau) {
 					echo "<div id='folder_".md5($prevfolder)."'>\n" ; 
+					$hasmodif[$niveau] = false ;
+					$listfolder[$old_niv] = $prevfolder ;
 				}
 				$prevfolder = $rc[3] ; 
 				
-				echo "<p style='padding:0px;margin:0px;padding-left:".(20*$niveau)."px;'>".$plus.$icone."<span style='".$color."'>".$rc[0].$binary."</span>".$loupe."</p>\n" ; 
+				if (!$withTick)
+					$tick = "" ; 
 				
+				echo "<p style='padding:0px;margin:0px;'>".$tick."<span style='padding:0px;margin:0px;padding-left:".(20*$niveau)."px;'>".$plus.$icone."<span style='".$color."'>".$rc[0].$binary."</span>".$loupe."</span></p>\n" ; 
 				
-				
+				if ( ($rc[1]==3) || ($rc[1]==2) || ($rc[1]==1) ) {
+					for ($i=0 ; $i<=$niveau ; $i++) {
+						$hasmodif[$i] = true ;
+					}
+				}
 				
 				if ((($rc[1]==3)||($rc[1]==2)||($rc[1]==1))&&($rc[2]=="text_file")) {
 					echo "<div id='diff_".md5($rc[3])."' style='display:none;padding:0px;margin:0px;padding-left:".(20*$niveau+30)."px;'>\n" ; 
@@ -194,6 +240,15 @@ if (!class_exists("foldDiff")) {
 					
 					echo "</div>\n" ; 
 				}
+			}				
+			
+			$reduire .= "</script>\r\n" ; 
+			if ($withTick) {
+				echo "<p><input class='button-secondary action' onClick='allTick(true)' value='".__('Select all', 'SL_framework')."'>"  ; 
+				echo "&nbsp; <input class='button-secondary action' onClick='allTick(false)' value='".__('Un-select all', 'SL_framework')."'></p>"  ; 
+			}
+			if ($closeNotModifiedFolders) {
+				echo $reduire ; 
 			}
 		}
 

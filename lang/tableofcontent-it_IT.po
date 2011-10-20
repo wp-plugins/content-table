@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-09-27T08:30:18+00:00\n"
-"Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"PO-Revision-Date: 2011-10-08T17:21:07+00:00\n"
+"Last-Translator: jkappa <gmalavolta@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: France\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -21,59 +21,59 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "If you want that the table of content appears in your post, just type:"
-msgstr "Si vous voulez que la table des matière apparaisse dans vos articles, tapez simplement : "
+msgstr "Se desideri che il Table of Content appaia nel tuo articolo, basta scrivere:"
 
 msgid "that is all !"
-msgstr "c&#039;est tout !"
+msgstr "Tutto qua!"
 
 msgid "What is the title to be displayed in the table of content?"
-msgstr "Quel est le titre qui sera affiché pour la table des matières ?"
+msgstr "Qual è il titolo da visualizzare nel Table of Content?"
 
 msgid "Title of the table of content:"
-msgstr "Titre de la table des matières :"
+msgstr "Titolo del Table of Content"
 
 msgid "Add prefix in your title:"
-msgstr "Ajoutez un préfixe à vos titres"
+msgstr "Aggiungi un prefisso per il titolo"
 
 msgid "If you leave the field blank, nothing will be added !"
-msgstr "Si vous laissez les champs vides, rien ne sera ajouté !"
+msgstr "Se lasci vuoto, nulla verrà aggiunto"
 
 msgid "Note that if you want to display the number of level 2, just write %s ..."
-msgstr "Si vous souhaitez afficher le numéro du niveau 2, écrivez simplement %s ..."
+msgstr "Nota che se vuoi visualizzare il numero del livello 2, devi scrivere %s"
 
 msgid "Prefix of the level 2:"
-msgstr "Préfixe du niveau 2 :"
+msgstr "Prefisso per il livello 2:"
 
 msgid "Prefix of the level 3:"
-msgstr "Préfixe du niveau 3 :"
+msgstr "Prefisso per il livello 3:"
 
 msgid "Prefix of the level 4:"
-msgstr "Préfixe du niveau 4 :"
+msgstr "Prefisso per il livello 4:"
 
 msgid "Prefix of the level 5:"
-msgstr "Préfixe du niveau 5 :"
+msgstr "Prefisso per il livello 5:"
 
 msgid "Prefix of the level 6:"
-msgstr "Préfixe du niveau 6 :"
+msgstr "Prefisso per il livello 6:"
 
 msgid "Parameters"
-msgstr "Paramètres"
+msgstr "Parametri"
 
 msgid "Manage translations"
-msgstr "Gérer les traductions"
+msgstr "Gestisci la traduzione"
 
 msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr "Ce formulaire vous permet de contacter facilement l&#039;auteur et de discuter de vos problèmes / des incompatibilités / etc."
+msgstr "Questo modulo è un modo agevole per contattare l&#039;autore per segnalare errori / incompatibilità / etc"
 
 msgid "Give feedback"
-msgstr "Donner un feedback"
+msgstr "Invia un tuo commento"
 
 msgid "Here is the plugins developped by the author"
-msgstr "Voici les plugins développés par l&#039;auteur :"
+msgstr "Questo plugin è stato sviluppato dall&#039;autore"
 
 msgid "Other possible plugins"
-msgstr "Autres plugins possibles"
+msgstr "Altri possibili plugin"
 
 msgid "Here is the plugins developped by the author:"
-msgstr "Voici les plugins développés par l&#039;auteur :"
+msgstr "Questi sono i plugin sviluppati dall&#039;autore:"
 
