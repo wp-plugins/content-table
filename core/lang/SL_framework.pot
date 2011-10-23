@@ -92,7 +92,7 @@ msgstr ""
 
 #: core.class.php:725
 #: core/otherplugins.class.php:40
-#: core/otherplugins.class.php:77
+#: core/otherplugins.class.php:78
 #@ SL_framework
 msgid "An Unexpected HTTP Error occurred during the API request."
 msgstr ""
@@ -389,13 +389,11 @@ msgid "Update the SVN repository %s with your current local plugin files (slower
 msgstr ""
 
 #: core.class.php:1457
-#: core/svn.class.old.php:323
 #@ SL_framework
 msgid "Update the SVN repository %s with your current local plugin files"
 msgstr ""
 
 #: core.class.php:1460
-#: core/svn.class.old.php:326
 #@ SL_framework
 msgid "Overwrite the local plugin %s files with files stored the SVN repository"
 msgstr ""
@@ -458,20 +456,16 @@ msgstr ""
 
 #: core.class.php:1637
 #: core.class.php:1674
-#: core/svn.class.old.php:379
-#: core/svn.class.old.php:392
 #@ SL_framework
 msgid "Confirmation"
 msgstr ""
 
 #: core.class.php:1639
-#: core/svn.class.old.php:381
 #@ SL_framework
 msgid "Commit comment:"
 msgstr ""
 
 #: core.class.php:1641
-#: core/svn.class.old.php:383
 #@ SL_framework
 msgid "Yes, the SVN version will be deleted and be replaced by the local version"
 msgstr ""
@@ -799,119 +793,8 @@ msgstr ""
 msgid "The feedback has been sent"
 msgstr ""
 
-#: core/popup.class.php:71
+#: core/popup.class.php:72
 #@ SL_framework
 msgid "Close popup"
-msgstr ""
-
-#: core/svn.class.old.php:57
-#@ SL_framework
-msgid "The file %s cannot be created. Therefore, no svn script can be created. Please make the folder writable or visit %s to install a SubVersion package on your server."
-msgstr ""
-
-#: core/svn.class.old.php:67
-#@ SL_framework
-msgid "The folder %s does not exists and cannot be created. Therefore, no svn script can be created in that folder. Please create this folder (and make it writable) or visit %s to install a SubVersion package on your server."
-msgstr ""
-
-#: core/svn.class.old.php:77
-#@ SL_framework
-msgid "The operating system of your server is %s. No installation of SVN has been found. Please visit %s to install a SubVersion package on your server."
-msgstr ""
-
-#: core/svn.class.old.php:84
-#@ SL_framework
-msgid "The exec function is disabled on your installation. This function is mandatory to be able to use SVN."
-msgstr ""
-
-#: core/svn.class.old.php:103
-#: core/svn.class.old.php:106
-#@ SL_framework
-msgid "SVN command:"
-msgstr ""
-
-#: core/svn.class.old.php:135
-#: core/svn.class.old.php:169
-#: core/svn.class.old.php:243
-#: core/svn.class.old.php:270
-#: core/svn.class.old.php:296
-#@ SL_framework
-msgid "%s returns the following code: %s"
-msgstr ""
-
-#: core/svn.class.old.php:175
-#@ SL_framework
-msgid "Checkout has failed! Please retry ..."
-msgstr ""
-
-#: core/svn.class.old.php:176
-#@ SL_framework
-msgid "Indeed, it is known that the Checkout command have some difficulties to work. You may have to re-test several times (1-20 times) to finally succeed."
-msgstr ""
-
-#: core/svn.class.old.php:177
-#@ SL_framework
-msgid "Do not panic: once the checkout have worked one time, the update command will be used and it is far more robust!"
-msgstr ""
-
-#: core/svn.class.old.php:179
-#@ SL_framework
-msgid "NOTE: The command outputs the following information:"
-msgstr ""
-
-#: core/svn.class.old.php:187
-#@ SL_framework
-msgid "The checkout have begun but have been interrupted without any reason!"
-msgstr ""
-
-#: core/svn.class.old.php:367
-#@ SL_framework
-msgid "Update the local cache"
-msgstr ""
-
-#: core/svn.class.old.php:370
-#@ SL_framework
-msgid "Compare the local cache with the plugins files"
-msgstr ""
-
-#: core/svn.class.old.php:394
-#@ SL_framework
-msgid "Yes, the local version will be deleted and be replaced by the files stored on the SVN repository"
-msgstr ""
-
-#: core/svn.class.old.php:399
-#@ SL_framework
-msgid "Retry the SVN preparation!"
-msgstr ""
-
-#: core/svn.class.old.php:437
-#@ SL_framework
-msgid "Add a file: %s"
-msgstr ""
-
-#: core/svn.class.old.php:451
-#@ SL_framework
-msgid "Delete a file: %s"
-msgstr ""
-
-#: core/svn.class.old.php:456
-#@ SL_framework
-msgid "Final commit:"
-msgstr ""
-
-#: core/svn.class.old.php:460
-#@ SL_framework
-msgid "The commit has ended and you may restart a normal life by closing the window..."
-msgstr ""
-
-#: core/svn.class.old.php:461
-#: core/svn.class.old.php:519
-#@ SL_framework
-msgid "Thank you!"
-msgstr ""
-
-#: core/svn.class.old.php:518
-#@ SL_framework
-msgid "The overwrite has ended and you may restart a normal life by closing the window..."
 msgstr ""
 
