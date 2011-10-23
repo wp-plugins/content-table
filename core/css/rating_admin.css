@@ -62,3 +62,7 @@ span.count {
 	left: 100px;
 	top: 0;
 }
+
+div.inline { float:left; }
+
+.clearBoth { clear:both; }

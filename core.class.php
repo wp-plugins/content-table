@@ -741,16 +741,17 @@ if (!class_exists('pluginSedLex')) {
 												}
 												echo  "<p>InfoVersion: ".$hash_plugin."</p>" ; 
 												echo  "<p>".__('Last update:', 'SL_framework' )." ".$res->last_updated."</p>";
-												echo  "<p>".sprintf(__('Rating: %s', 'SL_framework' ), $res->rating) ; 
-												echo "<div class='star-holder'>" ; 
+												echo  "<div class='inline'>".sprintf(__('Rating: %s', 'SL_framework' ), $res->rating)." &nbsp; &nbsp; </div> " ; 
+												echo "<div class='star-holder inline'>" ; 
 												echo "<div class='star star-rating' style='width: ".$res->rating."px'></div>" ; 
 												echo "<div class='star star5'><img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/star.gif' alt='5 stars' /></div>" ; 
 												echo "<div class='star star4'><img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/star.gif' alt='4 stars' /></div>" ; 
 												echo "<div class='star star3'><img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/star.gif' alt='3 stars' /></div>" ; 
 												echo "<div class='star star2'><img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/star.gif' alt='2 stars' /></div>" ; 
 												echo "<div class='star star1'><img src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/star.gif' alt='1 stars' /></div>" ; 
-												echo "</div>" ; 
-												echo " (".sprintf(__("by %s persons", 'SL_framework' ),$res->num_ratings).")</p>";
+												echo "</div> " ; 
+												echo " <div class='inline'> &nbsp; (".sprintf(__("by %s persons", 'SL_framework' ),$res->num_ratings).")</div>";
+												echo "<br class='clearBoth' />" ; 
 												echo  "<p>".__('Number of download:', 'SL_framework' )." ".$res->downloaded."</p>";
 											
 											}
