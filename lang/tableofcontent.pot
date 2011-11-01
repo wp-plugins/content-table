@@ -1,94 +1,167 @@
 Content-Transfer-Encoding: 8bit
 
-#: content-table.php:96
+#: content-table.php:135
 #@ tableofcontent
 msgid "If you want that the table of content appears in your post, just type:"
 msgstr ""
 
-#: content-table.php:96
+#: content-table.php:135
 #@ tableofcontent
 msgid "that is all !"
 msgstr ""
 
-#: content-table.php:111
+#: content-table.php:150
 #@ tableofcontent
 msgid "What is the title to be displayed in the table of content?"
 msgstr ""
 
-#: content-table.php:112
+#: content-table.php:151
 #@ tableofcontent
 msgid "Title of the table of content:"
 msgstr ""
 
-#: content-table.php:113
+#: content-table.php:152
 #@ tableofcontent
 msgid "Add prefix in your title:"
 msgstr ""
 
-#: content-table.php:114
+#: content-table.php:153
 #@ tableofcontent
 msgid "If you leave the field blank, nothing will be added !"
 msgstr ""
 
-#: content-table.php:114
+#: content-table.php:153
 #@ tableofcontent
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr ""
 
-#: content-table.php:115
+#: content-table.php:154
 #@ tableofcontent
 msgid "Prefix of the level 2:"
 msgstr ""
 
-#: content-table.php:116
+#: content-table.php:155
 #@ tableofcontent
 msgid "Prefix of the level 3:"
 msgstr ""
 
-#: content-table.php:117
+#: content-table.php:156
 #@ tableofcontent
 msgid "Prefix of the level 4:"
 msgstr ""
 
-#: content-table.php:118
+#: content-table.php:157
 #@ tableofcontent
 msgid "Prefix of the level 5:"
 msgstr ""
 
-#: content-table.php:119
+#: content-table.php:158
 #@ tableofcontent
 msgid "Prefix of the level 6:"
 msgstr ""
 
-#: content-table.php:121
+#: content-table.php:159
+#@ tableofcontent
+msgid "Customize the global visual appearance:"
+msgstr ""
+
+#: content-table.php:160
+#@ tableofcontent
+msgid "The HTML:"
+msgstr ""
+
+#: content-table.php:161
+#@ tableofcontent
+msgid "The default HTML is: %s"
+msgstr ""
+
+#: content-table.php:165
+#@ tableofcontent
+msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
+msgstr ""
+
+#: content-table.php:166
+#: content-table.php:178
+#@ tableofcontent
+msgid "The CSS:"
+msgstr ""
+
+#: content-table.php:167
+#: content-table.php:179
+#@ tableofcontent
+msgid "The default CSS is: %s"
+msgstr ""
+
+#: content-table.php:177
+#@ tableofcontent
+msgid "Customize the visual appearance of the title:"
+msgstr ""
+
+#: content-table.php:187
+#@ tableofcontent
+msgid "Customize the visual appearance of each entry in the TOC:"
+msgstr ""
+
+#: content-table.php:188
+#@ tableofcontent
+msgid "The indentation of the TOC (in pixels):"
+msgstr ""
+
+#: content-table.php:189
+#: content-table.php:190
+#@ tableofcontent
+msgid "The max font size:"
+msgstr ""
+
+#: content-table.php:191
+#@ tableofcontent
+msgid "The color of the upper level:"
+msgstr ""
+
+#: content-table.php:192
+#@ tableofcontent
+msgid "The color of the lower level:"
+msgstr ""
+
+#: content-table.php:193
+#@ tableofcontent
+msgid "The color of entry will be a transition color between these two colors (depending of their levels)."
+msgstr ""
+
+#: content-table.php:193
+#@ tableofcontent
+msgid "Please add the # character before the code. If you do not know what code to use, please visit this website: %s"
+msgstr ""
+
+#: content-table.php:196
 #@ tableofcontent
 msgid "Parameters"
 msgstr ""
 
-#: content-table.php:128
+#: content-table.php:203
 #: core/templates/my-plugin.php:227
 #@ tableofcontent
 msgid "Manage translations"
 msgstr ""
 
-#: content-table.php:131
+#: content-table.php:206
 #: core/templates/my-plugin.php:230
 #@ tableofcontent
 msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
 msgstr ""
 
-#: content-table.php:135
+#: content-table.php:210
 #: core/templates/my-plugin.php:234
 #@ tableofcontent
 msgid "Give feedback"
 msgstr ""
 
-#: content-table.php:138
+#: content-table.php:213
 #@ tableofcontent
 msgid "Here is the plugins developped by the author"
 msgstr ""
 
-#: content-table.php:141
+#: content-table.php:216
 #: core/templates/my-plugin.php:243
 #@ tableofcontent
 msgid "Other possible plugins"

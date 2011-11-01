@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.2.0
+Version: 1.2.2
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -50,6 +50,7 @@ class tableofcontent extends pluginSedLex {
 		$this->niv6 = 1 ; 		
 		add_shortcode( "toc", array($this,"shortcode_toc") );
 		add_action( "the_content", array($this,"the_content") );
+		add_action('wp_print_styles', array($this,'header_init'));
 	}
 	/**
 	 * Function to instantiate our class and make it a singleton
@@ -68,16 +69,54 @@ class tableofcontent extends pluginSedLex {
 	*/
 	public function get_default_option($option) {
 		switch ($option) {
+			case 'html' 	: return "*<div class='toc tableofcontent'>
+   <h2>%title%</h2>
+   %toc%
+</div>" 	; break ; 
+			case 'css' 	: return "*.tableofcontent {
+	border: 1px solid #AAAAAA;
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	font-size: 0.95em;
+	min-width:200px;
+	float:left ; 
+}" ;break ; 
+			case 'css_title' 	: return "*.tableofcontent h2 {
+	text-align: center;
+	font-size: 1em;
+	font-weight: bold;
+	margin : 3px ; 
+	padding-top : 5px ;
+	padding-bottom : 5px ;
+}" 	; break ; 
+			case 'padding' 	: return 20 	; break ; 
 			case 'title' 	: return "Table Of Content" 	; break ; 
 			case 'h2' 		: return "Chapter #2." 			; break ; 
 			case 'h3' 		: return "Section #3." 			; break ; 
 			case 'h4' 		: return "#4)" 					; break ; 
 			case 'h5' 		: return "#4.#5." 				; break ; 
 			case 'h6' 		: return "" 					; break ; 
+			case 'entry_max_font_size' 		: return 14 					; break ; 
+			case 'entry_min_font_size' 		: return 10 					; break ; 
+			case 'entry_max_color' 		: return "#000000" 					; break ; 
+			case 'entry_min_color' 		: return "#555555" 					; break ; 
 		}
 		return null ;
 	}
 
+	/** ====================================================================================================================================================
+	* Load the configuration of the javascript in the header
+	* 
+	* @return variant of the option
+	*/
+	function header_init() {
+		$css = $this->get_param('css') ; 
+		$css .= "\r\n".$this->get_param('css_title') ; 
+		$this->add_inline_css($css) ; 
+	}
+	
 	/** ====================================================================================================================================================
 	* The configuration page
 	* 
@@ -117,6 +156,42 @@ class tableofcontent extends pluginSedLex {
 				$params->add_param('h4', __('Prefix of the level 4:',$this->pluginID)) ; 
 				$params->add_param('h5', __('Prefix of the level 5:',$this->pluginID)) ; 
 				$params->add_param('h6', __('Prefix of the level 6:',$this->pluginID)) ; 
+				$params->add_title(__('Customize the global visual appearance:',$this->pluginID)) ; 
+				$params->add_param('html', __('The HTML:',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('The default HTML is: %s',$this->pluginID), "<br/><code>&lt;div class='toc tableofcontent'&gt;<br/>
+   &lt;h2&gt;%title%&lt;/h2&gt;<br/>
+   %toc%<br/>
+&lt;/div&gt;</code><br/>").
+sprintf(__('Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title', $this->pluginID) , "<code>%title%</code>", "<code>%toc%</code>") ) ; 
+				$params->add_param('css', __('The CSS:',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('The default CSS is: %s',$this->pluginID), "<br/><code>.tableofcontent {<br/>
+&nbsp; &nbsp;border: 1px solid #AAAAAA;<br/>
+&nbsp; &nbsp;padding: 5px;<br/>
+&nbsp; &nbsp;padding-left: 20px;<br/>
+&nbsp; &nbsp;padding-right: 20px;<br/>
+&nbsp; &nbsp;padding-bottom: 10px;<br/>
+&nbsp; &nbsp;font-size: 0.95em;<br/>
+&nbsp; &nbsp;min-width:200px;<br/>
+&nbsp; &nbsp;float:left ; <br/>
+}</code><br/>")) ; 
+				$params->add_title(__('Customize the visual appearance of the title:',$this->pluginID)) ; 
+				$params->add_param('css_title', __('The CSS:',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('The default CSS is: %s',$this->pluginID), "<br/><code>.tableofcontent h2 {<br/>
+&nbsp; &nbsp;text-align: center;<br/>
+&nbsp; &nbsp;font-size: 1em;<br/>
+&nbsp; &nbsp;font-weight: bold;<br/>
+&nbsp; &nbsp;margin : 3px ; <br/>
+&nbsp; &nbsp;padding-top : 5px ;<br/>
+&nbsp; &nbsp;padding-bottom : 5px ;<br/>
+}</code><br/>")) ; 
+				$params->add_title(__('Customize the visual appearance of each entry in the TOC:',$this->pluginID)) ; 
+				$params->add_param('padding', __('The indentation of the TOC (in pixels):',$this->pluginID)) ; 
+				$params->add_param('entry_max_font_size', __('The max font size:',$this->pluginID)) ; 
+				$params->add_param('entry_min_font_size', __('The max font size:',$this->pluginID)) ; 
+				$params->add_param('entry_max_color', __('The color of the upper level:',$this->pluginID)) ; 
+				$params->add_param('entry_min_color', __('The color of the lower level:',$this->pluginID)) ; 
+				$params->add_comment(__('The color of entry will be a transition color between these two colors (depending of their levels).', $this->pluginID)."<br/> ".sprintf(__('Please add the # character before the code. If you do not know what code to use, please visit this website: %s',$this->pluginID),"<a href='http://html-color-codes.info/'>http://html-color-codes.info/</a>")) ; 
+				
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
 			
@@ -166,8 +241,11 @@ class tableofcontent extends pluginSedLex {
 	* @return string the replacement string
 	*/	
 	function shortcode_toc($attribs) {	
-		$out = "</p><div class='toc tableofcontent'>\n";
-		$out .= "<h2>".$this->get_param('title')."</h2>\n";
+		$out = "</p>" ; 
+		$out .= $this->get_param('html') ; 
+		$out .= "<div class='tableofcontent-end'> </div><p>" ; 
+		
+		$out = str_replace('%title%', $this->get_param('title'), $out);
 		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 
@@ -175,7 +253,8 @@ class tableofcontent extends pluginSedLex {
 		$this->niv4 = 1 ; 
 		$this->niv5 = 1 ; 
 		$this->niv6 = 1 ; 
-
+		
+		$out_toc = "" ; 
 		// headings...
 		foreach($this->used_names as $i => $heading) {
 			// We check if we have to add something here
@@ -211,12 +290,28 @@ class tableofcontent extends pluginSedLex {
 				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 				$this->niv6 ++ ; 
 			}
+			$min = $this->get_param('entry_min_font_size') ; 
+			$max = $this->get_param('entry_max_font_size') ; 
+			$font_size = floor($max-($max-$min)/4*($heading['level']-2)) ; 
+			
+			$r2 = hexdec(substr($this->get_param('entry_min_color'), 1, 2)) ; 
+  			$g2 = hexdec(substr($this->get_param('entry_min_color'), 3, 2)) ; 
+  			$b2 = hexdec(substr($this->get_param('entry_min_color'), 5, 2)) ; 
+  			
+			$r1 = hexdec(substr($this->get_param('entry_max_color'), 1, 2)) ; 
+  			$g1 = hexdec(substr($this->get_param('entry_max_color'), 3, 2)) ; 
+  			$b1 = hexdec(substr($this->get_param('entry_max_color'), 5, 2)) ; 
+			
+			$r3 = floor($r1 - ($r1-$r2)/4*($heading['level']-2) ) ; 
+			$g3 = floor($g1 - ($g1-$g2)/4*($heading['level']-2) ) ; 
+			$b3 = floor($b1 - ($b1-$b2)/4*($heading['level']-2) ) ; 
+			$color = "#".str_pad(dechex($r3), 2, '0', STR_PAD_LEFT).str_pad(dechex($g3), 2, '0', STR_PAD_LEFT).str_pad(dechex($b3), 2, '0', STR_PAD_LEFT);
 		
-			$out .= "<p style='text-indent:".(0.5*($heading['level']-2))."cm;'><a href=\"#" . esc_attr($i). "\">" .trim($add. $heading['value']) . "</a></p>\n";
+			
+			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;'><a style='color:".$color." ;' href=\"#" . esc_attr($i). "\">" .trim($add. $heading['value']) . "</a></p>\n";
 		}
 		
-		$out .= "</div><div class='fix'></div>\n";
-		$out .= "<p>\n";
+		$out = str_replace('%toc%', $out_toc , $out) ; 
 		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 

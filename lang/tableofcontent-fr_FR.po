@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-09-27T08:30:18+00:00\n"
+"PO-Revision-Date: 2011-11-01T16:18:44+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -55,6 +55,48 @@ msgstr "Préfixe du niveau 5 :"
 
 msgid "Prefix of the level 6:"
 msgstr "Préfixe du niveau 6 :"
+
+msgid "Customize the global visual appearance:"
+msgstr "Personnaliser l&#039;apparence visuel globale :"
+
+msgid "The HTML:"
+msgstr "Le HTML :"
+
+msgid "The default HTML is: %s"
+msgstr "Le HTML par défaut est : %s"
+
+msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
+msgstr "Merci de noter que %s sera remplacé par le titre enregistré de la table des matières et que %s sera remplacé avec le titre courant du chapitre/section/etc."
+
+msgid "The CSS:"
+msgstr "Le CSS :"
+
+msgid "The default CSS is: %s"
+msgstr "Le CSS par défaut est : %s"
+
+msgid "Customize the visual appearance of the title:"
+msgstr "Personnaliser l&#039;apparence visuel du titre :"
+
+msgid "Customize the visual appearance of each entry in the TOC:"
+msgstr "Personnaliser l&#039;apparence visuel de chaque entrée dans la table des matières :"
+
+msgid "The indentation of the TOC (in pixels):"
+msgstr "L&#039;indentation de la table des matières (en pixels) :"
+
+msgid "The max font size:"
+msgstr "La taille maximale de la police : "
+
+msgid "The color of the upper level:"
+msgstr "La couleur du niveau supérieur :"
+
+msgid "The color of the lower level:"
+msgstr "La couleur du niveau inférieur :"
+
+msgid "The color of entry will be a transition color between these two colors (depending of their levels)."
+msgstr "La couleur de l&#039;entrée sera comprise entre ces deux couleurs (selon son niveau)."
+
+msgid "Please add the # character before the code. If you do not know what code to use, please visit this website: %s"
+msgstr "Merci d&#039;ajouter le caractère # avant le code de couleur. Si vous ne savez pas quel code utiliser, merci de visiter le site : %s"
 
 msgid "Parameters"
 msgstr "Paramètres"

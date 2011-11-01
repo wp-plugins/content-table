@@ -59,6 +59,15 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.2.2 =
+* The HTML/CSS may now be modified to fit your need
+* The size of the entries may be configured
+* The color of the entries may be configured
+
+= 1.2.1 =
+* Improve the information interface of the Core
+* Add translations for the core
+
 = 1.2.0 =
 * SVN support for committing changes
 
@@ -119,4 +128,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:bd34793683eb7e855b8b1cdfe37b3859
+InfoVersion:2f66b61f70a6940a97ae95e99f392bf6
