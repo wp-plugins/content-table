@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-11-01T16:18:44+00:00\n"
+"PO-Revision-Date: 2011-11-10T17:59:06+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,20 +41,8 @@ msgstr "Si vous laissez les champs vides, rien ne sera ajouté !"
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Si vous souhaitez afficher le numéro du niveau 2, écrivez simplement %s ..."
 
-msgid "Prefix of the level 2:"
-msgstr "Préfixe du niveau 2 :"
-
-msgid "Prefix of the level 3:"
-msgstr "Préfixe du niveau 3 :"
-
-msgid "Prefix of the level 4:"
-msgstr "Préfixe du niveau 4 :"
-
-msgid "Prefix of the level 5:"
-msgstr "Préfixe du niveau 5 :"
-
-msgid "Prefix of the level 6:"
-msgstr "Préfixe du niveau 6 :"
+msgid "Prefix of the level %s:"
+msgstr "Préfixe du niveau %s :"
 
 msgid "Customize the global visual appearance:"
 msgstr "Personnaliser l&#039;apparence visuel globale :"
@@ -97,6 +85,15 @@ msgstr "La couleur de l&#039;entrée sera comprise entre ces deux couleurs (selo
 
 msgid "Please add the # character before the code. If you do not know what code to use, please visit this website: %s"
 msgstr "Merci d&#039;ajouter le caractère # avant le code de couleur. Si vous ne savez pas quel code utiliser, merci de visiter le site : %s"
+
+msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
+msgstr "Personnaliser l&#039;apparence visuel de chaque entrée dans la table des matières (mode Experts) :"
+
+msgid "The CSS style of the level %s:"
+msgstr "Le style CSS du niveau %s :"
+
+msgid "For instance, %s"
+msgstr "Par exemple, %s"
 
 msgid "Parameters"
 msgstr "Paramètres"

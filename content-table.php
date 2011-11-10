@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.2.2
+Version: 1.2.3
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -98,6 +98,11 @@ class tableofcontent extends pluginSedLex {
 			case 'h4' 		: return "#4)" 					; break ; 
 			case 'h5' 		: return "#4.#5." 				; break ; 
 			case 'h6' 		: return "" 					; break ; 
+			case 'style_h2' 		: return "" 			; break ; 
+			case 'style_h3' 		: return "" 			; break ; 
+			case 'style_h4' 		: return "" 					; break ; 
+			case 'style_h5' 		: return "" 				; break ; 
+			case 'style_h6' 		: return "" 					; break ; 
 			case 'entry_max_font_size' 		: return 14 					; break ; 
 			case 'entry_min_font_size' 		: return 10 					; break ; 
 			case 'entry_max_color' 		: return "#000000" 					; break ; 
@@ -151,11 +156,11 @@ class tableofcontent extends pluginSedLex {
 				$params->add_param('title', __('Title of the table of content:',$this->pluginID)) ; 
 				$params->add_title(__('Add prefix in your title:',$this->pluginID)) ; 
 				$params->add_comment(__('If you leave the field blank, nothing will be added !',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
-				$params->add_param('h2', __('Prefix of the level 2:',$this->pluginID)) ; 
-				$params->add_param('h3', __('Prefix of the level 3:',$this->pluginID)) ; 
-				$params->add_param('h4', __('Prefix of the level 4:',$this->pluginID)) ; 
-				$params->add_param('h5', __('Prefix of the level 5:',$this->pluginID)) ; 
-				$params->add_param('h6', __('Prefix of the level 6:',$this->pluginID)) ; 
+				$params->add_param('h2', sprintf(__('Prefix of the level %s:',$this->pluginID), "2")) ; 
+				$params->add_param('h3', sprintf(__('Prefix of the level %s:',$this->pluginID), "3")) ; 
+				$params->add_param('h4', sprintf(__('Prefix of the level %s:',$this->pluginID), "4")) ; 
+				$params->add_param('h5', sprintf(__('Prefix of the level %s:',$this->pluginID), "5")) ; 
+				$params->add_param('h6', sprintf(__('Prefix of the level %s:',$this->pluginID), "6")) ; 
 				$params->add_title(__('Customize the global visual appearance:',$this->pluginID)) ; 
 				$params->add_param('html', __('The HTML:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('The default HTML is: %s',$this->pluginID), "<br/><code>&lt;div class='toc tableofcontent'&gt;<br/>
@@ -191,6 +196,13 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->add_param('entry_max_color', __('The color of the upper level:',$this->pluginID)) ; 
 				$params->add_param('entry_min_color', __('The color of the lower level:',$this->pluginID)) ; 
 				$params->add_comment(__('The color of entry will be a transition color between these two colors (depending of their levels).', $this->pluginID)."<br/> ".sprintf(__('Please add the # character before the code. If you do not know what code to use, please visit this website: %s',$this->pluginID),"<a href='http://html-color-codes.info/'>http://html-color-codes.info/</a>")) ; 
+				$params->add_title(__('Customize the visual appearance of each entry in the TOC (for Experts):',$this->pluginID)) ; 
+				$params->add_param('style_h2', sprintf(__('The CSS style of the level %s:',$this->pluginID),"2")) ; 
+				$params->add_comment(sprintf(__('For instance, %s',$this->pluginID),"<code>font-weight:bold; size:12px</code>")) ; 
+				$params->add_param('style_h3', sprintf(__('The CSS style of the level %s:',$this->pluginID),"3")) ; 
+				$params->add_param('style_h4', sprintf(__('The CSS style of the level %s:',$this->pluginID),"4")) ; 
+				$params->add_param('style_h5', sprintf(__('The CSS style of the level %s:',$this->pluginID),"5")) ; 
+				$params->add_param('style_h6', sprintf(__('The CSS style of the level %s:',$this->pluginID),"6")) ; 
 				
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
@@ -308,7 +320,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 			$color = "#".str_pad(dechex($r3), 2, '0', STR_PAD_LEFT).str_pad(dechex($g3), 2, '0', STR_PAD_LEFT).str_pad(dechex($b3), 2, '0', STR_PAD_LEFT);
 		
 			
-			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;'><a style='color:".$color." ;' href=\"#" . esc_attr($i). "\">" .trim($add. $heading['value']) . "</a></p>\n";
+			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;".$this->get_param('style_h'.$heading['level'])."'><a style='color:".$color." ;' href=\"#" . esc_attr($i). "\">" .trim($add. $heading['value']) . "</a></p>\n";
 		}
 		
 		$out = str_replace('%toc%', $out_toc , $out) ; 

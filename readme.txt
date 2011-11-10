@@ -59,6 +59,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.2.3 =
+* Each level may be stylized with custom CSS
+
 = 1.2.2 =
 * The HTML/CSS may now be modified to fit your need
 * The size of the entries may be configured
@@ -128,4 +131,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:2f66b61f70a6940a97ae95e99f392bf6
+InfoVersion:4447c7666051b7324e3f53528d091186
