@@ -59,6 +59,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.2.4 =
+* Improve the English text thanks to Rene 
+
 = 1.2.3 =
 * Each level may be stylized with custom CSS
 
@@ -131,4 +134,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:4447c7666051b7324e3f53528d091186
+InfoVersion:7a2a3e1644645f5de47715cab9df65c2

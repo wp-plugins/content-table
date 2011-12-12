@@ -2,12 +2,7 @@ Content-Transfer-Encoding: 8bit
 
 #: content-table.php:140
 #@ tableofcontent
-msgid "If you want that the table of content appears in your post, just type:"
-msgstr ""
-
-#: content-table.php:140
-#@ tableofcontent
-msgid "that is all !"
+msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
 msgstr ""
 
 #: content-table.php:155
@@ -27,7 +22,7 @@ msgstr ""
 
 #: content-table.php:158
 #@ tableofcontent
-msgid "If you leave the field blank, nothing will be added !"
+msgid "If you leave the field blank, nothing will be added!"
 msgstr ""
 
 #: content-table.php:158
@@ -142,36 +137,17 @@ msgid "Parameters"
 msgstr ""
 
 #: content-table.php:215
-#: core/templates/my-plugin.php:227
 #@ tableofcontent
 msgid "Manage translations"
 msgstr ""
 
-#: content-table.php:218
-#: core/templates/my-plugin.php:230
-#@ tableofcontent
-msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr ""
-
-#: content-table.php:222
-#: core/templates/my-plugin.php:234
+#: content-table.php:221
 #@ tableofcontent
 msgid "Give feedback"
 msgstr ""
 
-#: content-table.php:225
+#: content-table.php:226
 #@ tableofcontent
-msgid "Here is the plugins developped by the author"
-msgstr ""
-
-#: content-table.php:228
-#: core/templates/my-plugin.php:243
-#@ tableofcontent
-msgid "Other possible plugins"
-msgstr ""
-
-#: core/templates/my-plugin.php:237
-#@ tableofcontent
-msgid "Here is the plugins developped by the author:"
+msgid "Other plugins"
 msgstr ""
 

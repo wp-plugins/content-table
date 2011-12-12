@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.2.3
+Version: 1.2.4
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -137,7 +137,7 @@ class tableofcontent extends pluginSedLex {
 		</div>
 		<div style="padding:20px;">
 				<?php echo $this->signature ; ?>
-			<p><?php echo __("If you want that the table of content appears in your post, just type:", $this->pluginID)." <i>[toc]</i>,". __('that is all !',$this->pluginID) ?></p>
+			<p><?php echo sprintf(__("If you want that the table of content appears in your post, just type: %s, that is all!", $this->pluginID)," <i>[toc]</i>") ?></p>
 		<?php
 	
 			$this->check_folder_rights( array() ) ; 
@@ -155,7 +155,7 @@ class tableofcontent extends pluginSedLex {
 				$params->add_title(__('What is the title to be displayed in the table of content?',$this->pluginID)) ; 
 				$params->add_param('title', __('Title of the table of content:',$this->pluginID)) ; 
 				$params->add_title(__('Add prefix in your title:',$this->pluginID)) ; 
-				$params->add_comment(__('If you leave the field blank, nothing will be added !',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
+				$params->add_comment(__('If you leave the field blank, nothing will be added!',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
 				$params->add_param('h2', sprintf(__('Prefix of the level %s:',$this->pluginID), "2")) ; 
 				$params->add_param('h3', sprintf(__('Prefix of the level %s:',$this->pluginID), "3")) ; 
 				$params->add_param('h4', sprintf(__('Prefix of the level %s:',$this->pluginID), "4")) ; 
@@ -205,27 +205,25 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->add_param('style_h6', sprintf(__('The CSS style of the level %s:',$this->pluginID),"6")) ; 
 				
 				$params->flush() ; 
-			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
 			
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new translationSL($this->pluginID, $plugin) ; 
 				$trans->enable_translation() ; 
-			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 
 			ob_start() ; 
-				echo "<p>".__('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID)."</p>" ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
-			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
 			ob_start() ; 
-				echo "<p>".__('Here is the plugins developped by the author',  $this->pluginID) ."</p>" ; 
 				$trans = new otherPlugins("sedLex", array('wp-pirates-search')) ; 
 				$trans->list_plugins() ; 
-			$tabs->add_tab(__('Other possible plugins',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
 			echo $tabs->flush() ; 
 			

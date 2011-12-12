@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-11-10T17:59:06+00:00\n"
+"PO-Revision-Date: 2011-12-12T13:28:54+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-msgid "If you want that the table of content appears in your post, just type:"
-msgstr "Si vous voulez que la table des matière apparaisse dans vos articles, tapez simplement : "
-
-msgid "that is all !"
-msgstr "c&#039;est tout !"
+msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
+msgstr "Si vous voulez que la table des matières apparaissent dans votre article, taper simplement : %s, c&#039;est tout !"
 
 msgid "What is the title to be displayed in the table of content?"
 msgstr "Quel est le titre qui sera affiché pour la table des matières ?"
@@ -35,8 +32,8 @@ msgstr "Titre de la table des matières :"
 msgid "Add prefix in your title:"
 msgstr "Ajoutez un préfixe à vos titres"
 
-msgid "If you leave the field blank, nothing will be added !"
-msgstr "Si vous laissez les champs vides, rien ne sera ajouté !"
+msgid "If you leave the field blank, nothing will be added!"
+msgstr "Si vous laissez ce champ vide, rien ne sera ajouté !"
 
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Si vous souhaitez afficher le numéro du niveau 2, écrivez simplement %s ..."
@@ -45,7 +42,7 @@ msgid "Prefix of the level %s:"
 msgstr "Préfixe du niveau %s :"
 
 msgid "Customize the global visual appearance:"
-msgstr "Personnaliser l&#039;apparence visuel globale :"
+msgstr "Personnaliser l&#039;apparence visuelle globale :"
 
 msgid "The HTML:"
 msgstr "Le HTML :"
@@ -101,18 +98,9 @@ msgstr "Paramètres"
 msgid "Manage translations"
 msgstr "Gérer les traductions"
 
-msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr "Ce formulaire vous permet de contacter facilement l&#039;auteur et de discuter de vos problèmes / des incompatibilités / etc."
-
 msgid "Give feedback"
 msgstr "Donner un feedback"
 
-msgid "Here is the plugins developped by the author"
-msgstr "Voici les plugins développés par l&#039;auteur :"
-
-msgid "Other possible plugins"
-msgstr "Autres plugins possibles"
-
-msgid "Here is the plugins developped by the author:"
-msgstr "Voici les plugins développés par l&#039;auteur :"
+msgid "Other plugins"
+msgstr "Autres plugins"
 
