@@ -2,7 +2,7 @@
 /**
 Plugin Name: Table of content
 Description: <p>Create a table of content in you posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.2.4
+Version: 1.2.5
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -239,9 +239,13 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 	*/	
 	
 	public function get_unique_name($heading) {		
-		$n = str_replace(" ", "_", strip_tags($heading));
-		$n = preg_replace("#[^A-Za-z0-9\-_]#", "", $n);
-		$n = preg_replace("#^[^A-Za-z]*?([A-Za-z])#", "$1", $n);
+		$n = $heading ; 
+
+		$n = str_replace(" ", "_", strip_tags($n));
+		$n = str_replace("'", "_", strip_tags($n));
+		$n = str_replace("\"", "_", strip_tags($n));
+		$n = preg_replace("/^[0-9]*?([A-Za-z0-9\-_]*)$/u", "$1", $n);
+		
 		return $n;
 	}
 
@@ -318,7 +322,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 			$color = "#".str_pad(dechex($r3), 2, '0', STR_PAD_LEFT).str_pad(dechex($g3), 2, '0', STR_PAD_LEFT).str_pad(dechex($b3), 2, '0', STR_PAD_LEFT);
 		
 			
-			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;".$this->get_param('style_h'.$heading['level'])."'><a style='color:".$color." ;' href=\"#" . esc_attr($i). "\">" .trim($add. $heading['value']) . "</a></p>\n";
+			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;".$this->get_param('style_h'.$heading['level'])."'><a style='color:".$color." ;' href=\"#" . $i. "\">" .trim($add. $heading['value']) . "</a></p>\n";
 		}
 		
 		$out = str_replace('%toc%', $out_toc , $out) ; 
@@ -340,7 +344,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 	*/	
 	
 	
-	function heading_anchor($match) {		
+	function heading_anchor($match) {
 		$name = $this->get_unique_name($match[2]);
 		
 		if (isset($this->used_names[$name])) {
@@ -384,8 +388,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 			$this->niv6 ++ ; 
 		}
-		
-		return '<h'.$match[1].' id="' . esc_attr($name) . '">' . trim($add . $match[2]) . '</h'.$match[1].'>';
+		return '<h'.$match[1].' id="' . $name . '">' . trim($add . $match[2]) . '</h'.$match[1].'>';
 	}
 
 	/** ====================================================================================================================================================
@@ -404,7 +407,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->niv6 = 1 ; 
 		
 		$this->used_names = array();
-		$out = preg_replace_callback("#<h([2-6])>(.*?)</h[2-6]>#i", array($this,"heading_anchor"), $content);
+		$out = preg_replace_callback("#<h([2-6])>(.*?)</h[2-6]>#iu", array($this,"heading_anchor"), $content);
 		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 

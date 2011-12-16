@@ -59,6 +59,10 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.2.5 =
+* Bug correction (open_basedir restriction)
+* Change the creation of the link id ...
+
 = 1.2.4 =
 * Improve the English text thanks to Rene 
 
@@ -134,4 +138,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:7a2a3e1644645f5de47715cab9df65c2
+InfoVersion:921dffd0293064ca21d846ab06c6e984

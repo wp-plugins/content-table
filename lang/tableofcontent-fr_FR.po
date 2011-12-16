@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-12T13:28:54+00:00\n"
+"PO-Revision-Date: 2011-12-16T10:46:32+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,10 +60,10 @@ msgid "The default CSS is: %s"
 msgstr "Le CSS par défaut est : %s"
 
 msgid "Customize the visual appearance of the title:"
-msgstr "Personnaliser l&#039;apparence visuel du titre :"
+msgstr "Personnaliser l&#039;apparence visuelle du titre :"
 
 msgid "Customize the visual appearance of each entry in the TOC:"
-msgstr "Personnaliser l&#039;apparence visuel de chaque entrée dans la table des matières :"
+msgstr "Personnaliser l&#039;apparence visuelle de chaque entrée dans la table des matières :"
 
 msgid "The indentation of the TOC (in pixels):"
 msgstr "L&#039;indentation de la table des matières (en pixels) :"
@@ -84,7 +84,7 @@ msgid "Please add the # character before the code. If you do not know what code 
 msgstr "Merci d&#039;ajouter le caractère # avant le code de couleur. Si vous ne savez pas quel code utiliser, merci de visiter le site : %s"
 
 msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
-msgstr "Personnaliser l&#039;apparence visuel de chaque entrée dans la table des matières (mode Experts) :"
+msgstr "Personnaliser l&#039;apparence visuelle de chaque entrée dans la table des matières (mode Experts) :"
 
 msgid "The CSS style of the level %s:"
 msgstr "Le style CSS du niveau %s :"
