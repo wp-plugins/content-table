@@ -1,48 +1,49 @@
 === Table of content ===
 
-Contributors: SedLex
 Author: SedLex
+Contributors: SedLex
 Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/content-table/
-Tags: plugin, table of content, toc
+Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.3.1
 Stable tag: trunk
 
-Create a table of content in you posts. 
+Create a *table of content* in you posts. 
 
 == Description ==
 
-Create a table of content in you posts. 
+Create a *table of content* in you posts. 
 
-You only have to insert the shortcode *[toc]* in your post to display the table of content. 
+You only have to insert the shortcode [toc] in your post to display the table of content. 
 
-Please note that you can also configure a text to be inserted before the title of you post such as 'Chapter' or 'Section' with an auto-numbering feature.
+Please note that you can also configure a text to be inserted before the title of you post such as Chapter or Section with numbers. 
 
-It is stressed that the first level taken in account is "Title 2". 
+It is stressed that the first level taken in account is Â« Title 2â³. 
 
-Plugin developped from the orginal plugin *Toc for Wordpress*. 
+Plugin developped from the orginal plugin Toc for Wordpress. 
 
-= Localizations =
+This plugin is under GPL licence. 
 
-* Russian translation (by Limych)
-* Italian translation (by Jkappa)
-* French translation (by me)
+= Localization =
 
-= Features of the framework = 
+* English (United States), default language
+* French (France) translation provided by SedLex
+* Italian (Italy) translation provided by jkappa
+* Russian (Russia) translation provided by Limych
 
-This plugin use SL framework.
+= Features of the framework =
 
-You may translate this plugin with an embedded feature which is very easy to use by any end-users (without any external tools / knowledge).
+This plugin uses the SL framework. This framework eases the creation of new plugins by providing incredible tools and frames.
 
-You may also create a new plugin. You will download, from the plugin, an "hello World" plugin: You just have to fill the blank and follow the comments.
+For instance, a new created plugin comes with
 
-Moreover, all the plugins developped with this framework is able to use astonishing tools, such as :
-
-* embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
-* detailled documentation of all available classes and methodes ; 
-* updating the core with a single click ; 
+* A translation interface to simplify the localization of the text of the plugin ; 
+* An embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
+* A detailled documentation of all available classes and methodes ; 
 * etc.
+
+Have fun !
 
 == Installation ==
 
@@ -58,6 +59,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.2.5 =
+* Major update of the framework
 
 = 1.2.5 =
 * Bug correction (open_basedir restriction)
@@ -138,4 +142,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:921dffd0293064ca21d846ab06c6e984
+InfoVersion:89985906270f8d85fd71b2498db392a5

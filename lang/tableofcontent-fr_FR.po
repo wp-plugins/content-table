@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-16T10:46:32+00:00\n"
+"PO-Revision-Date: 2012-01-07T20:47:31+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "If you want that the table of content appears in your post, just type: %s
 msgstr "Si vous voulez que la table des matières apparaissent dans votre article, taper simplement : %s, c&#039;est tout !"
 
 msgid "What is the title to be displayed in the table of content?"
-msgstr "Quel est le titre qui sera affiché pour la table des matières ?"
+msgstr "Quel titre sera affiché pour la table des matières ?"
 
 msgid "Title of the table of content:"
 msgstr "Titre de la table des matières :"
