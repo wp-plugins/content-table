@@ -19,7 +19,7 @@ You only have to insert the shortcode [toc] in your post to display the table of
 
 Please note that you can also configure a text to be inserted before the title of you post such as Chapter or Section with numbers. 
 
-It is stressed that the first level taken in account is Â« Title 2â³. 
+It is stressed that the first level taken in account is "Title 2"
 
 Plugin developped from the orginal plugin Toc for Wordpress. 
 
@@ -60,7 +60,10 @@ Have fun !
 
 == Changelog ==
 
-= 1.2.5 =
+= 1.3.1 =
+* Update translations
+
+= 1.3.0 =
 * Major update of the framework
 
 = 1.2.5 =
@@ -142,4 +145,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:89985906270f8d85fd71b2498db392a5
+InfoVersion:b9afd5898c9cd6f1b0ecd8e4bd266277
