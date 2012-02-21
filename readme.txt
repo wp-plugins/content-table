@@ -9,17 +9,17 @@ Requires at least: 3.0
 Tested up to: 3.3.1
 Stable tag: trunk
 
-Create a *table of content* in you posts. 
+Insert a *table of content* in your posts. 
 
 == Description ==
 
-Create a *table of content* in you posts. 
+Insert a *table of content* in your posts. 
 
 You only have to insert the shortcode [toc] in your post to display the table of content. 
 
 Please note that you can also configure a text to be inserted before the title of you post such as Chapter or Section with numbers. 
 
-It is stressed that the first level taken in account is "Title 2"
+It is stressed that the first level taken in account is "Title 2". 
 
 Plugin developped from the orginal plugin Toc for Wordpress. 
 
@@ -59,6 +59,9 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.3.2 =
+* Update of the framework
 
 = 1.3.1 =
 * Update translations
@@ -145,4 +148,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b9afd5898c9cd6f1b0ecd8e4bd266277
+InfoVersion:366283c1b28d736855bfd0a0f37b75cb
