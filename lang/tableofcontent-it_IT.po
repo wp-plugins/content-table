@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-10-08T17:21:07+00:00\n"
+"PO-Revision-Date: 2012-02-25T10:38:24+00:00\n"
 "Last-Translator: jkappa <gmalavolta@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-msgid "If you want that the table of content appears in your post, just type:"
-msgstr "Se desideri che il Table of Content appaia nel tuo articolo, basta scrivere:"
-
-msgid "that is all !"
-msgstr "Tutto qua!"
+msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
+msgstr ""
 
 msgid "What is the title to be displayed in the table of content?"
 msgstr "Qual è il titolo da visualizzare nel Table of Content?"
@@ -35,26 +32,65 @@ msgstr "Titolo del Table of Content"
 msgid "Add prefix in your title:"
 msgstr "Aggiungi un prefisso per il titolo"
 
-msgid "If you leave the field blank, nothing will be added !"
+msgid "If you leave the field blank, nothing will be added!"
 msgstr "Se lasci vuoto, nulla verrà aggiunto"
 
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Nota che se vuoi visualizzare il numero del livello 2, devi scrivere %s"
 
-msgid "Prefix of the level 2:"
-msgstr "Prefisso per il livello 2:"
+msgid "Prefix of the level %s:"
+msgstr "Prefisso per il livello %s:"
 
-msgid "Prefix of the level 3:"
-msgstr "Prefisso per il livello 3:"
+msgid "Customize the global visual appearance:"
+msgstr ""
 
-msgid "Prefix of the level 4:"
-msgstr "Prefisso per il livello 4:"
+msgid "The HTML:"
+msgstr ""
 
-msgid "Prefix of the level 5:"
-msgstr "Prefisso per il livello 5:"
+msgid "The default HTML is: %s"
+msgstr ""
 
-msgid "Prefix of the level 6:"
-msgstr "Prefisso per il livello 6:"
+msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
+msgstr ""
+
+msgid "The CSS:"
+msgstr ""
+
+msgid "The default CSS is: %s"
+msgstr ""
+
+msgid "Customize the visual appearance of the title:"
+msgstr ""
+
+msgid "Customize the visual appearance of each entry in the TOC:"
+msgstr ""
+
+msgid "The indentation of the TOC (in pixels):"
+msgstr ""
+
+msgid "The max font size:"
+msgstr ""
+
+msgid "The color of the upper level:"
+msgstr ""
+
+msgid "The color of the lower level:"
+msgstr ""
+
+msgid "The color of entry will be a transition color between these two colors (depending of their levels)."
+msgstr ""
+
+msgid "Please add the # character before the code. If you do not know what code to use, please visit this website: %s"
+msgstr ""
+
+msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
+msgstr ""
+
+msgid "The CSS style of the level %s:"
+msgstr ""
+
+msgid "For instance, %s"
+msgstr ""
 
 msgid "Parameters"
 msgstr "Parametri"
@@ -62,18 +98,9 @@ msgstr "Parametri"
 msgid "Manage translations"
 msgstr "Gestisci la traduzione"
 
-msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr "Questo modulo è un modo agevole per contattare l&#039;autore per segnalare errori / incompatibilità / etc"
-
 msgid "Give feedback"
 msgstr "Invia un tuo commento"
 
-msgid "Here is the plugins developped by the author"
-msgstr "Questo plugin è stato sviluppato dall&#039;autore"
-
-msgid "Other possible plugins"
-msgstr "Altri possibili plugin"
-
-msgid "Here is the plugins developped by the author:"
-msgstr "Questi sono i plugin sviluppati dall&#039;autore:"
+msgid "Other plugins"
+msgstr ""
 
