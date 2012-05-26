@@ -66,6 +66,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.4 =
+* Delete options and database upon uninstall
+
 = 1.3.3 =
 * Multisite support
 
@@ -127,4 +130,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:483286c2eb822a703d80796d9ccc0ffe
+InfoVersion:c563c7ba13bf194028821b8e91a5dedb

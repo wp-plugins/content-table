@@ -3,7 +3,7 @@
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
 Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.3.3
+Version: 1.3.4
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -33,14 +33,15 @@ class tableofcontent extends pluginSedLex {
 	protected function _init() {
 		// Configuration
 		$this->pluginName = 'Table of content' ; 
-		$this->table_sql = '' ; 
+		$this->tableSQL = "" ; 
 		$this->table_name = $wpdb->prefix . "pluginSL_" . get_class() ; 
 		$this->path = __FILE__ ; 
 		$this->pluginID = get_class() ; 
 		
 		//Init et des-init
 		register_activation_hook(__FILE__, array($this,'install'));
-		register_deactivation_hook(__FILE__, array($this,'uninstall'));
+		register_deactivation_hook(__FILE__, array($this,'deactivate'));
+		register_uninstall_hook(__FILE__, array($this,'uninstall_removedata'));
 
 		//Paramètres supplementaires
 		$this->tableofcontent_used_names = array();
