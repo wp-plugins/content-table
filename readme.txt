@@ -66,6 +66,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.5 =
+* Add a button in the TinyMCE
+
 = 1.3.4 =
 * Delete options and database upon uninstall
 
@@ -130,4 +133,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:29d4e73bda8551bce34154b6a2d21dc9
+InfoVersion:3b2f345b0ec20a74fcada9e1a83b8a7f
