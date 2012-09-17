@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.3.1
+Tested up to: 3.4
 Stable tag: trunk
 
 Insert a *table of content* in your posts. 
@@ -65,6 +65,9 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.3.6 =
+* Correct a bug with some installation and the button
 
 = 1.3.5 =
 * Add a button in the TinyMCE
@@ -133,4 +136,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b1911c5489edc07174bfaf19d9c44ebd
+InfoVersion:611f91df46437292f797ffba31d5f499
