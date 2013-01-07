@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.4
+Tested up to: 3.5
 Stable tag: trunk
 
 Insert a *table of content* in your posts. 
@@ -18,8 +18,6 @@ Insert a *table of content* in your posts.
 You only have to insert the shortcode [toc] in your post to display the table of content. 
 
 Please note that you can also configure a text to be inserted before the title of you post such as Chapter or Section with numbers. 
-
-It is stressed that the first level taken in account is "Title 2". 
 
 Plugin developped from the orginal plugin Toc for Wordpress. 
 
@@ -33,9 +31,12 @@ This plugin works with Multisite installation
 
 * German (Germany) translation provided by internetfreak
 * English (United States), default language
+* Spanish (Spain) translation provided by Jan-ErikFinlander
 * Spanish (Mexico) translation provided by RobertoRamrez
+* Finnish (Finland) translation provided by Jan-ErikFinlander
 * French (France) translation provided by SedLex
 * Italian (Italy) translation provided by jkappa
+* Dutch (Netherlands) translation provided by MarcelJansen
 * Russian (Russia) translation provided by Limych
 
 = Features of the framework =
@@ -66,25 +67,17 @@ Have fun !
 
 == Changelog ==
 
-= 1.3.6 =
+= 1.4.0 = 
+* Avoid Inline style. Every style is in a css file
+* h2 is not necessarily the first style 
+
+= 1.3.0 -&gt; 1.3.6 =
 * Correct a bug with some installation and the button
-
-= 1.3.5 =
 * Add a button in the TinyMCE
-
-= 1.3.4 =
 * Delete options and database upon uninstall
-
-= 1.3.3 =
 * Multisite support
-
-= 1.3.2 =
 * Update of the framework
-
-= 1.3.1 =
 * Update translations
-
-= 1.3.0 =
 * Major update of the framework
 
 = 1.2.0 -&gt; 1.2.5 =
@@ -109,7 +102,7 @@ Have fun !
 * ZipArchive class has been suppressed and pclzip is used instead
 * Ensure that folders and files permissions are correct for an adequate behavior
 
-= 1.0.2 -&gt; 1.0.8 =
+= 1.0.1 -&gt; 1.0.8 =
 * Thanks to Vincent (http://www.vincent.mabillot.net) a bug in the numbering have been corrected
 * Feedback have been improved to show the configuration of the submitters
 * Update of the framework
@@ -125,8 +118,6 @@ Have fun !
 * Add the French localization
 * Add a form to send feedback to the author
 * Update the framework with a new version
-
-= 1.0.1 =
 * First release in the wild web (have fun)
 
 == Frequently Asked Questions ==
@@ -136,4 +127,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:611f91df46437292f797ffba31d5f499
+InfoVersion:f2b0d8b7830d5ea51dfa81945ba25480

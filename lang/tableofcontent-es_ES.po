@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-09-26T14:11:43+00:00\n"
-"Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"PO-Revision-Date: 2012-11-20T14:15:13+00:00\n"
+"Last-Translator: Jan-ErikFinlander <janerik.finlander@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: France\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"
+"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -21,89 +21,89 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "Display the table of content"
-msgstr "Afficher la table des matière"
+msgstr "Visualice la tabla de contenidos"
 
 msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
-msgstr "Si vous voulez que la table des matières apparaissent dans votre article, taper simplement : %s, c&#039;est tout !"
+msgstr "Si deseas que la tabla de contenidos apareza en tu mensaje, escribe:% s, eso es todo!"
 
 msgid "What is the title to be displayed in the table of content?"
-msgstr "Quel titre sera affiché pour la table des matières ?"
+msgstr "¿Cuál es el título que se mostrará en la tabla de contenidos?"
 
 msgid "Title of the table of content:"
-msgstr "Titre de la table des matières :"
+msgstr "Título de la tabla de contenidos:"
 
 msgid "Add prefix in your title:"
-msgstr "Ajoutez un préfixe à vos titres"
+msgstr "Agregar un prefijo al título:"
 
 msgid "If you leave the field blank, nothing will be added!"
-msgstr "Si vous laissez ce champ vide, rien ne sera ajouté !"
+msgstr "Si dejas el campo en blanco, nada será añadido!"
 
 msgid "Note that if you want to display the number of level 2, just write %s ..."
-msgstr "Si vous souhaitez afficher le numéro du niveau 2, écrivez simplement %s ..."
+msgstr "Ten en cuenta que si deseas mostrar el número de nivel 2, simplemente escribe% s ..."
 
 msgid "Prefix of the level %s:"
-msgstr "Préfixe du niveau %s :"
+msgstr "Prefijo del nivel% s:"
 
 msgid "Customize the global visual appearance:"
-msgstr "Personnaliser l&#039;apparence visuelle globale :"
+msgstr "Personalizar la apariencia visual global:"
 
 msgid "The HTML:"
-msgstr "Le HTML :"
+msgstr "El código HTML:"
 
 msgid "The default HTML is: %s"
-msgstr "Le HTML par défaut est : %s"
+msgstr "El código HTML predeterminado es:% s"
 
 msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
-msgstr "Merci de noter que %s sera remplacé par le titre enregistré de la table des matières et que %s sera remplacé avec le titre courant du chapitre/section/etc."
+msgstr "Ten en cuenta que% s se sustituirá por el título dado a la tabla de contenidos y% s será reemplazado por el actual capítulo / sección / etc. título"
 
 msgid "The CSS:"
-msgstr "Le CSS :"
+msgstr "El código CSS:"
 
 msgid "The default CSS is: %s"
-msgstr "Le CSS par défaut est : %s"
+msgstr "El código CSS predeterminado es:% s"
 
 msgid "Customize the visual appearance of the title:"
-msgstr "Personnaliser l&#039;apparence visuelle du titre :"
+msgstr "Personalizar la apariencia visual del título:"
 
 msgid "Customize the visual appearance of each entry in the TOC:"
-msgstr "Personnaliser l&#039;apparence visuelle de chaque entrée dans la table des matières :"
+msgstr "Personalizar la apariencia visual de cada entrada en la tabla de contenidos:"
 
 msgid "The indentation of the TOC (in pixels):"
-msgstr "L&#039;indentation de la table des matières (en pixels) :"
+msgstr "La sangría de la tabla de contenidos (en píxeles):"
 
 msgid "The max font size:"
-msgstr "La taille maximale de la police :"
+msgstr "El tamaño de letra máximo:"
 
 msgid "The color of the upper level:"
-msgstr "La couleur du niveau supérieur :"
+msgstr "El color del nivel superior:"
 
 msgid "The color of the lower level:"
-msgstr "La couleur du niveau inférieur :"
+msgstr "El color del nivel baja:"
 
 msgid "The color of entry will be a transition color between these two colors (depending of their levels)."
-msgstr "La couleur de l&#039;entrée sera comprise entre ces deux couleurs (selon son niveau)."
+msgstr "El color de entrada será un color de transición entre estos dos colores (dependiendo de sus niveles)."
 
 msgid "Please add the # character before the code. If you do not know what code to use, please visit this website: %s"
-msgstr "Merci d&#039;ajouter le caractère # avant le code de couleur. Si vous ne savez pas quel code utiliser, merci de visiter le site : %s"
+msgstr "Por favor, agregar el carácter # delante del código. Si no sabes qué código usar, por favor, visita la página web:% s"
 
 msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
-msgstr "Personnaliser l&#039;apparence visuelle de chaque entrée dans la table des matières (mode Experts) :"
+msgstr "Personalizar la apariencia visual de cada entrada en la tabla de contenidos (para expertos):"
 
 msgid "The CSS style of the level %s:"
-msgstr "Le style CSS du niveau %s :"
+msgstr "El estilo CSS del nivel% s:"
 
 msgid "For instance, %s"
-msgstr "Par exemple, %s"
+msgstr "Por ejemplo% s,"
 
 msgid "Parameters"
-msgstr "Paramètres"
+msgstr "Parámetros"
 
 msgid "Manage translations"
-msgstr "Gérer les traductions"
+msgstr "Administrar traducciones"
 
 msgid "Give feedback"
-msgstr "Donner un feedback"
+msgstr "Enviar comentario"
 
 msgid "Other plugins"
-msgstr "Autres plugins"
+msgstr "Otros complementos"
 

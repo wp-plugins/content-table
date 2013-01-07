@@ -2,8 +2,8 @@
 /**
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
-Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>It is stressed that the first level taken in account is "Title 2". </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.3.6
+Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/extend/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
+Version: 1.4.0
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -31,6 +31,8 @@ class tableofcontent extends pluginSedLex {
 	static $instance = false;
 
 	protected function _init() {
+		global $wpdb ; 
+		
 		// Configuration
 		$this->pluginName = 'Table of content' ; 
 		$this->tableSQL = "" ; 
@@ -41,7 +43,7 @@ class tableofcontent extends pluginSedLex {
 		//Init et des-init
 		register_activation_hook(__FILE__, array($this,'install'));
 		register_deactivation_hook(__FILE__, array($this,'deactivate'));
-		register_uninstall_hook(__FILE__, array($this,'uninstall_removedata'));
+		register_uninstall_hook(__FILE__, array('tableofcontent','uninstall_removedata'));
 
 		//Paramètres supplementaires
 		$this->tableofcontent_used_names = array();
@@ -50,9 +52,6 @@ class tableofcontent extends pluginSedLex {
 		$this->niv4 = 1 ; 
 		$this->niv5 = 1 ; 
 		$this->niv6 = 1 ; 		
-		add_shortcode( "toc", array($this,"shortcode_toc") );
-		add_action( "the_content", array($this,"the_content") );
-		add_action('wp_print_styles', array($this,'header_init'));
 	}
 	/**
 	 * Function to instantiate our class and make it a singleton
@@ -62,6 +61,37 @@ class tableofcontent extends pluginSedLex {
 			self::$instance = new self;
 		}
 		return self::$instance;
+	}
+	
+	/** ====================================================================================================================================================
+	* In order to uninstall the plugin, few things are to be done ... 
+	* (do not modify this function)
+	* 
+	* @return void
+	*/
+	
+	public function uninstall_removedata () {
+		global $wpdb ;
+		// DELETE OPTIONS
+		delete_option('tableofcontent'.'_options') ;
+		if (is_multisite()) {
+			delete_site_option('tableofcontent'.'_options') ;
+		}
+		
+		// DELETE SQL
+		if (function_exists('is_multisite') && is_multisite()){
+			$old_blog = $wpdb->blogid;
+			$old_prefix = $wpdb->prefix ; 
+			// Get all blog ids
+			$blogids = $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM ".$wpdb->blogs));
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				$wpdb->query("DROP TABLE ".str_replace($old_prefix, $wpdb->prefix, $wpdb->prefix . "pluginSL_" . 'tableofcontent')) ; 
+			}
+			switch_to_blog($old_blog);
+		} else {
+			$wpdb->query("DROP TABLE ".$wpdb->prefix . "pluginSL_" . 'tableofcontent' ) ; 
+		}
 	}
 	
 	/** ====================================================================================================================================================
@@ -109,6 +139,7 @@ class tableofcontent extends pluginSedLex {
 			case 'entry_min_font_size' 		: return 10 					; break ; 
 			case 'entry_max_color' 		: return "#000000" 					; break ; 
 			case 'entry_min_color' 		: return "#555555" 					; break ; 
+			case 'first_level' 		: return 2 					; break ; 
 		}
 		return null ;
 	}
@@ -128,13 +159,49 @@ class tableofcontent extends pluginSedLex {
 	}
 	
 	/** ====================================================================================================================================================
-	* Load the configuration of the javascript in the header
-	* 
-	* @return variant of the option
+	* Init css for the public side
+	* If you want to load a style sheet, please type :
+	*	<code>$this->add_inline_css($css_text);</code>
+	*	<code>$this->add_css($css_url_file);</code>
+	*
+	* @return void
 	*/
-	function header_init() {
+	
+	function _public_css_load() {	
+	
 		$css = $this->get_param('css') ; 
 		$css .= "\r\n".$this->get_param('css_title') ; 
+		// Add style for h2
+		$list_nb = array(2, 3, 4, 5, 6) ; 
+		foreach ($list_nb as $nb) {
+			$font_size = floor($this->get_param('entry_max_font_size')-($this->get_param('entry_max_font_size')-$this->get_param('entry_min_font_size'))/4*($nb-2)) ; 
+
+			$r2 = hexdec(substr($this->get_param('entry_min_color'), 1, 2)) ; 
+  			$g2 = hexdec(substr($this->get_param('entry_min_color'), 3, 2)) ; 
+  			$b2 = hexdec(substr($this->get_param('entry_min_color'), 5, 2)) ; 
+  			
+			$r1 = hexdec(substr($this->get_param('entry_max_color'), 1, 2)) ; 
+  			$g1 = hexdec(substr($this->get_param('entry_max_color'), 3, 2)) ; 
+  			$b1 = hexdec(substr($this->get_param('entry_max_color'), 5, 2)) ; 
+			
+			$r3 = floor($r1 - ($r1-$r2)/4*($nb-2) ) ; 
+			$g3 = floor($g1 - ($g1-$g2)/4*($nb-2) ) ; 
+			$b3 = floor($b1 - ($b1-$b2)/4*($nb-2) ) ; 
+			$color = "#".str_pad(dechex($r3), 2, '0', STR_PAD_LEFT).str_pad(dechex($g3), 2, '0', STR_PAD_LEFT).str_pad(dechex($b3), 2, '0', STR_PAD_LEFT);
+
+			$css .= "\r\n" ; 
+			$css .= ".contentTable_h".$nb." {\r\n" ; 
+			$css .= "   font-size:".$font_size."px;\r\n" ; 
+			$css .= "   line-height:".$font_size."px;\r\n" ; 
+			$css .= "   padding-left:".($this->get_param('padding')*($nb-2))."px;\r\n" ; 
+			$css .= str_replace(";", ";\r\n   ",$this->get_param('style_h'.$nb)) ; 
+			$css .= "\r\n}\r\n" ; 
+			$css .= "\r\n" ; 
+			$css .= ".contentTable_h".$nb." a:link, .contentTable_h".$nb." a:visited, .contentTable_h".$nb." a:hover {\r\n" ; 
+			$css .= "   color:".$color.";\r\n" ; 
+			$css .= "}\r\n" ; 
+		}
+		
 		$this->add_inline_css($css) ; 
 	}
 	
@@ -143,6 +210,7 @@ class tableofcontent extends pluginSedLex {
 	* 
 	* @return void
 	*/
+	
 	public function configuration_page() {
 		global $wpdb;
 	
@@ -168,15 +236,17 @@ class tableofcontent extends pluginSedLex {
 			
 			ob_start() ; 
 				$params = new parametersSedLex($this, "tab-parameters") ; 
-				$params->add_title(__('What is the title to be displayed in the table of content?',$this->pluginID)) ; 
+				$params->add_title(__('General',$this->pluginID)) ; 
 				$params->add_param('title', __('Title of the table of content:',$this->pluginID)) ; 
+				$params->add_param('first_level', __('What is the first level?',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('If you set this option to %s, then the first level would be %s!',$this->pluginID), "<code>2</code>", "<code>&lt;h2&gt;</code>")) ; 
 				$params->add_title(__('Add prefix in your title:',$this->pluginID)) ; 
+				$params->add_param('h2', __('Prefix of the first level:',$this->pluginID)) ; 
 				$params->add_comment(__('If you leave the field blank, nothing will be added!',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
-				$params->add_param('h2', sprintf(__('Prefix of the level %s:',$this->pluginID), "2")) ; 
-				$params->add_param('h3', sprintf(__('Prefix of the level %s:',$this->pluginID), "3")) ; 
-				$params->add_param('h4', sprintf(__('Prefix of the level %s:',$this->pluginID), "4")) ; 
-				$params->add_param('h5', sprintf(__('Prefix of the level %s:',$this->pluginID), "5")) ; 
-				$params->add_param('h6', sprintf(__('Prefix of the level %s:',$this->pluginID), "6")) ; 
+				$params->add_param('h3', __('Prefix of the second level:',$this->pluginID)) ; 
+				$params->add_param('h4', __('Prefix of the third level:',$this->pluginID)) ; 
+				$params->add_param('h5', __('Prefix of the fourth level:',$this->pluginID)) ; 
+				$params->add_param('h6', __('Prefix of the fifth level:',$this->pluginID)) ; 
 				$params->add_title(__('Customize the global visual appearance:',$this->pluginID)) ; 
 				$params->add_param('html', __('The HTML:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('The default HTML is: %s',$this->pluginID), "<br/><code>&lt;div class='toc tableofcontent'&gt;<br/>
@@ -213,12 +283,12 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->add_param('entry_min_color', __('The color of the lower level:',$this->pluginID)) ; 
 				$params->add_comment(__('The color of entry will be a transition color between these two colors (depending of their levels).', $this->pluginID)."<br/> ".sprintf(__('Please add the # character before the code. If you do not know what code to use, please visit this website: %s',$this->pluginID),"<a href='http://html-color-codes.info/'>http://html-color-codes.info/</a>")) ; 
 				$params->add_title(__('Customize the visual appearance of each entry in the TOC (for Experts):',$this->pluginID)) ; 
-				$params->add_param('style_h2', sprintf(__('The CSS style of the level %s:',$this->pluginID),"2")) ; 
+				$params->add_param('style_h2', __('The CSS style of the first level:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('For instance, %s',$this->pluginID),"<code>font-weight:bold; size:12px</code>")) ; 
-				$params->add_param('style_h3', sprintf(__('The CSS style of the level %s:',$this->pluginID),"3")) ; 
-				$params->add_param('style_h4', sprintf(__('The CSS style of the level %s:',$this->pluginID),"4")) ; 
-				$params->add_param('style_h5', sprintf(__('The CSS style of the level %s:',$this->pluginID),"5")) ; 
-				$params->add_param('style_h6', sprintf(__('The CSS style of the level %s:',$this->pluginID),"6")) ; 
+				$params->add_param('style_h3', __('The CSS style of the second level:',$this->pluginID)) ; 
+				$params->add_param('style_h4', __('The CSS style of the third level:',$this->pluginID)) ; 
+				$params->add_param('style_h5', __('The CSS style of the fourth level:',$this->pluginID)) ; 
+				$params->add_param('style_h6', __('The CSS style of the fifth level:',$this->pluginID)) ; 
 				
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
@@ -270,7 +340,8 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 	* 
 	* @return string the replacement string
 	*/	
-	function shortcode_toc($attribs) {	
+	
+	function shortcode_toc() {	
 		$out = "</p>" ; 
 		$out .= $this->get_param('html') ; 
 		$out .= "<div class='tableofcontent-end'> </div><p>" ; 
@@ -286,59 +357,44 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		
 		$out_toc = "" ; 
 		// headings...
-		foreach($this->used_names as $i => $heading) {
-			// We check if we have to add something here
-			$add = "" ; 
-			if ($heading['level']==2) {
-				$add = $this->get_param('h2')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
-				$this->niv2 ++ ; 
-				$this->niv3 = 1 ; 
-				$this->niv4 = 1 ; 
-				$this->niv5 = 1 ; 
-				$this->niv6 = 1 ; 
-			} else if ($heading['level']==3) {
-				$add = $this->get_param('h3')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
-				$this->niv3 ++ ; 
-				$this->niv4 = 1 ; 
-				$this->niv5 = 1 ; 
-				$this->niv6 = 1 ; 
-			} else if ($heading['level']==4) {
-				$add = $this->get_param('h4')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4,$this->niv5,$this->niv6), $add) ; 
-				$this->niv4 ++ ; 
-				$this->niv5 = 1 ; 
-				$this->niv6 = 1 ; 
-			} else if ($heading['level']==5) {
-				$add = $this->get_param('h5')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5,$this->niv6), $add) ; 
-				$this->niv5 ++ ; 
-				$this->niv6 = 1 ; 
-			} else if ($heading['level']==6) {
-				$add = $this->get_param('h6')." " ; 
-				$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
-				$this->niv6 ++ ; 
+		if (isset($this->used_names)) {
+			foreach($this->used_names as $i => $heading) {
+				// We check if we have to add something here
+				$add = "" ; 
+				if ($heading['level']==$this->get_param('first_level')+0) {
+					$add = $this->get_param('h2')." " ; 
+					$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+					$this->niv2 ++ ; 
+					$this->niv3 = 1 ; 
+					$this->niv4 = 1 ; 
+					$this->niv5 = 1 ; 
+					$this->niv6 = 1 ; 
+				} else if ($heading['level']==$this->get_param('first_level')+1) {
+					$add = $this->get_param('h3')." " ; 
+					$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+					$this->niv3 ++ ; 
+					$this->niv4 = 1 ; 
+					$this->niv5 = 1 ; 
+					$this->niv6 = 1 ; 
+				} else if ($heading['level']==$this->get_param('first_level')+2) {
+					$add = $this->get_param('h4')." " ; 
+					$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4,$this->niv5,$this->niv6), $add) ; 
+					$this->niv4 ++ ; 
+					$this->niv5 = 1 ; 
+					$this->niv6 = 1 ; 
+				} else if ($heading['level']==$this->get_param('first_level')+3) {
+					$add = $this->get_param('h5')." " ; 
+					$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5,$this->niv6), $add) ; 
+					$this->niv5 ++ ; 
+					$this->niv6 = 1 ; 
+				} else if ($heading['level']==$this->get_param('first_level')+4) {
+					$add = $this->get_param('h6')." " ; 
+					$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
+					$this->niv6 ++ ; 
+				}		
+				
+				$out_toc .= "<p class='contentTable_h".($heading['level']-$this->get_param('first_level')+2)."'><a href=\"#" . $i. "\">" .trim($add. $heading['value']) . "</a></p>\n";
 			}
-			$min = $this->get_param('entry_min_font_size') ; 
-			$max = $this->get_param('entry_max_font_size') ; 
-			$font_size = floor($max-($max-$min)/4*($heading['level']-2)) ; 
-			
-			$r2 = hexdec(substr($this->get_param('entry_min_color'), 1, 2)) ; 
-  			$g2 = hexdec(substr($this->get_param('entry_min_color'), 3, 2)) ; 
-  			$b2 = hexdec(substr($this->get_param('entry_min_color'), 5, 2)) ; 
-  			
-			$r1 = hexdec(substr($this->get_param('entry_max_color'), 1, 2)) ; 
-  			$g1 = hexdec(substr($this->get_param('entry_max_color'), 3, 2)) ; 
-  			$b1 = hexdec(substr($this->get_param('entry_max_color'), 5, 2)) ; 
-			
-			$r3 = floor($r1 - ($r1-$r2)/4*($heading['level']-2) ) ; 
-			$g3 = floor($g1 - ($g1-$g2)/4*($heading['level']-2) ) ; 
-			$b3 = floor($b1 - ($b1-$b2)/4*($heading['level']-2) ) ; 
-			$color = "#".str_pad(dechex($r3), 2, '0', STR_PAD_LEFT).str_pad(dechex($g3), 2, '0', STR_PAD_LEFT).str_pad(dechex($b3), 2, '0', STR_PAD_LEFT);
-		
-			
-			$out_toc .= "<p style='font-size:".$font_size."px; line-height:".$font_size."px; padding-left:".($this->get_param('padding')*($heading['level']-2))."px;".$this->get_param('style_h'.$heading['level'])."'><a style='color:".$color." ;' href=\"#" . $i. "\">" .trim($add. $heading['value']) . "</a></p>\n";
 		}
 		
 		$out = str_replace('%toc%', $out_toc , $out) ; 
@@ -373,7 +429,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		
 		// We check if we have to add something here
 		$add = "" ; 
-		if ($match[1]=="2") {
+		if ($match[1]==($this->get_param('first_level')+0)."") {
 			$add = $this->get_param('h2')." " ; 
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 			$this->niv2 ++ ; 
@@ -381,25 +437,25 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 			$this->niv4 = 1 ; 
 			$this->niv5 = 1 ; 
 			$this->niv6 = 1 ; 
-		} else if ($match[1]=="3") {
+		} else if ($match[1]==($this->get_param('first_level')+1)."") {
 			$add = $this->get_param('h3')." " ; 
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 			$this->niv3 ++ ; 
 			$this->niv4 = 1 ; 
 			$this->niv5 = 1 ; 
 			$this->niv6 = 1 ; 
-		} else if ($match[1]=="4") {
+		} else if ($match[1]==($this->get_param('first_level')+2)."") {
 			$add = $this->get_param('h4')." " ; 
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4,$this->niv5,$this->niv6), $add) ; 
 			$this->niv4 ++ ; 
 			$this->niv5 = 1 ; 
 			$this->niv6 = 1 ; 
-		} else if ($match[1]=="5") {
+		} else if ($match[1]==($this->get_param('first_level')+3)."") {
 			$add = $this->get_param('h5')." " ; 
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5,$this->niv6), $add) ; 
 			$this->niv5 ++ ; 
 			$this->niv6 = 1 ; 
-		} else if ($match[1]=="6") {
+		} else if ($match[1]==($this->get_param('first_level')+4)."") {
 			$add = $this->get_param('h6')." " ; 
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 			$this->niv6 ++ ; 
@@ -408,13 +464,16 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 	}
 
 	/** ====================================================================================================================================================
-	* Called when the content is printed
-	* 
-	* @return void
-	*/	
+	* Called when the content is displayed
+	*
+	* @param string $content the content which will be displayed
+	* @param string $type the type of the article (e.g. post, page, custom_type1, etc.)
+	* @param boolean $excerpt if the display is performed during the loop
+	* @return string the new content
+	*/
 	
-	function the_content($content) {	
-	
+	function _modify_content($content, $type, $excerpt) {	
+		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 
 		$this->niv3 = 1 ; 
@@ -423,7 +482,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->niv6 = 1 ; 
 		
 		$this->used_names = array();
-		$out = preg_replace_callback("#<h([2-6])>(.*?)</h[2-6]>#iu", array($this,"heading_anchor"), $content);
+		$out = preg_replace_callback("#<h([1-6])>(.*?)</h[1-6]>#iu", array($this,"heading_anchor"), $content);
 		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 
@@ -432,6 +491,10 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->niv5 = 1 ; 
 		$this->niv6 = 1 ; 
 		
+		// manually replace the shortcode
+		$shortcode = "toc" ; 
+		$out = preg_replace("#\[$shortcode(.*?)?\](?:(.+?)?\[\/$shortcode\])?#iu", $this->shortcode_toc(), $out);
+
 		return $out;
 	}
 	
