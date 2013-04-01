@@ -35,7 +35,7 @@ This plugin works with Multisite installation
 * Spanish (Mexico) translation provided by RobertoRamrez
 * Finnish (Finland) translation provided by Jan-ErikFinlander
 * French (France) translation provided by SedLex
-* Italian (Italy) translation provided by jkappa
+* Italian (Italy) translation provided by jkappa, DipSTF
 * Dutch (Netherlands) translation provided by MarcelJansen
 * Russian (Russia) translation provided by Limych
 
@@ -54,7 +54,7 @@ Have fun !
 
 == Installation ==
 
-1. Upload this folder to your plugin directory (for instance '/wp-content/plugins/')
+1. Upload this folder content-table to your plugin directory (for instance '/wp-content/plugins/')
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Navigate to the 'SL plugins' box
 4. All plugins developed with the SL core will be listed in this box
@@ -66,6 +66,9 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.4.1 = 
+* Lighten the plugin and add translation
 
 = 1.4.0 = 
 * Avoid Inline style. Every style is in a css file
@@ -127,4 +130,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:f2b0d8b7830d5ea51dfa81945ba25480
+InfoVersion:0e678862be08a3e10a9a0c375f74c971
