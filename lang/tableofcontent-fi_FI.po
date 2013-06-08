@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-23T08:29:18+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:42:20+00:00\n"
 "Last-Translator: Jan-ErikFinlander <janerik.finlander@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"
-"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: Finland\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -26,14 +26,23 @@ msgstr "Näytä sisällysluettelo"
 msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
 msgstr "Jos haluat, että taulukon sisältö näkyy viestissäsi, kirjoita:  %s, ei muuta."
 
-msgid "What is the title to be displayed in the table of content?"
-msgstr "Mikä on sisällysluettelon otsikko?"
+msgid "General"
+msgstr ""
 
 msgid "Title of the table of content:"
 msgstr "Sisällysluettelon otsikko:"
 
+msgid "What is the first level?"
+msgstr ""
+
+msgid "If you set this option to %s, then the first level would be %s!"
+msgstr ""
+
 msgid "Add prefix in your title:"
 msgstr "Lisää etuliite otsikkoon:"
+
+msgid "Prefix of the first level:"
+msgstr ""
 
 msgid "If you leave the field blank, nothing will be added!"
 msgstr "Jos jätät kentän tyhjäksi, mitään ei lisätä!"
@@ -41,8 +50,17 @@ msgstr "Jos jätät kentän tyhjäksi, mitään ei lisätä!"
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Huomaa, että jos haluat näyttää tason 2 lukumäärän, niin kirjoita vain %s ..."
 
-msgid "Prefix of the level %s:"
-msgstr "Etuliitteen taso %s:"
+msgid "Prefix of the second level:"
+msgstr ""
+
+msgid "Prefix of the third level:"
+msgstr ""
+
+msgid "Prefix of the fourth level:"
+msgstr ""
+
+msgid "Prefix of the fifth level:"
+msgstr ""
 
 msgid "Customize the global visual appearance:"
 msgstr "Maailmanlaajuisen ulkoasun mukautus:"
@@ -51,7 +69,7 @@ msgid "The HTML:"
 msgstr "HTML:"
 
 msgid "The default HTML is: %s"
-msgstr "Oletus HTML on:% s"
+msgstr "Oletus HTML on: %s"
 
 msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
 msgstr "Huomaa, että %s korvaa annetun otsikon sisällysluettelon ja %s korvataan nykyisen luvun / osan / etc. otsikolla"
@@ -60,7 +78,7 @@ msgid "The CSS:"
 msgstr "CSS:"
 
 msgid "The default CSS is: %s"
-msgstr "Oletus CSS on:% s"
+msgstr "Oletus CSS on: %s"
 
 msgid "Customize the visual appearance of the title:"
 msgstr "Mukauta otsikon ulkoasu:"
@@ -89,11 +107,23 @@ msgstr "Lisää # merkki ennen koodia. Jos et tiedä, mitä koodia käyttää, k
 msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
 msgstr "Mukauta ulkoasua jokaisen sisällysluettelon merkinnän (asiantuntijoille):"
 
-msgid "The CSS style of the level %s:"
-msgstr "CSS tyyli taso% s:"
+msgid "The CSS style of the first level:"
+msgstr ""
 
 msgid "For instance, %s"
-msgstr "Esimerkiksi% s"
+msgstr "Esimerkiksi %s"
+
+msgid "The CSS style of the second level:"
+msgstr ""
+
+msgid "The CSS style of the third level:"
+msgstr ""
+
+msgid "The CSS style of the fourth level:"
+msgstr ""
+
+msgid "The CSS style of the fifth level:"
+msgstr ""
 
 msgid "Parameters"
 msgstr "Parametrit"

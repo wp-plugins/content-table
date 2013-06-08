@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-31T10:28:16+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:43:40+00:00\n"
 "Last-Translator: Limych <andrey@khrolenok.ru>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,17 +20,29 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
+msgid "Display the table of content"
+msgstr ""
+
 msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
 msgstr "Хотите добавить оглавление на страницу? Просто вставьте %s в нужном месте!…"
 
-msgid "What is the title to be displayed in the table of content?"
-msgstr "Что будем писать в заголовке оглавления?"
+msgid "General"
+msgstr ""
 
 msgid "Title of the table of content:"
 msgstr "Заголовок блока:"
 
+msgid "What is the first level?"
+msgstr ""
+
+msgid "If you set this option to %s, then the first level would be %s!"
+msgstr ""
+
 msgid "Add prefix in your title:"
 msgstr "Префиксы заголовков"
+
+msgid "Prefix of the first level:"
+msgstr ""
 
 msgid "If you leave the field blank, nothing will be added!"
 msgstr "Если оставить поле пустым, ничего не будет добавляться."
@@ -38,8 +50,17 @@ msgstr "Если оставить поле пустым, ничего не бу�
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Чтобы добавить номер заголовка, например, второго уровня, напишите в тексте «%s»."
 
-msgid "Prefix of the level %s:"
-msgstr "Префикс для уровня %s:"
+msgid "Prefix of the second level:"
+msgstr ""
+
+msgid "Prefix of the third level:"
+msgstr ""
+
+msgid "Prefix of the fourth level:"
+msgstr ""
+
+msgid "Prefix of the fifth level:"
+msgstr ""
 
 msgid "Customize the global visual appearance:"
 msgstr "Настройте общее визуальное представление:"
@@ -48,7 +69,7 @@ msgid "The HTML:"
 msgstr "HTML:"
 
 msgid "The default HTML is: %s"
-msgstr "HTML по-умолчанию:"
+msgstr "HTML по-умолчанию: %s"
 
 msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
 msgstr "Обратите внимание, что %s будет заменено на заголовок оглавления, а %s будет заменено на заголовок текущей главы, раздела и т.п."
@@ -57,7 +78,7 @@ msgid "The CSS:"
 msgstr "CSS:"
 
 msgid "The default CSS is: %s"
-msgstr "CSS по-умолчанию:"
+msgstr "CSS по-умолчанию: %s"
 
 msgid "Customize the visual appearance of the title:"
 msgstr "Настройте визуальное представление заголовка:"
@@ -86,11 +107,23 @@ msgstr "Пожалуйста, добавьте # перед кодом цвет�
 msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
 msgstr "Настройте визуальное представление каждой строки оглавления (для экспертов):"
 
-msgid "The CSS style of the level %s:"
-msgstr "CSS-стиль уровня %s:"
+msgid "The CSS style of the first level:"
+msgstr ""
 
 msgid "For instance, %s"
 msgstr "Например, %s"
+
+msgid "The CSS style of the second level:"
+msgstr ""
+
+msgid "The CSS style of the third level:"
+msgstr ""
+
+msgid "The CSS style of the fourth level:"
+msgstr ""
+
+msgid "The CSS style of the fifth level:"
+msgstr ""
 
 msgid "Parameters"
 msgstr "Параметры"

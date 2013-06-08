@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-03-19T18:05:52+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:40:37+00:00\n"
 "Last-Translator: RobertoRamrez <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,17 +20,29 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
+msgid "Display the table of content"
+msgstr ""
+
 msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
 msgstr "Escribe %s si quieres que la tabla de contenido aparesca en tu entrada, ¡eso es todo!"
 
-msgid "What is the title to be displayed in the table of content?"
-msgstr "¿Qué titulo quieres que aparesca en la tabla de contenido?"
+msgid "General"
+msgstr ""
 
 msgid "Title of the table of content:"
 msgstr "Titulo de la tabla de contenido:"
 
+msgid "What is the first level?"
+msgstr ""
+
+msgid "If you set this option to %s, then the first level would be %s!"
+msgstr ""
+
 msgid "Add prefix in your title:"
 msgstr "Agrega un prefijo a tu titulo:"
+
+msgid "Prefix of the first level:"
+msgstr ""
 
 msgid "If you leave the field blank, nothing will be added!"
 msgstr "¡Nada se agregara si dejas el campo vacio!"
@@ -38,8 +50,17 @@ msgstr "¡Nada se agregara si dejas el campo vacio!"
 msgid "Note that if you want to display the number of level 2, just write %s ..."
 msgstr "Date cuenta que solo tienes que escribir %s para mostrar el número del nivel 2"
 
-msgid "Prefix of the level %s:"
-msgstr "Prefijo del nivel %s:"
+msgid "Prefix of the second level:"
+msgstr ""
+
+msgid "Prefix of the third level:"
+msgstr ""
+
+msgid "Prefix of the fourth level:"
+msgstr ""
+
+msgid "Prefix of the fifth level:"
+msgstr ""
 
 msgid "Customize the global visual appearance:"
 msgstr "Personaliza la apariencia visual global:"
@@ -57,7 +78,7 @@ msgid "The CSS:"
 msgstr "El código CSS:"
 
 msgid "The default CSS is: %s"
-msgstr "El código CSS por omisión:"
+msgstr "El código CSS por omisión: %s"
 
 msgid "Customize the visual appearance of the title:"
 msgstr "Personaliza la apariencia visual del titulo:"
@@ -86,11 +107,23 @@ msgstr "Por favor agrega el carácter # antes del código. Por favor visita el s
 msgid "Customize the visual appearance of each entry in the TOC (for Experts):"
 msgstr "Personaliza la apariencia visual de cada entrada en la tabla de contenido (para expertos):"
 
-msgid "The CSS style of the level %s:"
-msgstr "El estílo CSS del nivel %s:"
+msgid "The CSS style of the first level:"
+msgstr ""
 
 msgid "For instance, %s"
 msgstr "Por ejemplo, %s:"
+
+msgid "The CSS style of the second level:"
+msgstr ""
+
+msgid "The CSS style of the third level:"
+msgstr ""
+
+msgid "The CSS style of the fourth level:"
+msgstr ""
+
+msgid "The CSS style of the fifth level:"
+msgstr ""
 
 msgid "Parameters"
 msgstr "Parámetros"
@@ -103,7 +136,4 @@ msgstr "Da retroalimentación"
 
 msgid "Other plugins"
 msgstr "Otros plugins"
-
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
-msgstr "No se puede eliminar el archivo %s. Seguro tienes problemas de permisionamiento de archivos o restricciones de seguridad."
 

@@ -3,7 +3,7 @@
 Author: SedLex
 Contributors: SedLex
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://wordpress.org/extend/plugins/content-table/
+Plugin URI: http://wordpress.org/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
 Tested up to: 3.5
@@ -66,6 +66,9 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.4.2 = 
+* Update of the core
 
 = 1.4.1 = 
 * Lighten the plugin and add translation
@@ -130,4 +133,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:0e678862be08a3e10a9a0c375f74c971
+InfoVersion:1afebde121699ece2bd0acdb03f63340
