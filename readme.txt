@@ -67,6 +67,10 @@ Have fun !
 
 == Changelog ==
 
+= 1.4.3 = 
+* Now compatible with HTTPS site
+* URL of the former plugin is updated
+
 = 1.4.2 = 
 * Update of the core
 
@@ -133,4 +137,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:1afebde121699ece2bd0acdb03f63340
+InfoVersion:78251e83ef85e16a743d0c6a8a6d201a
