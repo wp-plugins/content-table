@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-02-24T23:08:58+00:00\n"
+"PO-Revision-Date: 2013-11-12T16:40:24+00:00\n"
 "Last-Translator: internetfreak <http://www.internetfreak.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgid "The default HTML is: %s"
 msgstr "Standard HTML ist %s"
 
 msgid "Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title"
-msgstr "Bitte beachte, dass %s ersetzt wird mit dem übergebenen Titel des Inhaltsverzeichnisses und %s ersetzt wird mit dem Titel des aktuellen Kapitels/der aktuellen Sektion/usw. "
+msgstr "Bitte beachte, dass %s ersetzt wird mit dem übergebenen Titel des Inhaltsverzeichnisses und %s ersetzt wird mit dem Titel des aktuellen Kapitels/der aktuellen Sektion/usw."
 
 msgid "The CSS:"
 msgstr "CSS"
@@ -106,4 +106,10 @@ msgstr "Andere Plugins"
 
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr "Datei %s kann nicht gelöscht werden. Du solltest ein Problem mit den Berechtigungen oder Sicherheitseinstellungen haben."
+
+msgid "Display the table of content"
+msgstr "Zeige das Inhaltsverzeichnis"
+
+msgid "General"
+msgstr "Generell"
 

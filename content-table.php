@@ -3,7 +3,7 @@
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
 Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.4.3
+Version: 1.4.4
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -130,6 +130,7 @@ class tableofcontent extends pluginSedLex {
 			case 'h4' 		: return "#4)" 					; break ; 
 			case 'h5' 		: return "#4.#5." 				; break ; 
 			case 'h6' 		: return "" 					; break ; 
+			case 'modify_without_toc' 		: return true 					; break ; 
 			case 'style_h2' 		: return "" 			; break ; 
 			case 'style_h3' 		: return "" 			; break ; 
 			case 'style_h4' 		: return "" 					; break ; 
@@ -247,6 +248,7 @@ class tableofcontent extends pluginSedLex {
 				$params->add_param('h4', __('Prefix of the third level:',$this->pluginID)) ; 
 				$params->add_param('h5', __('Prefix of the fourth level:',$this->pluginID)) ; 
 				$params->add_param('h6', __('Prefix of the fifth level:',$this->pluginID)) ; 
+				$params->add_param('modify_without_toc', sprintf(__('Modify the title even if the %s is not present in the article:',$this->pluginID),"<code>[toc]</code>")) ; 
 				$params->add_title(__('Customize the global visual appearance:',$this->pluginID)) ; 
 				$params->add_param('html', __('The HTML:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('The default HTML is: %s',$this->pluginID), "<br/><code>&lt;div class='toc tableofcontent'&gt;<br/>
@@ -480,9 +482,14 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->niv4 = 1 ; 
 		$this->niv5 = 1 ; 
 		$this->niv6 = 1 ; 
+		$shortcode = "toc" ;
+		
+		$out = $content ;  
 		
 		$this->used_names = array();
-		$out = preg_replace_callback("#<h([1-6])>(.*?)</h[1-6]>#iu", array($this,"heading_anchor"), $content);
+		if ($this->get_param('modify_without_toc')||preg_match("#\[$shortcode(.*?)?\](?:(.+?)?\[\/$shortcode\])?#iu", $content)) {
+			$out = preg_replace_callback("#<h([1-6])>(.*?)</h[1-6]>#iu", array($this,"heading_anchor"), $out);
+		}
 		
 		//Ré-initialisation
 		$this->niv2 = 1 ; 
@@ -492,7 +499,6 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->niv6 = 1 ; 
 		
 		// manually replace the shortcode
-		$shortcode = "toc" ; 
 		$out = preg_replace("#\[$shortcode(.*?)?\](?:(.+?)?\[\/$shortcode\])?#iu", $this->shortcode_toc(), $out);
 
 		return $out;

@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-08-24T12:16:15+00:00\n"
+"Last-Translator: Adrian <www.the-found-world.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2); \n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: Romania\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "Display the table of content"
+msgstr "Arata pluginul"
+
+msgid "If you want that the table of content appears in your post, just type: %s, that is all!"
+msgstr "Daca vrei ca pluginul sa apara in postarile tale scrie %s, asta e tot!"
+
+msgid "General"
+msgstr "General"
+
+msgid "Title of the table of content:"
+msgstr "Titlul continutului tabelului"
+
+msgid "What is the first level?"
+msgstr "Care este primul nivel?"
+
+msgid "Add prefix in your title:"
+msgstr "Adauga prfixul in titlul tau"
+
+msgid "Prefix of the first level:"
+msgstr "Prefixul primului nivel"
+
+msgid "If you leave the field blank, nothing will be added!"
+msgstr "Daca lasi acest camp gol, nimic nu o sa fie adaugat."
+
+msgid "Prefix of the second level:"
+msgstr "Prefixul pentru nivelul doi."
+
+msgid "Prefix of the third level:"
+msgstr "Prefixul pentru nivelul trei."
+
+msgid "Prefix of the fourth level:"
+msgstr "Prefixul pentru nivelul patru."
+
+msgid "Prefix of the fifth level:"
+msgstr "Prefixul pentru nivelul cinci."
+
+msgid "The HTML:"
+msgstr "Codul HTML"
+
+msgid "The default HTML is: %s"
+msgstr "HTML-ul de baza: %s"
+
