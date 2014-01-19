@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: trunk
 
 Insert a *table of content* in your posts. 
@@ -67,6 +67,9 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.4.5 = 
+* BUG : Take in account title that are not simply &lt;hx&gt; but also &lt;hx class='foo'&gt;
 
 = 1.4.4 = 
 * The modification of the title is optional if the [toc] is not added in the page
@@ -141,4 +144,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:d6f08c4300ae070f2e18b6adb25f2da6
+InfoVersion:93ba8603777b92f09e06da81a529fabe
