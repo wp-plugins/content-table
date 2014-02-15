@@ -3,7 +3,8 @@
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
 Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.4.5
+Version: 1.4.6
+
 
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -396,7 +397,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 					$this->niv6 ++ ; 
 				}		
 				
-				$out_toc .= "<p class='contentTable_h".($heading['level']-$this->get_param('first_level')+2)."'><a href=\"#" . $i. "\">" .trim($add. $heading['value']) . "</a></p>\n";
+				$out_toc .= "<p class='contentTable_h".($heading['level']-$this->get_param('first_level')+2)."'><a href=\"#" . $i. "\">" .trim($add. strip_tags($heading['value'])) . "</a></p>\n";
 			}
 		}
 		
