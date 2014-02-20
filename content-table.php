@@ -3,7 +3,8 @@
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
 Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.4.6
+Version: 1.4.7
+
 
 
 Author: SedLex
@@ -143,6 +144,7 @@ class tableofcontent extends pluginSedLex {
 			case 'entry_max_color' 		: return "#000000" 					; break ; 
 			case 'entry_min_color' 		: return "#555555" 					; break ; 
 			case 'first_level' 		: return 2 					; break ; 
+			case 'excluded_class' 		: return ""					; break ; 
 		}
 		return null ;
 	}
@@ -294,6 +296,10 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->add_param('style_h5', __('The CSS style of the fourth level:',$this->pluginID)) ; 
 				$params->add_param('style_h6', __('The CSS style of the fifth level:',$this->pluginID)) ; 
 				
+				$params->add_title(__('Advanced options:',$this->pluginID)) ; 
+				$params->add_param('excluded_class', __('Coma separated list of class headers to be excluded:',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('For instance, to exclude the headers like %s or %s, you may type %s',$this->pluginID),"<code>&lt;h3 class='foo'&gt;</code>","<code>&lt;h3 class='bar'&gt;</code>","<code>foo,bar</code>")) ; 
+				
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
@@ -421,7 +427,19 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 	
 	
 	function heading_anchor($match) {
-		$name = $this->get_unique_name($match[2]);
+	
+	
+		// To be excluded ?
+		$classes = explode(',',$this->get_param('excluded_class')) ; 
+		foreach ($classes as $c) {
+			if (preg_match("/class='[^']*".addslashes($c)."[^']*'/u", $match[2])) {
+				return $match[0] ; 
+			} elseif (preg_match('/class="[^"]*'.str_replace('"','\\"',$c).'[^"]*"/u', $match[2])) {
+				return $match[0] ; 
+			}
+		}
+	
+		$name = $this->get_unique_name($match[3]);
 		
 		if (isset($this->used_names[$name])) {
 			$name = $name.rand(0,10000000) ; 
@@ -429,7 +447,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		$this->used_names[$name] = array() ;
 		
 		$this->used_names[$name]['level'] = $match[1] ; 
-		$this->used_names[$name]['value'] = $match[2] ; 
+		$this->used_names[$name]['value'] = $match[3] ; 
 		
 		// We check if we have to add something here
 		$add = "" ; 
@@ -464,7 +482,10 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 			$add = preg_replace(array("/#2/","/#3/","/#4/","/#5/","/#6/"), array($this->niv2-1,$this->niv3-1,$this->niv4-1,$this->niv5-1,$this->niv6), $add) ; 
 			$this->niv6 ++ ; 
 		}
-		return '<h'.$match[1].' id="' . $name . '">' . trim($add . $match[2]) . '</h'.$match[1].'>';
+		
+		$other_content = trim(preg_replace('/id="[^"]*"/u',"",preg_replace("/id='[^']*'/u","",$match[2]))) ; 
+		
+		return '<h'.$match[1].' id="' . $name . '" '.$other_content.'>' . trim($add . $match[3]) . '</h'.$match[1].'>';
 	}
 
 	/** ====================================================================================================================================================
@@ -490,7 +511,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 		
 		$this->used_names = array();
 		if ($this->get_param('modify_without_toc')||preg_match("#\[$shortcode(.*?)?\](?:(.+?)?\[\/$shortcode\])?#iu", $content)) {
-			$out = preg_replace_callback("#<h([1-6])[^>]*>(.*?)</h[1-6]>#iu", array($this,"heading_anchor"), $out);
+			$out = preg_replace_callback("#<h([1-6])([^>]*)>(.*?)</h[1-6]>#iu", array($this,"heading_anchor"), $out);
 		}
 		
 		//Ré-initialisation
