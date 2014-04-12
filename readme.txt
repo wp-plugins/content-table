@@ -68,6 +68,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.4.8 = 
+* IMPROVE: Enhance the look
+
 = 1.4.7 = 
 * NEW: List of excluded class ! you may exclude some header by indicating their class
 * NEW: remove existing id of the header and keep the other parameters such as style or class
@@ -152,4 +155,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b1c6b7fb5189ad855bc4a0e49b8b6edd
+InfoVersion:d2876617aca3056c6c0bf8c64fb05710
