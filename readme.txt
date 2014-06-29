@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.8.1
+Tested up to: 3.9.1
 Stable tag: trunk
 
 Insert a *table of content* in your posts. 
@@ -29,7 +29,7 @@ This plugin works with Multisite installation
 
 = Localization =
 
-* German (Germany) translation provided by internetfreak, ChristopherKbel
+* German (Germany) translation provided by internetfreak, ChristopherKbel, GLassnig
 * English (United States), default language
 * Spanish (Spain) translation provided by Jan-ErikFinlander
 * Spanish (Mexico) translation provided by RobertoRamrez
@@ -42,14 +42,9 @@ This plugin works with Multisite installation
 
 = Features of the framework =
 
-This plugin uses the SL framework. This framework eases the creation of new plugins by providing incredible tools and frames.
+This plugin uses the SL framework. This framework eases the creation of new plugins by providing tools and frames (see dev-toolbox plugin for more info).
 
-For instance, a new created plugin comes with
-
-* A translation interface to simplify the localization of the text of the plugin ; 
-* An embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
-* A detailled documentation of all available classes and methodes ; 
-* etc.
+You may easily translate the text of the plugin and submit it to the developer, send a feedback, or choose the location of the plugin in the admin panel.
 
 Have fun !
 
@@ -67,6 +62,10 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.4.9 = 
+* NEW: How to
+* NEW: improve the default CSS
 
 = 1.4.8 = 
 * IMPROVE: Enhance the look
@@ -155,4 +154,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:f449acaa51becce2ac667a8e46ddb39d
+InfoVersion:c8bbdde981bfb201c1fecce86eff770e73ac7c71

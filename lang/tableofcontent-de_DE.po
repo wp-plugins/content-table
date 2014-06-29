@@ -4,9 +4,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-02-11T12:19:55+00:00\n"
+"PO-Revision-Date: 2014-04-17T06:03:33+00:00\n"
 "Last-Translator: internetfreak <http://www.internetfreak.net>\n"
 "Last-Translator: ChristopherKbel <http://www.defrent.de>\n"
+"Last-Translator: GLassnig <info@e67-its.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,4 +153,13 @@ msgstr "CSS-Stil der vierten Ebene:"
 
 msgid "The CSS style of the fifth level:"
 msgstr "CSS-Stil der fünften Ebene:"
+
+msgid "Advanced options:"
+msgstr "Erweiterte Einstellungen:"
+
+msgid "Coma separated list of class headers to be excluded:"
+msgstr "Komma separierte Liste mit auszuschließenden Header-Klassen:"
+
+msgid "For instance, to exclude the headers like %s or %s, you may type %s"
+msgstr "Zum Beispiel, um die Kopfzeilen wie %s oder %s auszuschließen, können Sie %s eingeben."
 

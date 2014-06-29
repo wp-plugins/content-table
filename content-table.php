@@ -3,11 +3,7 @@
 Plugin Name: Table of content
 Plugin Tag: plugin, table of content, toc, content
 Description: <p>Insert a *table of content* in your posts. </p><p>You only have to insert the shortcode <code>[toc]</code> in your post to display the table of content. </p><p>Please note that you can also configure a text to be inserted before the title of you post such as <code>Chapter</code> or <code>Section</code> with numbers. </p><p>Plugin developped from the orginal plugin <a href="http://wordpress.org/plugins/toc-for-wordpress/">Toc for Wordpress</a>. </p><p>This plugin is under GPL licence. </p>
-Version: 1.4.8
-
-
-
-
+Version: 1.4.9
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
@@ -106,26 +102,35 @@ class tableofcontent extends pluginSedLex {
 	public function get_default_option($option) {
 		switch ($option) {
 			case 'html' 	: return "*<div class='toc tableofcontent'>
-   <h2>%title%</h2>
+   <p id='title'>%title%</p>
    %toc%
 </div>" 	; break ; 
 			case 'css' 	: return "*.tableofcontent {
-	border: 1px solid #AAAAAA;
-	padding: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-bottom: 10px;
-	font-size: 0.95em;
-	min-width:200px;
-	float:left ; 
+      border: 0px;
+      border-left: 3px solid #D6341D ;
+      padding: 5px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      font-size: 0.95em;
+      min-width:200px;
+      float:left ;
+      margin: 0px;
+      margin-left: 50px;
+      line-height:1em;
 }" ;break ; 
-			case 'css_title' 	: return "*.tableofcontent h2 {
+			case 'css_title' 	: return "*.tableofcontent p#title{
 	text-align: center;
-	font-size: 1em;
+	font-size: 1.5em;
 	font-weight: bold;
 	margin : 3px ; 
 	padding-top : 5px ;
 	padding-bottom : 5px ;
+        color:#D6341D ;
+}
+.tableofcontent p{
+	margin-bottom:0px !important;
+	margin-top:0px !important;
 }" 	; break ; 
 			case 'padding' 	: return 20 	; break ; 
 			case 'title' 	: return "Table Of Content" 	; break ; 
@@ -135,7 +140,7 @@ class tableofcontent extends pluginSedLex {
 			case 'h5' 		: return "#4.#5." 				; break ; 
 			case 'h6' 		: return "" 					; break ; 
 			case 'modify_without_toc' 		: return true 					; break ; 
-			case 'style_h2' 		: return "" 			; break ; 
+			case 'style_h2' 		: return "font-weight:bold; size:14px;" 			; break ; 
 			case 'style_h3' 		: return "" 			; break ; 
 			case 'style_h4' 		: return "" 					; break ; 
 			case 'style_h5' 		: return "" 				; break ; 
@@ -228,7 +233,6 @@ class tableofcontent extends pluginSedLex {
 		<div class="plugin-contentSL">		
 			<?php echo $this->signature ; ?>
 			
-			<p><?php echo sprintf(__("If you want that the table of content appears in your post, just type: %s, that is all!", $this->pluginID)," <i>[toc]</i>") ?></p>
 		<?php
 	
 			$this->check_folder_rights( array() ) ; 
@@ -239,14 +243,15 @@ class tableofcontent extends pluginSedLex {
 			//
 			//==========================================================================================
 
-			$tabs = new adminTabs() ; 
+			$tabs = new SLFramework_Tabs() ; 
 			
 			ob_start() ; 
-				$params = new parametersSedLex($this, "tab-parameters") ; 
+				$params = new SLFramework_Parameters($this, "tab-parameters") ; 
 				$params->add_title(__('General',$this->pluginID)) ; 
 				$params->add_param('title', __('Title of the table of content:',$this->pluginID)) ; 
 				$params->add_param('first_level', __('What is the first level?',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('If you set this option to %s, then the first level would be %s!',$this->pluginID), "<code>2</code>", "<code>&lt;h2&gt;</code>")) ; 
+				
 				$params->add_title(__('Add prefix in your title:',$this->pluginID)) ; 
 				$params->add_param('h2', __('Prefix of the first level:',$this->pluginID)) ; 
 				$params->add_comment(__('If you leave the field blank, nothing will be added!',$this->pluginID).'<br/>'.sprintf(__('Note that if you want to display the number of level 2, just write %s ...',$this->pluginID),"<i>#2</i>")) ; 
@@ -255,34 +260,21 @@ class tableofcontent extends pluginSedLex {
 				$params->add_param('h5', __('Prefix of the fourth level:',$this->pluginID)) ; 
 				$params->add_param('h6', __('Prefix of the fifth level:',$this->pluginID)) ; 
 				$params->add_param('modify_without_toc', sprintf(__('Modify the title even if the %s is not present in the article:',$this->pluginID),"<code>[toc]</code>")) ; 
+				
 				$params->add_title(__('Customize the global visual appearance:',$this->pluginID)) ; 
 				$params->add_param('html', __('The HTML:',$this->pluginID)) ; 
-				$params->add_comment(sprintf(__('The default HTML is: %s',$this->pluginID), "<br/><code>&lt;div class='toc tableofcontent'&gt;<br/>
-   &lt;h2&gt;%title%&lt;/h2&gt;<br/>
-   %toc%<br/>
-&lt;/div&gt;</code><br/>").
-sprintf(__('Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title', $this->pluginID) , "<code>%title%</code>", "<code>%toc%</code>") ) ; 
+				$params->add_comment(__('The default HTML is:',$this->pluginID)) ; 
+				$params->add_comment_default_value('html') ; 
+				$params->add_comment(sprintf(__('Please note that %s will be replaced with the given title of the table of content and %s will be replaced with the current chapter/section/etc. title', $this->pluginID) , "<code>%title%</code>", "<code>%toc%</code>") ) ; 
 				$params->add_param('css', __('The CSS:',$this->pluginID)) ; 
-				$params->add_comment(sprintf(__('The default CSS is: %s',$this->pluginID), "<br/><code>.tableofcontent {<br/>
-&nbsp; &nbsp;border: 1px solid #AAAAAA;<br/>
-&nbsp; &nbsp;padding: 5px;<br/>
-&nbsp; &nbsp;padding-left: 20px;<br/>
-&nbsp; &nbsp;padding-right: 20px;<br/>
-&nbsp; &nbsp;padding-bottom: 10px;<br/>
-&nbsp; &nbsp;font-size: 0.95em;<br/>
-&nbsp; &nbsp;min-width:200px;<br/>
-&nbsp; &nbsp;float:left ; <br/>
-}</code><br/>")) ; 
+				$params->add_comment(__('The default CSS is:',$this->pluginID)) ; 
+				$params->add_comment_default_value('css') ; 
+				
 				$params->add_title(__('Customize the visual appearance of the title:',$this->pluginID)) ; 
 				$params->add_param('css_title', __('The CSS:',$this->pluginID)) ; 
-				$params->add_comment(sprintf(__('The default CSS is: %s',$this->pluginID), "<br/><code>.tableofcontent h2 {<br/>
-&nbsp; &nbsp;text-align: center;<br/>
-&nbsp; &nbsp;font-size: 1em;<br/>
-&nbsp; &nbsp;font-weight: bold;<br/>
-&nbsp; &nbsp;margin : 3px ; <br/>
-&nbsp; &nbsp;padding-top : 5px ;<br/>
-&nbsp; &nbsp;padding-bottom : 5px ;<br/>
-}</code><br/>")) ; 
+				$params->add_comment(__('The default CSS for title is:',$this->pluginID)) ; 
+				$params->add_comment_default_value('css_title') ; 
+				
 				$params->add_title(__('Customize the visual appearance of each entry in the TOC:',$this->pluginID)) ; 
 				$params->add_param('padding', __('The indentation of the TOC (in pixels):',$this->pluginID)) ; 
 				$params->add_param('entry_max_font_size', __('The max font size:',$this->pluginID)) ; 
@@ -290,6 +282,7 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->add_param('entry_max_color', __('The color of the upper level:',$this->pluginID)) ; 
 				$params->add_param('entry_min_color', __('The color of the lower level:',$this->pluginID)) ; 
 				$params->add_comment(__('The color of entry will be a transition color between these two colors (depending of their levels).', $this->pluginID)."<br/> ".sprintf(__('Please add the # character before the code. If you do not know what code to use, please visit this website: %s',$this->pluginID),"<a href='http://html-color-codes.info/'>http://html-color-codes.info/</a>")) ; 
+				
 				$params->add_title(__('Customize the visual appearance of each entry in the TOC (for Experts):',$this->pluginID)) ; 
 				$params->add_param('style_h2', __('The CSS style of the first level:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('For instance, %s',$this->pluginID),"<code>font-weight:bold; size:12px</code>")) ; 
@@ -305,21 +298,40 @@ sprintf(__('Please note that %s will be replaced with the given title of the tab
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
+
 			
+			ob_start() ;
+				echo "<p>".__("This table enables the display of a list of all titles of the page/post to create a table of contents.", $this->pluginID)."</p>" ;
+			$howto1 = new SLFramework_Box (__("Purpose of that plugin", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".sprintf(__("If you want that the table of contents appears in your post, just type: %s, that is all!", $this->pluginID)," <code>[toc]</code>")."</p>" ;
+				echo "<p>".__("If no shortcode is in the page/post, no table of contents will be displayed.", $this->pluginID)."</p>" ;
+				echo "<p>".__("A button is available in the post/page editor to ease the display.", $this->pluginID)."</p>" ;
+			$howto2 = new SLFramework_Box (__("How to display the table of contents", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".sprintf(__("In addition, you may modify dynamically your title in order to add before them %s or anystring you want.", $this->pluginID), "<code>Chapter 2.3</code>")."</p>" ;
+				echo "<p>".__("Numbering is possible.", $this->pluginID)."</p>" ;
+			$howto3 = new SLFramework_Box (__("Modification of the titles", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				 echo $howto1->flush() ; 
+				 echo $howto2->flush() ; 
+				 echo $howto3->flush() ; 
+			$tabs->add_tab(__('How To',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_how.png") ; 				
+
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new translationSL($this->pluginID, $plugin) ; 
+				$trans = new SLFramework_Translation($this->pluginID, $plugin) ; 
 				$trans->enable_translation() ; 
 			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new feedbackSL($plugin, $this->pluginID) ; 
+				$trans = new SLFramework_Feedback($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
 			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
 			ob_start() ; 
-				$trans = new otherPlugins("sedLex", array('wp-pirates-search')) ; 
+				$trans = new SLFramework_OtherPlugins("sedLex", array('wp-pirates-search')) ; 
 				$trans->list_plugins() ; 
 			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
