@@ -6,8 +6,9 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/content-table/
 Tags: plugin, table of content, toc, content
 Requires at least: 3.0
-Tested up to: 3.9.1
+Tested up to: 4.2
 Stable tag: trunk
+License: GPLv3
 
 Insert a *table of content* in your posts. 
 
@@ -62,6 +63,10 @@ Have fun !
 2. An example of a table of content
 
 == Changelog ==
+
+= 1.5.0 = 
+* NEW: icon
+* NEW: delete content on uninstall
 
 = 1.4.9 = 
 * NEW: How to
@@ -154,4 +159,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:c8bbdde981bfb201c1fecce86eff770e73ac7c71
+InfoVersion:ccac1fa17f5f332b61a1316006e9f18c786fa321
